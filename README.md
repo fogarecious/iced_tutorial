@@ -189,6 +189,7 @@ Moreover, **Iced** provides other syntax sugar functions and marcros, such as [t
 
 To add multiple widgets, we can use [column](https://docs.iced.rs/iced/widget/macro.column.html) macro to arrange a group of widgets vertically in the window.
 The syntax `column![A, B, C]` can be treated as `Column::new().push(A).push(B).push(C)`, although the underlying implementation is slightly different.
+Be sure to `use` [iced::widget::column](https://docs.iced.rs/iced/widget/macro.column.html), otherwise `column` macro would refer to [std::column](https://doc.rust-lang.org/std/macro.column.html) in Rust standard library.
 
 ```rust
 use iced::{
