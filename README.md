@@ -5,12 +5,14 @@ This tutorial serves as a quick start for the library.
 
 Contents:
 
+* [Setting up](./tutorial/setting_up.md)
 * First app - Hello world!
 * Producing and Receiving Messages
 * Widgets
 * Multipage apps
   * A Straightforward Method
   * A Modular Method
+<!-- * Keyboard events -->
 
 ## See also
 
