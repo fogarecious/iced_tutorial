@@ -21,3 +21,5 @@ You should see the dependency in the end of `Cargo.toml` file.
 [dependencies]
 iced = "0.10.0"
 ```
+
+:arrow_right:  Next: [First app - Hello world!](./first_app.md)
