@@ -8,14 +8,14 @@ Contents:
 
 * [Setting up](./tutorial/setting_up.md)
 * [First app - Hello world!](./tutorial/first_app.md)
-* Adding widgets
+* [Adding widgets](./tutorial/adding_widgets.md)
 * Producing and Receiving Messages
 * Explanation of Sandbox
 * Widgets
 * Multipage apps
   * A Straightforward Method
   * A Modular Method
-* Chaning Theme
+* Changing Theme
 * Keyboard events
 
 ## See also

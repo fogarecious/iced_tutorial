@@ -32,3 +32,5 @@ impl Sandbox for MyApp {
 ```
 
 ![First app](./pic/first_app.png)
+
+:arrow_right:  Next: [Adding widgets](./adding_widgets.md)
