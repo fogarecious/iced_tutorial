@@ -1,4 +1,4 @@
-# Tutorial of Iced library
+# Unofficial Tutorial of Iced library
 
 [Iced](https://iced.rs/) is a cross-platform GUI library for [Rust](https://www.rust-lang.org/).
 This tutorial serves as a quick start for the library.
@@ -12,11 +12,29 @@ Contents:
 * Producing and Receiving Messages
 * Explanation of Sandbox
 * Widgets
+  * Text (incl. colors)
+  * Button (incl. styles)
+  * TextInput
+  * Checkbox
+  * Toggler
+  * Radio
+  * PickList
+  * ComboBox
+  * Slider and VerticalSlider
+  * ProgressBar
+  * Image
+  * Svg
+  * Tooltip
+  * Scrollable
+  * Space
+  * Rule
+* Changing Window Sizes
 * Multipage apps
   * A Straightforward Method
   * A Modular Method
-* Changing Theme
-* Keyboard events
+* Changing Themes
+* Keyboard Events
+* Custom Widgets
 
 ## See also
 
