@@ -1,4 +1,4 @@
-# Setting up
+# Setting Up
 
 Initialize a [Cargo](https://doc.rust-lang.org/cargo/guide/) project.
 
@@ -22,4 +22,4 @@ You should see the dependency in the end of `Cargo.toml` file.
 iced = "0.10.0"
 ```
 
-:arrow_right:  Next: [First app - Hello world!](./first_app.md)
+:arrow_right:  Next: [First App - Hello World!](./first_app.md)

@@ -1,4 +1,4 @@
-# Adding widgets
+# Adding Widgets
 
 Use [column!](https://docs.iced.rs/iced/widget/macro.column.html) and [row!](https://docs.iced.rs/iced/widget/macro.row.html) to group multiple widgets such as [text](https://docs.iced.rs/iced/widget/fn.text.html) and [button](https://docs.iced.rs/iced/widget/fn.button.html).
 
@@ -40,3 +40,5 @@ impl Sandbox for MyApp {
 ```
 
 ![Adding widgets](./pic/adding_widgets.png)
+
+:arrow_right:  Next: [Changing Displaying Content](./changing_displaying_content.md)

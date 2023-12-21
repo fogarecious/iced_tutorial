@@ -1,4 +1,4 @@
-# First app - Hello world!
+# First App - Hello World!
 
 We need a struct to implement [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html), and call its [run](https://docs.iced.rs/iced/trait.Sandbox.html#method.run) method from `main`.
 All widgets should be placed inside the [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) method.
@@ -33,4 +33,4 @@ impl Sandbox for MyApp {
 
 ![First app](./pic/first_app.png)
 
-:arrow_right:  Next: [Adding widgets](./adding_widgets.md)
+:arrow_right:  Next: [Adding Widgets](./adding_widgets.md)

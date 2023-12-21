@@ -6,10 +6,10 @@ We try to keep each part of the tutorial as short as possible.
 
 Contents:
 
-* [Setting up](./tutorial/setting_up.md)
-* [First app - Hello world!](./tutorial/first_app.md)
-* [Adding widgets](./tutorial/adding_widgets.md)
-* Producing and Receiving Messages
+* [Setting Up](./tutorial/setting_up.md)
+* [First App - Hello World!](./tutorial/first_app.md)
+* [Adding Widgets](./tutorial/adding_widgets.md)
+* [Changing Displaying Content](./tutorial/changing_displaying_content.md)
 * Explanation of Sandbox
 * Widgets
   * Text (incl. colors)
