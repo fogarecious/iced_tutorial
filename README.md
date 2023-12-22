@@ -10,7 +10,7 @@ Contents:
 * [First App - Hello World!](./tutorial/first_app.md)
 * [Adding Widgets](./tutorial/adding_widgets.md)
 * [Changing Displaying Content](./tutorial/changing_displaying_content.md)
-* Explanation of Sandbox
+* [Explanation of Sandbox Trait](./tutorial/explanation_of_sandbox_trait.md)
 * Widgets
   * Text (incl. colors)
   * Button (incl. styles)

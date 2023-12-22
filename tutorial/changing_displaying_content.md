@@ -54,3 +54,5 @@ impl Sandbox for MyApp {
 ```
 
 ![Producing and receiving messages](./pic/changing_displaying_content.png)
+
+:arrow_right:  Next: [Explanation of Sandbox Trait](./explanation_of_sandbox_trait.md)
