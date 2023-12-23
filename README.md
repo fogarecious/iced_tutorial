@@ -28,7 +28,7 @@ Contents:
   * Scrollable
   * Space
   * Rule
-* Changing Window Sizes
+* [Changing Window Properties](./tutorial/changing_window_properties.md)
 * Changing Themes
 * Multipage Apps
   * More Than One Page
