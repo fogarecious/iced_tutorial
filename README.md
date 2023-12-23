@@ -29,11 +29,14 @@ Contents:
   * Space
   * Rule
 * Changing Window Sizes
-* Multipage apps
-  * A Straightforward Method
-  * A Modular Method
 * Changing Themes
-* Keyboard Events
+* Multipage Apps
+  * More Than One Page
+  * Memoryless Pages
+  * Navigation History
+* Events
+  * Mouse Events
+  * Keyboard Events
 * Custom Widgets
 
 ## See also
