@@ -38,3 +38,5 @@ impl Sandbox for MyApp {
 ```
 
 ![Changing window properties](./pic/changing_window_properties.png)
+
+:arrow_right:  Next: [Changing Themes](./changing_themes.md)

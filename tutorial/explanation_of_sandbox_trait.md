@@ -40,3 +40,5 @@ impl Sandbox for MyApp {
     }
 }
 ```
+
+:arrow_right:  Next: [Changing Window Properties](./changing_window_properties.md)

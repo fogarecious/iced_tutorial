@@ -29,7 +29,7 @@ Contents:
   * Space
   * Rule
 * [Changing Window Properties](./tutorial/changing_window_properties.md)
-* Changing Themes
+* [Changing Themes](./tutorial/changing_themes.md)
 * Multipage Apps
   * More Than One Page
   * Memoryless Pages
