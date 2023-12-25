@@ -31,7 +31,7 @@ Contents:
 * [Changing Window Properties](./tutorial/changing_window_properties.md)
 * [Changing Themes](./tutorial/changing_themes.md)
 * Multipage Apps
-  * More Than One Page
+  * [More Than One Page](./tutorial/more_than_one_page.md)
   * Memoryless Pages
   * Navigation History
 * Events
