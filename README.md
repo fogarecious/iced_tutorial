@@ -8,9 +8,9 @@ Contents:
 
 * [Setting Up](./tutorial/setting_up.md)
 * [First App - Hello World!](./tutorial/first_app.md)
+* [Explanation of Sandbox Trait](./tutorial/explanation_of_sandbox_trait.md)
 * [Adding Widgets](./tutorial/adding_widgets.md)
 * [Changing Displaying Content](./tutorial/changing_displaying_content.md)
-* [Explanation of Sandbox Trait](./tutorial/explanation_of_sandbox_trait.md)
 * Widgets
   * Text (incl. colors)
   * Button (incl. styles)
@@ -33,11 +33,15 @@ Contents:
 * Multipage Apps
   * [More Than One Page](./tutorial/more_than_one_page.md)
   * Memoryless Pages
+  * Passing Parameters
   * Navigation History
 * Events
   * Mouse Events
   * Keyboard Events
 * Custom Widgets
+  * Drawing Widgets
+  * Storing Widget States
+  * Producing Widget Messages
 
 ## See also
 

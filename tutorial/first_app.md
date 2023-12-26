@@ -33,4 +33,4 @@ impl Sandbox for MyApp {
 
 ![First app](./pic/first_app.png)
 
-:arrow_right:  Next: [Adding Widgets](./adding_widgets.md)
+:arrow_right:  Next: [Explanation of Sandbox Trait](./explanation_of_sandbox_trait.md)

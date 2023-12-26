@@ -41,4 +41,4 @@ impl Sandbox for MyApp {
 }
 ```
 
-:arrow_right:  Next: [Changing Window Properties](./changing_window_properties.md)
+:arrow_right:  Next: [Adding Widgets](./adding_widgets.md)
