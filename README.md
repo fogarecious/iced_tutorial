@@ -33,7 +33,7 @@ Contents:
 * Multipage Apps
   * [More Than One Page](./tutorial/more_than_one_page.md)
   * [Memoryless Pages](./tutorial/memoryless_pages.md)
-  * Passing Parameters
+  * [Passing Parameters Across Pages](./tutorial/passing_parameters_across_pages.md)
   * Navigation History
 * Events
   * Mouse Events
