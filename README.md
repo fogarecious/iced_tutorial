@@ -40,8 +40,12 @@ Contents:
   * Keyboard Events
 * Custom Widgets
   * Drawing Widgets
-  * Storing Widget States
+  * Updating Widgets From Outside
+  * Updating Widgets From Events
   * Producing Widget Messages
+  * Mouse Pointer Over Widgets
+  * Widgets With Children
+  * Communication With Children
 
 ## See also
 
