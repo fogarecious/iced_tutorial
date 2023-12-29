@@ -158,3 +158,5 @@ impl Page for PageB {
 ```
 
 ![Page B](./pic/navigation_history_b.png)
+
+:arrow_right:  Next: [Mouse Events](./mouse_events.md)

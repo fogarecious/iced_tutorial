@@ -43,7 +43,7 @@ Contents:
   * [Passing Parameters Across Pages](./tutorial/passing_parameters_across_pages.md)
   * [Navigation History](./tutorial/navigation_history.md)
 * Events
-  * Mouse Events
+  * [Mouse Events](./tutorial/mouse_events.md)
   * Pressing/Releasing On Some Widgets
   * Keyboard Events
 * Custom Widgets
