@@ -20,14 +20,21 @@ Contents:
   * Radio
   * PickList
   * ComboBox
-  * Slider and VerticalSlider
+  * Slider And VerticalSlider
   * ProgressBar
+  * Tooltip
   * Image
   * Svg
-  * Tooltip
-  * Scrollable
-  * Space
+  * Canvas
   * Rule
+* Layouts
+  * Width And Height
+  * Column
+  * Row
+  * Space
+  * Container
+  * Scrollable
+  * Responsive
 * [Changing Window Properties](./tutorial/changing_window_properties.md)
 * [Changing Themes](./tutorial/changing_themes.md)
 * Multipage Apps
@@ -37,6 +44,7 @@ Contents:
   * [Navigation History](./tutorial/navigation_history.md)
 * Events
   * Mouse Events
+  * Pressing/Releasing On Some Widgets
   * Keyboard Events
 * Custom Widgets
   * Drawing Widgets
@@ -46,6 +54,8 @@ Contents:
   * Mouse Pointer Over Widgets
   * Widgets With Children
   * Communication With Children
+  * Obeying Limits In Layout
+  * Limits Of Children
 
 ## See also
 
