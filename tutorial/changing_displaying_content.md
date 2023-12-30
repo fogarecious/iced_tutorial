@@ -55,4 +55,4 @@ impl Sandbox for MyApp {
 
 ![Producing and receiving messages](./pic/changing_displaying_content.png)
 
-:arrow_right:  Next: [Changing Window Properties](./changing_window_properties.md)
+:arrow_right:  Next: [Changing Themes](./changing_themes.md)

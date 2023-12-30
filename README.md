@@ -35,16 +35,22 @@ Contents:
   * Container
   * Scrollable
   * Responsive
-* [Changing Window Properties](./tutorial/changing_window_properties.md)
 * [Changing Themes](./tutorial/changing_themes.md)
 * Multipage Apps
   * [More Than One Page](./tutorial/more_than_one_page.md)
   * [Memoryless Pages](./tutorial/memoryless_pages.md)
   * [Passing Parameters Across Pages](./tutorial/passing_parameters_across_pages.md)
   * [Navigation History](./tutorial/navigation_history.md)
+* Applications
+  * From Sandbox To Application
+  * Executing Async Commands
+* Windows
+  * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
+  * Changing The Window Dynamically
+  * Closing The Window
 * Events
-  * [Mouse Events](./tutorial/mouse_events.md)
   * Pressing/Releasing On Some Widgets
+  * [Mouse Events](./tutorial/mouse_events.md)
   * Keyboard Events
 * Custom Widgets
   * Drawing Widgets

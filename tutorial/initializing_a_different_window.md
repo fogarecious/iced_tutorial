@@ -1,4 +1,4 @@
-# Changing Window Properties
+# Initializing A Different Window
 
 We can use [window::Settings](https://docs.iced.rs/iced/window/settings/struct.Settings.html) to change the properties of the window (such as [position](https://docs.iced.rs/iced/window/settings/struct.Settings.html#structfield.position) and [size](https://docs.iced.rs/iced/window/settings/struct.Settings.html#structfield.size)) when we call [run](https://docs.iced.rs/iced/trait.Sandbox.html#method.run) of a [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html).
 
@@ -37,6 +37,6 @@ impl Sandbox for MyApp {
 }
 ```
 
-![Changing window properties](./pic/changing_window_properties.png)
+![Initializing a different window](./pic/initializing_a_different_window.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Mouse Events](./mouse_events.md)
