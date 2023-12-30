@@ -159,4 +159,4 @@ impl Page for PageB {
 
 ![Page B](./pic/navigation_history_b.png)
 
-:arrow_right:  Next: [Initializing A Different Window](./initializing_a_different_window.md)
+:arrow_right:  Next: [From Sandbox To Application](./from_sandbox_to_application.md)

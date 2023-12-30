@@ -42,7 +42,7 @@ Contents:
   * [Passing Parameters Across Pages](./tutorial/passing_parameters_across_pages.md)
   * [Navigation History](./tutorial/navigation_history.md)
 * Applications
-  * From Sandbox To Application
+  * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
   * Executing Async Commands
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
