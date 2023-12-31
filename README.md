@@ -52,7 +52,7 @@ Contents:
   * Batch Commands
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
-  * Changing The Window Dynamically
+  * [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
   * Closing The Window On Demand
 * Events
   * On Press/Release Of Some Widgets
