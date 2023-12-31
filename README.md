@@ -23,10 +23,10 @@ Contents:
   * Slider And VerticalSlider
   * ProgressBar
   * Tooltip
+  * Rule
   * Image
   * Svg
   * Canvas
-  * Rule
 * Layouts
   * Width And Height
   * Column
@@ -36,6 +36,9 @@ Contents:
   * Scrollable
   * Responsive
 * [Changing Themes](./tutorial/changing_themes.md)
+* Styles
+  * Changing Styles
+  * Custom Styles
 * Multipage Apps
   * [More Than One Page](./tutorial/more_than_one_page.md)
   * [Memoryless Pages](./tutorial/memoryless_pages.md)
@@ -44,14 +47,17 @@ Contents:
 * Applications
   * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
   * Executing Async Commands
+  * Producing Messages By Commands
+  * Timer Commands
+  * Batch Commands
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
   * Changing The Window Dynamically
-  * Closing The Window
+  * Closing The Window On Demand
 * Events
-  * Pressing/Releasing On Some Widgets
-  * [Mouse Events](./tutorial/mouse_events.md)
-  * Keyboard Events
+  * On Press/Release Of Some Widgets
+  * [Producing Messages By Mouse Events](./tutorial/producing_messages_by_mouse_events.md)
+  * Producing Messages By Keyboard Events
 * Custom Widgets
   * Drawing Widgets
   * Updating Widgets From Outside

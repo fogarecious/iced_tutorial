@@ -1,4 +1,4 @@
-# Mouse Events
+# Producing Messages By Mouse Events
 
 To capture events, we implement [subscription](https://docs.iced.rs/iced/application/trait.Application.html#method.subscription) method in [Application](https://docs.iced.rs/iced/application/trait.Application.html).
 This method returns [Subscription](https://docs.iced.rs/iced/struct.Subscription.html) struct, which allows us to specify how to handle events.
@@ -74,4 +74,4 @@ impl Application for MyApp {
 }
 ```
 
-![Mouse events](./pic/mouse_events.png)
+![Producing messages by mouse events](./pic/producing_messages_by_mouse_events.png)

@@ -40,4 +40,4 @@ impl Sandbox for MyApp {
 
 ![Initializing a different window](./pic/initializing_a_different_window.png)
 
-:arrow_right:  Next: [Mouse Events](./mouse_events.md)
+:arrow_right:  Next: [Producing Messages By Mouse Events](./producing_messages_by_mouse_events.md)
