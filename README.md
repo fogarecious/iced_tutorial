@@ -53,7 +53,7 @@ Contents:
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
   * [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
-  * Closing The Window On Demand
+  * [Closing The Window On Demand](./tutorial/closing_the_window_on_demand.md)
 * Events
   * On Press/Release Of Some Widgets
   * [Producing Messages By Mouse Events](./tutorial/producing_messages_by_mouse_events.md)
