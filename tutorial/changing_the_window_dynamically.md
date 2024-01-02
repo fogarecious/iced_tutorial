@@ -3,7 +3,7 @@
 We can use functions provided in [window](https://docs.iced.rs/iced/window/index.html) module to change the window after it is initialized.
 For example, to [resize](https://docs.iced.rs/iced/window/fn.resize.html) the window.
 These functions return [Command](https://docs.iced.rs/iced/struct.Command.html), which can be used as the return value in [update](https://docs.iced.rs/iced/application/trait.Application.html#tymethod.update) method.
-Developers might be interested in other [Command](https://docs.iced.rs/iced/struct.Command.html)s in [window](https://docs.iced.rs/iced/window/index.html) module.
+Developers might be interested in other [Commands](https://docs.iced.rs/iced/struct.Command.html) in [window](https://docs.iced.rs/iced/window/index.html) module.
 
 Note: If you find [resize](https://docs.iced.rs/iced/window/fn.resize.html) needs an [Id](https://docs.iced.rs/iced/window/struct.Id.html), you can get it by [fetch_id](https://docs.iced.rs/iced/window/fn.fetch_id.html).
 

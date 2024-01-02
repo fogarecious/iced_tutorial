@@ -38,4 +38,4 @@ impl Sandbox for MyApp {
 
 ![Changing themes](./pic/changing_themes.png)
 
-:arrow_right:  Next: [More Than One Page](./more_than_one_page.md)
+:arrow_right:  Next: [Changing Styles](./changing_styles.md)

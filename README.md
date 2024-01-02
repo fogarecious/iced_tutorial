@@ -37,7 +37,7 @@ Contents:
   * Responsive
 * [Changing Themes](./tutorial/changing_themes.md)
 * Styles
-  * Changing Styles
+  * [Changing Styles](./tutorial/changing_styles.md)
   * Custom Styles
 * Multipage Apps
   * [More Than One Page](./tutorial/more_than_one_page.md)
