@@ -12,8 +12,8 @@ Contents:
 * [Adding Widgets](./tutorial/adding_widgets.md)
 * [Changing Displaying Content](./tutorial/changing_displaying_content.md)
 * Widgets
-  * Text (incl. colors)
-  * Button (incl. styles)
+  * Text
+  * Button
   * TextInput
   * Checkbox
   * Toggler
@@ -46,10 +46,10 @@ Contents:
   * [Navigation History](./tutorial/navigation_history.md)
 * Applications
   * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
-  * Executing Async Commands
+  * Controlling Widgets By Commands
   * Producing Messages By Commands
-  * Timer Commands
   * Batch Commands
+  * Executing Custom Commands
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
   * [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
@@ -58,6 +58,8 @@ Contents:
   * On Press/Release Of Some Widgets
   * [Producing Messages By Mouse Events](./tutorial/producing_messages_by_mouse_events.md)
   * Producing Messages By Keyboard Events
+  * Producing Messages By Timer
+  * Batch Subscriptions
 * Custom Widgets
   * Drawing Widgets
   * Updating Widgets From Outside
