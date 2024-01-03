@@ -56,4 +56,4 @@ impl Sandbox for MyApp {
 
 ![Changing styles](./pic/changing_styles.png)
 
-:arrow_right:  Next: [More Than One Page](./more_than_one_page.md)
+:arrow_right:  Next: [Custom Styles](./custom_styles.md)
