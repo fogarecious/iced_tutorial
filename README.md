@@ -47,8 +47,8 @@ Contents:
 * Applications
   * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
   * Controlling Widgets By Commands
-  * Producing Messages By Commands
   * Batch Commands
+  * Producing Messages By Commands
   * Executing Custom Commands
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
@@ -70,6 +70,7 @@ Contents:
   * Communication With Children
   * Obeying Limits In Layout
   * Limits Of Children
+  * Texts In Widgets
 
 ## See also
 
