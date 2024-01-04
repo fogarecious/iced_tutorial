@@ -43,4 +43,4 @@ impl Application for MyApp {
 
 ![From sandbox to application](./pic/from_sandbox_to_application.png)
 
-:arrow_right:  Next: [Initializing A Different Window](./initializing_a_different_window.md)
+:arrow_right:  Next: [Controlling Widgets By Commands](./controlling_widgets_by_commands.md)

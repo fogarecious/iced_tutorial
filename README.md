@@ -46,7 +46,7 @@ Contents:
   * [Navigation History](./tutorial/navigation_history.md)
 * Applications
   * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
-  * Controlling Widgets By Commands
+  * [Controlling Widgets By Commands](./tutorial/controlling_widgets_by_commands.md)
   * Batch Commands
   * Producing Messages By Commands
   * Executing Custom Commands
