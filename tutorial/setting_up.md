@@ -22,4 +22,11 @@ You should see the dependency in the end of `Cargo.toml` file.
 iced = "0.10.0"
 ```
 
+Note: If you encounter `WGPU Error`, you can disable `wgpu` in `Cargo.toml` file.
+
+```toml
+[dependencies]
+iced = { version = "0.10.0", default-features = false }
+```
+
 :arrow_right:  Next: [First App - Hello World!](./first_app.md)
