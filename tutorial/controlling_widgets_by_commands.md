@@ -71,4 +71,4 @@ impl Application for MyApp {
 
 ![Controlling widgets by commands](./pic/controlling_widgets_by_commands.png)
 
-:arrow_right:  Next: [Initializing A Different Window](./initializing_a_different_window.md)
+:arrow_right:  Next: [Batch Commands](./batch_commands.md)

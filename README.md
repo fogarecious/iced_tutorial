@@ -47,8 +47,7 @@ Contents:
 * Applications
   * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
   * [Controlling Widgets By Commands](./tutorial/controlling_widgets_by_commands.md)
-  * Batch Commands
-  * Producing Messages By Commands
+  * [Batch Commands](./tutorial/batch_commands.md)
   * Executing Custom Commands
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
