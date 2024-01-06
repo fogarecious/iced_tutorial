@@ -52,4 +52,4 @@ impl Application for MyApp {
 
 ![Closing the window on demand](./pic/closing_the_window_on_demand.png)
 
-:arrow_right:  Next: [Producing Messages By Mouse Events](./producing_messages_by_mouse_events.md)
+:arrow_right:  Next: [On Pressed/Released Of Some Widgets](./on_pressed_released_of_some_widgets.md)

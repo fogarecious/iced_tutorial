@@ -54,10 +54,10 @@ Contents:
   * [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
   * [Closing The Window On Demand](./tutorial/closing_the_window_on_demand.md)
 * Events
-  * On Press/Release Of Some Widgets
+  * [On Pressed/Released Of Some Widgets](./tutorial/on_pressed_released_of_some_widgets.md)
   * [Producing Messages By Mouse Events](./tutorial/producing_messages_by_mouse_events.md)
   * Producing Messages By Keyboard Events
-  * Producing Messages By Timer
+  * Producing Messages By Timers
   * Batch Subscriptions
 * Custom Widgets
   * Drawing Widgets
