@@ -50,6 +50,8 @@ impl Sandbox for MyApp {
 }
 ```
 
+In addition to [on_press](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_press) and [on_release](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_release) methods, [MouseArea](https://docs.iced.rs/iced/widget/struct.MouseArea.html) also supports [on_middle_press](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_middle_press), [on_right_press](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_right_press), etc.
+
 When the mouse is pressed:
 
 ![On pressed/released of some widgets A](./pic/on_pressed_released_of_some_widgets_a.png)
