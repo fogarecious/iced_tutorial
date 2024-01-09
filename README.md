@@ -48,7 +48,7 @@ Contents:
   * [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
   * [Controlling Widgets By Commands](./tutorial/controlling_widgets_by_commands.md)
   * [Batch Commands](./tutorial/batch_commands.md)
-  * Executing Custom Commands
+  * [Executing Custom Commands](./tutorial/executing_custom_commands.md)
 * Windows
   * [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
   * [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
