@@ -67,3 +67,5 @@ impl Application for MyApp {
 ```
 
 ![Producing messages by timers](./pic/producing_messages_by_timers.png)
+
+:arrow_right:  Next: [Batch Subscriptions](./batch_subscriptions.md)

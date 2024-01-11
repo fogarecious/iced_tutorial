@@ -58,7 +58,7 @@ Contents:
   * [Producing Messages By Mouse Events](./tutorial/producing_messages_by_mouse_events.md)
   * [Producing Messages By Keyboard Events](./tutorial/producing_messages_by_keyboard_events.md)
   * [Producing Messages By Timers](./tutorial/producing_messages_by_timers.md)
-  * Batch Subscriptions
+  * [Batch Subscriptions](./tutorial/batch_subscriptions.md)
 * Custom Widgets
   * Drawing Widgets
   * Updating Widgets From Outside
