@@ -12,7 +12,7 @@ Contents:
 * [Adding Widgets](./tutorial/adding_widgets.md)
 * [Changing Displaying Content](./tutorial/changing_displaying_content.md)
 * Widgets
-  * Text
+  * [Text](./tutorial/text.md)
   * Button
   * TextInput
   * Checkbox
