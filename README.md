@@ -13,7 +13,7 @@ Contents:
 * [Changing Displaying Content](./tutorial/changing_displaying_content.md)
 * Widgets
   * [Text](./tutorial/text.md)
-  * Button
+  * [Button](./tutorial/button.md)
   * TextInput
   * Checkbox
   * Toggler
