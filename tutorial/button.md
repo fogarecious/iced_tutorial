@@ -49,4 +49,4 @@ impl Sandbox for MyApp {
 
 ![Button](./pic/button.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [TextInput](./text_input.md)

@@ -14,7 +14,7 @@ Contents:
 * Widgets
   * [Text](./tutorial/text.md)
   * [Button](./tutorial/button.md)
-  * TextInput
+  * [TextInput](./tutorial/text_input.md)
   * Checkbox
   * Toggler
   * Radio
