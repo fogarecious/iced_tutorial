@@ -16,7 +16,7 @@ Contents:
   * [Button](./tutorial/button.md)
   * [TextInput](./tutorial/text_input.md)
   * [Checkbox](./tutorial/checkbox.md)
-  * Toggler
+  * [Toggler](./tutorial/toggler.md)
   * Radio
   * PickList
   * ComboBox

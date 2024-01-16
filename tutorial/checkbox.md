@@ -81,4 +81,4 @@ impl Sandbox for MyApp {
 
 ![Checkbox](./pic/checkbox.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Toggler](./toggler.md)
