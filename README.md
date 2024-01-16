@@ -26,7 +26,6 @@ Contents:
   * Rule
   * Image
   * Svg
-  * Canvas
 * Layouts
   * Width And Height
   * Column
@@ -59,6 +58,9 @@ Contents:
   * [Producing Messages By Keyboard Events](./tutorial/producing_messages_by_keyboard_events.md)
   * [Producing Messages By Timers](./tutorial/producing_messages_by_timers.md)
   * [Batch Subscriptions](./tutorial/batch_subscriptions.md)
+* Canvas
+  * Drawing Shapes
+  * Drawing With Caches
 * Custom Widgets
   * Drawing Widgets
   * Updating Widgets From Outside
