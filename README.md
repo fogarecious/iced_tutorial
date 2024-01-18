@@ -18,7 +18,7 @@ Contents:
   * [Checkbox](./tutorial/checkbox.md)
   * [Toggler](./tutorial/toggler.md)
   * [Radio](./tutorial/radio.md)
-  * PickList
+  * [PickList](./tutorial/pickList.md)
   * ComboBox
   * Slider And VerticalSlider
   * ProgressBar
