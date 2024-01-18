@@ -1,6 +1,6 @@
 # Radio
 
-The [Radio](https://docs.iced.rs/iced/widget/radio/struct.Radio.html) widget represents a choice among multiple valuues.
+The [Radio](https://docs.iced.rs/iced/widget/radio/struct.Radio.html) widget represents a choice among multiple values.
 It has two methods of constructions.
 It supports reactions to clicking and touching.
 It is able to change styles of the button and the text.
@@ -24,7 +24,6 @@ enum MyAppMessage {
     Update4(String),
 }
 
-#[derive(Default)]
 struct MyApp {
     radio3: Option<u32>,
     radio4: Option<String>,
