@@ -107,4 +107,4 @@ impl Sandbox for MyApp {
 
 ![PickList](./pic/picklist.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [ComboBox](./combobox.md)

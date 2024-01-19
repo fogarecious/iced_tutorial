@@ -19,7 +19,7 @@ Contents:
   * [Toggler](./tutorial/toggler.md)
   * [Radio](./tutorial/radio.md)
   * [PickList](./tutorial/pickList.md)
-  * ComboBox
+  * [ComboBox](./tutorial/combobox.md)
   * Slider And VerticalSlider
   * ProgressBar
   * Tooltip
