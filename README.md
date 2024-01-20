@@ -20,7 +20,7 @@ Contents:
   * [Radio](./tutorial/radio.md)
   * [PickList](./tutorial/pickList.md)
   * [ComboBox](./tutorial/combobox.md)
-  * Slider And VerticalSlider
+  * [Slider And VerticalSlider](./tutorial/slider.md)
   * ProgressBar
   * Tooltip
   * Rule

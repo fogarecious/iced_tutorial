@@ -178,4 +178,4 @@ impl Sandbox for MyApp {
 
 ![ComboBox](./pic/combobox.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Slider And VerticalSlider](./slider.md)
