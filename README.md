@@ -21,7 +21,7 @@ Contents:
   * [PickList](./tutorial/pickList.md)
   * [ComboBox](./tutorial/combobox.md)
   * [Slider And VerticalSlider](./tutorial/slider.md)
-  * ProgressBar
+  * [ProgressBar](./tutorial/progressbar.md)
   * Tooltip
   * Rule
   * Image

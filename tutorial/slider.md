@@ -86,4 +86,4 @@ impl Sandbox for MyApp {
 
 ![Slider](./pic/slider.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [ProgressBar](./progressbar.md)
