@@ -42,4 +42,4 @@ impl Sandbox for MyApp {
 
 ![ProgressBar](./pic/progressbar.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Tooltip](./tooltip.md)

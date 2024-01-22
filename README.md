@@ -22,7 +22,7 @@ Contents:
   * [ComboBox](./tutorial/combobox.md)
   * [Slider And VerticalSlider](./tutorial/slider.md)
   * [ProgressBar](./tutorial/progressbar.md)
-  * Tooltip
+  * [Tooltip](./tutorial/tooltip.md)
   * Rule
   * Image
   * Svg
