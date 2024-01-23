@@ -86,4 +86,4 @@ impl Sandbox for MyApp {
 
 ![Tooltip](./pic/tooltip.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Rule](./rule.md)

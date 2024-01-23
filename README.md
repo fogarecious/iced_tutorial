@@ -23,7 +23,7 @@ Contents:
   * [Slider And VerticalSlider](./tutorial/slider.md)
   * [ProgressBar](./tutorial/progressbar.md)
   * [Tooltip](./tutorial/tooltip.md)
-  * Rule
+  * [Rule](./tutorial/rule.md)
   * Image
   * Svg
 * Layouts
