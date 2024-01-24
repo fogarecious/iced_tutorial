@@ -24,7 +24,7 @@ Contents:
   * [ProgressBar](./tutorial/progressbar.md)
   * [Tooltip](./tutorial/tooltip.md)
   * [Rule](./tutorial/rule.md)
-  * Image
+  * [Image](./tutorial/image.md)
   * Svg
 * Layouts
   * Width And Height

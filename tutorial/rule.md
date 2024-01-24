@@ -48,4 +48,4 @@ impl Sandbox for MyApp {
 
 ![Rule](./pic/rule.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Image](./image.md)
