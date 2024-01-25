@@ -55,4 +55,4 @@ impl Sandbox for MyApp {
 
 ![Image](./pic/image.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Svg](./svg.md)

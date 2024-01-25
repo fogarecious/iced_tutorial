@@ -25,7 +25,7 @@ Contents:
   * [Tooltip](./tutorial/tooltip.md)
   * [Rule](./tutorial/rule.md)
   * [Image](./tutorial/image.md)
-  * Svg
+  * [Svg](./tutorial/svg.md)
 * Layouts
   * Width And Height
   * Column
