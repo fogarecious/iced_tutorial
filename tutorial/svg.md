@@ -65,5 +65,6 @@ impl Sandbox for MyApp {
 
 ![Svg](./pic/svg.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Width And Height](./width_and_height.md)
+
 :blue_book: Back: [Table of contents](./../README.md)

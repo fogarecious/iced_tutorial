@@ -29,7 +29,7 @@ Contents:
   * [Svg](./tutorial/svg.md)
   <!-- * PaneGrid -->
 * Layouts
-  * Width And Height
+  * [Width And Height](./tutorial/width_and_height.md)
   * Column
   * Row
   * Space
