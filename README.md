@@ -1,8 +1,8 @@
-# Unofficial Tutorial of Iced library
+# Unofficial Tutorial Of Iced Library
 
 [Iced](https://iced.rs/) is a cross-platform GUI library for [Rust](https://www.rust-lang.org/).
 This tutorial serves as a quick start for the library.
-We try to keep each part of the tutorial as short as possible.
+We try to keep each part of the tutorial as simple as possible.
 
 Contents:
 
@@ -75,12 +75,12 @@ Contents:
 * Others
   * Loading Images Asynchronously
 
-## See also
+## See Also
 
 * [Iced](https://github.com/iced-rs/iced) - the Iced library.
 * [awesome-iced](https://github.com/iced-rs/awesome-iced) - a list of projects depending on Iced.
 
-## Contribution
+## Contributions
 
 Pull requests for typos, incorrect information, or other ideas are welcome!
 
