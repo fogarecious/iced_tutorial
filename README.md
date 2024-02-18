@@ -83,3 +83,7 @@ Contents:
 ## Contribution
 
 Pull requests for typos, incorrect information, or other ideas are welcome!
+
+## License
+
+All code in the tutorial is provided under the MIT License.
