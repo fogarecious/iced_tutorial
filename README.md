@@ -20,20 +20,23 @@ Contents:
   * [Radio](./tutorial/radio.md)
   * [PickList](./tutorial/pickList.md)
   * [ComboBox](./tutorial/combobox.md)
+  * Menu
   * [Slider And VerticalSlider](./tutorial/slider.md)
   * [ProgressBar](./tutorial/progressbar.md)
   * [Tooltip](./tutorial/tooltip.md)
   * [Rule](./tutorial/rule.md)
   * [Image](./tutorial/image.md)
   * [Svg](./tutorial/svg.md)
+  <!-- * PaneGrid -->
 * Layouts
   * Width And Height
   * Column
   * Row
   * Space
   * Container
+    <!-- center both h and v -->
   * Scrollable
-  * Responsive
+  <!-- * Responsive -->
 * [Changing Themes](./tutorial/changing_themes.md)
 * Styles
   * [Changing Styles](./tutorial/changing_styles.md)
