@@ -87,3 +87,5 @@ impl Sandbox for MyApp {
 ![Tooltip](./pic/tooltip.png)
 
 :arrow_right:  Next: [Rule](./rule.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

@@ -49,3 +49,5 @@ impl Sandbox for MyApp {
 ![Rule](./pic/rule.png)
 
 :arrow_right:  Next: [Image](./image.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

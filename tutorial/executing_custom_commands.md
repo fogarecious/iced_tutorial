@@ -89,3 +89,5 @@ impl Application for MyApp {
 ![Executing custom commands](./pic/executing_custom_commands.png)
 
 :arrow_right:  Next: [Initializing A Different Window](./initializing_a_different_window.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

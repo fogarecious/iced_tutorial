@@ -83,3 +83,5 @@ impl radio::StyleSheet for RadioStyle {
 ![Custom styles](./pic/custom_styles.png)
 
 :arrow_right:  Next: [More Than One Page](./more_than_one_page.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

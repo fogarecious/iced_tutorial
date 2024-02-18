@@ -72,3 +72,5 @@ impl Application for MyApp {
 ![Controlling widgets by commands](./pic/controlling_widgets_by_commands.png)
 
 :arrow_right:  Next: [Batch Commands](./batch_commands.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

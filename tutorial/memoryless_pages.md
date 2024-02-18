@@ -158,3 +158,5 @@ impl Page for PageA {
 ![Page A](./pic/memoryless_pages_a.png)
 
 :arrow_right:  Next: [Passing Parameters Across Pages](./passing_parameters_across_pages.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

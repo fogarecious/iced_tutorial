@@ -73,3 +73,5 @@ impl Application for MyApp {
 ![Batch commands](./pic/batch_commands.png)
 
 :arrow_right:  Next: [Executing Custom Commands](./executing_custom_commands.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

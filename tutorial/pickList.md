@@ -108,3 +108,5 @@ impl Sandbox for MyApp {
 ![PickList](./pic/picklist.png)
 
 :arrow_right:  Next: [ComboBox](./combobox.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

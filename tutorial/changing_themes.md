@@ -39,3 +39,5 @@ impl Sandbox for MyApp {
 ![Changing themes](./pic/changing_themes.png)
 
 :arrow_right:  Next: [Changing Styles](./changing_styles.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

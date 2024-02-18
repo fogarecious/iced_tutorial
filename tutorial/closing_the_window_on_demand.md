@@ -53,3 +53,5 @@ impl Application for MyApp {
 ![Closing the window on demand](./pic/closing_the_window_on_demand.png)
 
 :arrow_right:  Next: [On Pressed/Released Of Some Widgets](./on_pressed_released_of_some_widgets.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

@@ -43,3 +43,5 @@ impl Sandbox for MyApp {
 ![ProgressBar](./pic/progressbar.png)
 
 :arrow_right:  Next: [Tooltip](./tooltip.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

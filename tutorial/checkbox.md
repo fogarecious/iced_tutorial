@@ -82,3 +82,5 @@ impl Sandbox for MyApp {
 ![Checkbox](./pic/checkbox.png)
 
 :arrow_right:  Next: [Toggler](./toggler.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

@@ -78,3 +78,5 @@ impl Application for MyApp {
 ![Changing the window dynamically](./pic/changing_the_window_dynamically.png)
 
 :arrow_right:  Next: [Closing The Window On Demand](./closing_the_window_on_demand.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

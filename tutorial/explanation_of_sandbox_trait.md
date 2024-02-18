@@ -42,3 +42,5 @@ impl Sandbox for MyApp {
 ```
 
 :arrow_right:  Next: [Adding Widgets](./adding_widgets.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

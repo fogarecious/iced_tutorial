@@ -122,3 +122,5 @@ impl Sandbox for MyApp {
 ![TextInput](./pic/text_input.png)
 
 :arrow_right:  Next: [Checkbox](./checkbox.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

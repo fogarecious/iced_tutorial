@@ -61,3 +61,5 @@ And when the mouse is released:
 ![On pressed/released of some widgets B](./pic/on_pressed_released_of_some_widgets_b.png)
 
 :arrow_right:  Next: [Producing Messages By Mouse Events](./producing_messages_by_mouse_events.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

@@ -56,3 +56,5 @@ impl Sandbox for MyApp {
 ![Producing and receiving messages](./pic/changing_displaying_content.png)
 
 :arrow_right:  Next: [Text](./text.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

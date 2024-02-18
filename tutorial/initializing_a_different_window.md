@@ -41,3 +41,5 @@ impl Sandbox for MyApp {
 ![Initializing a different window](./pic/initializing_a_different_window.png)
 
 :arrow_right:  Next: [Changing The Window Dynamically](./changing_the_window_dynamically.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

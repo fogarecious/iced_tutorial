@@ -179,3 +179,5 @@ impl Sandbox for MyApp {
 ![ComboBox](./pic/combobox.png)
 
 :arrow_right:  Next: [Slider And VerticalSlider](./slider.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

@@ -87,3 +87,5 @@ impl Sandbox for MyApp {
 ![Slider](./pic/slider.png)
 
 :arrow_right:  Next: [ProgressBar](./progressbar.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

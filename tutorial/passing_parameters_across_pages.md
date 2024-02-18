@@ -144,3 +144,5 @@ impl Page for PageB {
 ![Page B](./pic/passing_parameters_across_pages_b.png)
 
 :arrow_right:  Next: [Navigation History](./navigation_history.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

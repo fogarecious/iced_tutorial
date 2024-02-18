@@ -71,3 +71,5 @@ And page B:
 ![Page B](./pic/more_than_one_page_b.png)
 
 :arrow_right:  Next: [Memoryless Pages](./memoryless_pages.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

@@ -44,3 +44,5 @@ impl Application for MyApp {
 ![From sandbox to application](./pic/from_sandbox_to_application.png)
 
 :arrow_right:  Next: [Controlling Widgets By Commands](./controlling_widgets_by_commands.md)
+
+:blue_book: Back: [Table of contents](./../README.md)

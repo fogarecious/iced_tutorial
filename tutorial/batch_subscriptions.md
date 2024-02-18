@@ -89,3 +89,5 @@ impl Application for MyApp {
 ```
 
 ![Batch subscriptions](./pic/batch_subscriptions.png)
+
+:blue_book: Back: [Table of contents](./../README.md)

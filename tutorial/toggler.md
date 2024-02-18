@@ -73,3 +73,5 @@ impl Sandbox for MyApp {
 ![Toggler](./pic/toggler.png)
 
 :arrow_right:  Next: [Radio](./radio.md)
+
+:blue_book: Back: [Table of contents](./../README.md)
