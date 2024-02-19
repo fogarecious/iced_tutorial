@@ -4,6 +4,8 @@
 This tutorial serves as a quick start for the library.
 We try to keep each part of the tutorial as simple as possible.
 
+(Currently, this tutorial is for version `0.10.0`.)
+
 Contents:
 
 * [Setting Up](./tutorial/setting_up.md)
@@ -30,7 +32,7 @@ Contents:
   <!-- * PaneGrid -->
 * Layouts
   * [Width And Height](./tutorial/width_and_height.md)
-  * Column
+  * [Column](./tutorial/column.md)
   * Row
   * Space
   * Container
@@ -63,9 +65,11 @@ Contents:
   * [Batch Subscriptions](./tutorial/batch_subscriptions.md)
 * Canvas
   * Drawing Shapes
+    <!-- examples/arc -->
   * Drawing With Caches
 * Custom Widgets
   * Drawing Widgets
+    <!-- examples/custom_widget -->
   * Updating Widgets From Outside
   * Updating Widgets From Events
   * Producing Widget Messages
@@ -77,6 +81,8 @@ Contents:
   * Texts In Widgets
 * Others
   * Loading Images Asynchronously
+
+<!-- examples/component -->
 
 ## See Also
 

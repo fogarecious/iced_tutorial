@@ -54,6 +54,6 @@ impl Sandbox for MyApp {
 
 ![Width And Height](./pic/width_and_height.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Column](./column.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
