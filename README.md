@@ -22,7 +22,6 @@ Contents:
   * [Radio](./tutorial/radio.md)
   * [PickList](./tutorial/pickList.md)
   * [ComboBox](./tutorial/combobox.md)
-  * Menu
   * [Slider And VerticalSlider](./tutorial/slider.md)
   * [ProgressBar](./tutorial/progressbar.md)
   * [Tooltip](./tutorial/tooltip.md)
@@ -33,7 +32,7 @@ Contents:
 * Layouts
   * [Width And Height](./tutorial/width_and_height.md)
   * [Column](./tutorial/column.md)
-  * Row
+  * [Row](./tutorial/row.md)
   * Space
   * Container
     <!-- center both h and v -->
