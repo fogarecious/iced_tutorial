@@ -54,6 +54,6 @@ impl Sandbox for MyApp {
 
 ![Row](./pic/row.png)
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Space](./space.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

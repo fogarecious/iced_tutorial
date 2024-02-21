@@ -33,7 +33,7 @@ Contents:
   * [Width And Height](./tutorial/width_and_height.md)
   * [Column](./tutorial/column.md)
   * [Row](./tutorial/row.md)
-  * Space
+  * [Space](./tutorial/space.md)
   * Container
     <!-- center both h and v -->
   * Scrollable
