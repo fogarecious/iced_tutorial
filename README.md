@@ -34,8 +34,7 @@ Contents:
   * [Column](./tutorial/column.md)
   * [Row](./tutorial/row.md)
   * [Space](./tutorial/space.md)
-  * Container
-    <!-- center both h and v -->
+  * [Container](./tutorial/container.md)
   * Scrollable
   <!-- * Responsive -->
 * [Changing Themes](./tutorial/changing_themes.md)
@@ -66,6 +65,7 @@ Contents:
   * Drawing Shapes
     <!-- examples/arc -->
   * Drawing With Caches
+    <!-- examples/clock -->
 * Custom Widgets
   * Drawing Widgets
     <!-- examples/custom_widget -->
