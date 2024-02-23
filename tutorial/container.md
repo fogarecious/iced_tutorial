@@ -54,6 +54,6 @@ If we want to center a widget both horizontally and vertically, we can use the f
 container("Center").width(Length::Fill).height(Length::Fill).center_x().center_y()
 ```
 
-:arrow_right:  Next: [Changing Themes](./changing_themes.md)
+:arrow_right:  Next: [Scrollable](./scrollable.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
