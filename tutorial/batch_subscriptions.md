@@ -90,4 +90,6 @@ impl Application for MyApp {
 
 ![Batch subscriptions](./pic/batch_subscriptions.png)
 
+:arrow_right:  Next: [Drawing Shapes](./drawing_shapes.md)
+
 :blue_book: Back: [Table of contents](./../README.md)

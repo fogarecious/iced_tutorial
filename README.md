@@ -62,8 +62,7 @@ Contents:
   * [Producing Messages By Timers](./tutorial/producing_messages_by_timers.md)
   * [Batch Subscriptions](./tutorial/batch_subscriptions.md)
 * Canvas
-  * Drawing Shapes
-    <!-- examples/arc -->
+  * [Drawing Shapes](./tutorial/drawing_shapes.md)
   * Drawing With Caches
     <!-- examples/clock -->
 * Custom Widgets
