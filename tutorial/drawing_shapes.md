@@ -123,6 +123,6 @@ impl<Message> Program<Message> for MyProgram {
 
 ![Drawing Shapes](./pic/drawing_shapes.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Drawing With Caches](./drawing_with_caches.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

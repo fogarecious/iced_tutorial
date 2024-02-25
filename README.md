@@ -63,8 +63,7 @@ Contents:
   * [Batch Subscriptions](./tutorial/batch_subscriptions.md)
 * Canvas
   * [Drawing Shapes](./tutorial/drawing_shapes.md)
-  * Drawing With Caches
-    <!-- examples/clock -->
+  * [Drawing With Caches](./tutorial/drawing_with_caches.md)
 * Custom Widgets
   * Drawing Widgets
     <!-- examples/custom_widget -->
