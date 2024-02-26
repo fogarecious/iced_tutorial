@@ -129,6 +129,6 @@ impl<Message> Program<Message> for MyApp {
 
 ![Drawing With Caches](./pic/drawing_with_caches.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Drawing Widgets](./drawing_widgets.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

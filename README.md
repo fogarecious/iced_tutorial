@@ -65,8 +65,7 @@ Contents:
   * [Drawing Shapes](./tutorial/drawing_shapes.md)
   * [Drawing With Caches](./tutorial/drawing_with_caches.md)
 * Custom Widgets
-  * Drawing Widgets
-    <!-- examples/custom_widget -->
+  * [Drawing Widgets](./tutorial/drawing_widgets.md)
   * Updating Widgets From Outside
   * Updating Widgets From Events
   * Producing Widget Messages
