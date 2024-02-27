@@ -229,6 +229,6 @@ where
 
 ![Drawing Widgets](./pic/drawing_widgets.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Updating Widgets From Outside](./updating_widgets_from_outside.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
