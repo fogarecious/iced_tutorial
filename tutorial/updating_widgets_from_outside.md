@@ -203,6 +203,6 @@ When `highlight` is true:
 
 ![Updating Widgets From Outside 2](./pic/updating_widgets_from_outside_2.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Updating Widgets From Events](./updating_widgets_from_events.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
