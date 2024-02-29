@@ -68,7 +68,7 @@ Contents:
   * [Drawing Widgets](./tutorial/drawing_widgets.md)
   * [Updating Widgets From Outside](./tutorial/updating_widgets_from_outside.md)
   * [Updating Widgets From Events](./tutorial/updating_widgets_from_events.md)
-  * Producing Widget Messages
+  * [Producing Widget Messages](./tutorial/producing_widget_messages.md)
   * Mouse Pointer Over Widgets
   * Widgets With Children
   * Communication With Children

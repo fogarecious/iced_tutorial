@@ -185,6 +185,6 @@ When the space bar is pressed, the widget color switches between light and dark.
 
 ![Updating Widgets From Events 2](./pic/updating_widgets_from_events_2.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Producing Widget Messages](./producing_widget_messages.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
