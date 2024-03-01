@@ -69,7 +69,7 @@ Contents:
   * [Updating Widgets From Outside](./tutorial/updating_widgets_from_outside.md)
   * [Updating Widgets From Events](./tutorial/updating_widgets_from_events.md)
   * [Producing Widget Messages](./tutorial/producing_widget_messages.md)
-  * Mouse Pointer Over Widgets
+  * [Mouse Pointer Over Widgets](./tutorial/mouse_pointer_over_widgets.md)
   * Texts In Widgets
   * Custom Background
   * Widgets With Children

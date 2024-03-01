@@ -222,6 +222,6 @@ where
 
 ![Producing Widget Messages](./pic/producing_widget_messages.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Mouse Pointer Over Widgets](./mouse_pointer_over_widgets.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
