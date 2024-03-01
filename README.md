@@ -70,11 +70,13 @@ Contents:
   * [Updating Widgets From Events](./tutorial/updating_widgets_from_events.md)
   * [Producing Widget Messages](./tutorial/producing_widget_messages.md)
   * Mouse Pointer Over Widgets
+  * Texts In Widgets
+  * Custom Background
   * Widgets With Children
   * Communication With Children
-  * Obeying Limits In Layout
-  * Limits Of Children
-  * Texts In Widgets
+  * Taking Any Children
+  <!-- * Obeying Limits In Layout -->
+  <!-- * Limits Of Children -->
 * Others
   * Loading Images Asynchronously
 
