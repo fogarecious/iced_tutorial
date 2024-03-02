@@ -132,6 +132,6 @@ where
 
 ![Mouse Pointer Over Widgets](./pic/mouse_pointer_over_widgets.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Texts In Widgets](./texts_in_widgets.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
