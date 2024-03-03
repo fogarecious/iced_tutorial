@@ -211,6 +211,6 @@ where
 
 ![Texts In Widgets](./pic/texts_in_widgets.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Custom Background](./custom_background.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

@@ -71,7 +71,7 @@ Contents:
   * [Producing Widget Messages](./tutorial/producing_widget_messages.md)
   * [Mouse Pointer Over Widgets](./tutorial/mouse_pointer_over_widgets.md)
   * [Texts In Widgets](./tutorial/texts_in_widgets.md)
-  * Custom Background
+  * [Custom Background](./tutorial/custom_background.md)
   * Widgets With Children
   * Taking Any Children
 * Others
