@@ -190,6 +190,6 @@ where
 
 ![Custom Background](./pic/custom_background.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Widgets With Children](./widgets_with_children.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

@@ -72,7 +72,7 @@ Contents:
   * [Mouse Pointer Over Widgets](./tutorial/mouse_pointer_over_widgets.md)
   * [Texts In Widgets](./tutorial/texts_in_widgets.md)
   * [Custom Background](./tutorial/custom_background.md)
-  * Widgets With Children
+  * [Widgets With Children](./tutorial/widgets_with_children.md)
   * Taking Any Children
 * Others
   * Loading Images Asynchronously
