@@ -269,6 +269,6 @@ where
 
 ![Widgets With Children](./pic/widgets_with_children.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Taking Any Children](./taking_any_children.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
