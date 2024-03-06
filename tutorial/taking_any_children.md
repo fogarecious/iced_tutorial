@@ -212,6 +212,6 @@ where
 
 ![Taking Any Children](./pic/taking_any_children.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [Loading Images Asynchronously](./loading_images_asynchronously.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
