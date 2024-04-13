@@ -1,7 +1,7 @@
 # Producing Messages By Timers
 
-To use build-in timers, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/latest/features#tokio), [async-std](https://docs.rs/crate/iced/latest/features#async-std), or [smol](https://docs.rs/crate/iced/latest/features#smol).
-In this tutorial, we use [async-std](https://docs.rs/crate/iced/latest/features#async-std) feature.
+To use build-in timers, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio), [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std), or [smol](https://docs.rs/crate/iced/0.12.1/features#smol).
+In this tutorial, we use [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std) feature.
 The `Cargo.toml` should look like this:
 
 ```toml
@@ -9,10 +9,10 @@ The `Cargo.toml` should look like this:
 iced = { version = "0.10.0", features = ["async-std"] }
 ```
 
-We use [time::every](https://docs.iced.rs/iced/time/fn.every.html) function to obtain [Subscription](https://docs.iced.rs/iced/struct.Subscription.html)\<[Instant](https://docs.iced.rs/iced/time/struct.Instant.html)> struct.
-Then we map the struct to [Subscription](https://docs.iced.rs/iced/struct.Subscription.html)\<`MyAppMessage`> by [Subscription::map](https://docs.iced.rs/iced/struct.Subscription.html#method.map) method.
-The result will be returned in the [subscription](https://docs.iced.rs/iced/application/trait.Application.html#method.subscription) method of [Application](https://docs.iced.rs/iced/application/trait.Application.html).
-The corresponding `MyAppMessage` will be received in the [update](https://docs.iced.rs/iced/application/trait.Application.html#tymethod.update) method.
+We use [time::every](https://docs.rs/iced/0.12.1/iced/time/fn.every.html) function to obtain [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html)\<[Instant](https://docs.rs/iced/0.12.1/iced/time/struct.Instant.html)> struct.
+Then we map the struct to [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html)\<`MyAppMessage`> by [Subscription::map](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html#method.map) method.
+The result will be returned in the [subscription](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#method.subscription) method of [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html).
+The corresponding `MyAppMessage` will be received in the [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
 
 ```rust
 use iced::{
@@ -56,7 +56,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message> {
         text(self.seconds).into()
     }
 

@@ -1,6 +1,6 @@
 # ProgressBar
 
-The [ProgressBar](https://docs.iced.rs/iced/widget/progress_bar/struct.ProgressBar.html) widget represents a value in a given range.
+The [ProgressBar](https://docs.rs/iced/0.12.1/iced/widget/progress_bar/struct.ProgressBar.html) widget represents a value in a given range.
 It has two methods of constructions.
 
 ```rust

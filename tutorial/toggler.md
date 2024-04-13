@@ -1,6 +1,6 @@
 # Toggler
 
-The [Toggler](https://docs.iced.rs/iced/widget/toggler/struct.Toggler.html) widget represents a boolean value.
+The [Toggler](https://docs.rs/iced/0.12.1/iced/widget/toggler/struct.Toggler.html) widget represents a boolean value.
 (Note, it appears on the right of its text.)
 It has two methods of constructions.
 It supports reactions to clicking and touching.

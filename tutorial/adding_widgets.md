@@ -1,6 +1,6 @@
 # Adding Widgets
 
-Use [column!](https://docs.iced.rs/iced/widget/macro.column.html) and [row!](https://docs.iced.rs/iced/widget/macro.row.html) to group multiple widgets such as [text](https://docs.iced.rs/iced/widget/fn.text.html) and [button](https://docs.iced.rs/iced/widget/fn.button.html).
+Use [column!](https://docs.rs/iced/0.12.1/iced/widget/macro.column.html) and [row!](https://docs.rs/iced/0.12.1/iced/widget/macro.row.html) to group multiple widgets such as [text](https://docs.rs/iced/0.12.1/iced/widget/fn.text.html) and [button](https://docs.rs/iced/0.12.1/iced/widget/fn.button.html).
 
 ```rust
 use iced::{

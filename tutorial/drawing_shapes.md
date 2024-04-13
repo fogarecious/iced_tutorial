@@ -1,15 +1,15 @@
 # Drawing Shapes
 
-[Canvas](https://docs.rs/iced/latest/iced/widget/canvas/struct.Canvas.html) is a widget that helps us drawing free-style shapes.
-To use the widget, we need to enable the [canvas](https://docs.rs/crate/iced/latest/features#canvas) feature.
+[Canvas](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Canvas.html) is a widget that helps us drawing free-style shapes.
+To use the widget, we need to enable the [canvas](https://docs.rs/crate/iced/0.12.1/features#canvas) feature.
 
 ```toml
 [dependencies]
-iced = { version = "0.10.0", features = ["canvas"] }
+iced = { version = "0.12.1", features = ["canvas"] }
 ```
 
-We use [Canvas::new](https://docs.rs/iced/latest/iced/widget/canvas/struct.Canvas.html#method.new) to obtain the canvas widget.
-This function accepts a [Program](https://docs.rs/iced/latest/iced/widget/canvas/trait.Program.html) trait.
+We use [Canvas::new](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Canvas.html#method.new) to obtain the canvas widget.
+This function accepts a [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) trait.
 We can create a struct (say, `MyProgram`) to implement this trait.
 
 ```rust
@@ -29,17 +29,17 @@ impl<Message> Program<Message> for MyProgram {
 }
 ```
 
-There is a generic data type `Message` when we implement the [Program](https://docs.rs/iced/latest/iced/widget/canvas/trait.Program.html) trait.
-This helps us adapting to our [Message](https://docs.rs/iced/latest/iced/trait.Sandbox.html#associatedtype.Message) in [Sandbox](https://docs.rs/iced/latest/iced/trait.Sandbox.html).
+There is a generic data type `Message` when we implement the [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) trait.
+This helps us adapting to our [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) in [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
 
-The associated type [State](https://docs.rs/iced/latest/iced/widget/canvas/trait.Program.html#associatedtype.State) is not used in our example, so we set it to `()`.
+The associated type [State](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#associatedtype.State) is not used in our example, so we set it to `()`.
 
-The key of [Program](https://docs.rs/iced/latest/iced/widget/canvas/trait.Program.html) is the [draw](https://docs.rs/iced/latest/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
+The key of [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) is the [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
 In the method, we define what shapes we are going to draw.
-We use [Frame](https://docs.rs/iced/latest/iced/widget/canvas/enum.Frame.html) as a *pen* to draw shapes.
-For example, we use the [fill_rectangle](https://docs.rs/iced/latest/iced/widget/canvas/enum.Frame.html#method.fill_rectangle) method of [Frame](https://docs.rs/iced/latest/iced/widget/canvas/enum.Frame.html) to draw a filled rectangle.
-Or we can stroke and fill any [Path](https://docs.rs/iced/latest/iced/widget/canvas/struct.Path.html).
-Finally, we use the [into_geometry](https://docs.rs/iced/latest/iced/widget/canvas/enum.Frame.html#method.into_geometry) method of [Frame](https://docs.rs/iced/latest/iced/widget/canvas/enum.Frame.html) to return the [Geometry](https://docs.rs/iced/latest/iced/widget/canvas/enum.Geometry.html) as required by the [draw](https://docs.rs/iced/latest/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
+We use [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html) as a *pen* to draw shapes.
+For example, we use the [fill_rectangle](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html#method.fill_rectangle) method of [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html) to draw a filled rectangle.
+Or we can stroke and fill any [Path](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Path.html).
+Finally, we use the [into_geometry](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html#method.into_geometry) method of [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html) to return the [Geometry](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Geometry.html) as required by the [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
 
 ```rust
 use iced::{

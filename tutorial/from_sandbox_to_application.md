@@ -1,12 +1,12 @@
 # From Sandbox To Application
 
-To have more control over our app, we can use [Application](https://docs.iced.rs/iced/application/trait.Application.html) trait, which is a generalization of [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html) trait.
-There are two main differences between [Application](https://docs.iced.rs/iced/application/trait.Application.html) and [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html).
+To have more control over our app, we can use [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html) trait, which is a generalization of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) trait.
+There are two main differences between [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html) and [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
 One thing is the [associated types](https://doc.rust-lang.org/stable/book/ch19-03-advanced-traits.html#specifying-placeholder-types-in-trait-definitions-with-associated-types).
-We have to specify [Executor](https://docs.iced.rs/iced/application/trait.Application.html#associatedtype.Executor), [Theme](https://docs.iced.rs/iced/application/trait.Application.html#associatedtype.Theme) and [Flags](https://docs.iced.rs/iced/application/trait.Application.html#associatedtype.Flags) in addition to [Message](https://docs.iced.rs/iced/trait.Sandbox.html#associatedtype.Message) in [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html).
+We have to specify [Executor](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#associatedtype.Executor), [Theme](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#associatedtype.Theme) and [Flags](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#associatedtype.Flags) in addition to [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) in [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
 Basically, we use the suggested defaults for these associated types.
-The other is that we have to return [Command](https://docs.iced.rs/iced/struct.Command.html) in [new](https://docs.iced.rs/iced/application/trait.Application.html#tymethod.new) method and [update](https://docs.iced.rs/iced/application/trait.Application.html#tymethod.update) method.
-We just return [Command::none()](https://docs.iced.rs/iced/struct.Command.html#method.none) for both methods.
+The other is that we have to return [Command](https://docs.rs/iced/0.12.1/iced/struct.Command.html) in [new](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.new) method and [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
+We just return [Command::none()](https://docs.rs/iced/0.12.1/iced/struct.Command.html#method.none) for both methods.
 
 ```rust
 use iced::{executor, Application, Command, Settings};
@@ -35,7 +35,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message> {
         "Hello World!".into()
     }
 }

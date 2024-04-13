@@ -1,7 +1,7 @@
 # More Than One Page
 
 To have multiple pages, we can add a field `page` to the main struct `MyApp`.
-The field `page` is an [enum](https://doc.rust-lang.org/std/keyword.enum.html) defined by us that decides what to display in [view](https://docs.rs/iced/latest/iced/trait.Sandbox.html#tymethod.view) method of the [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html).
+The field `page` is an [enum](https://doc.rust-lang.org/std/keyword.enum.html) defined by us that decides what to display in [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) method of the [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
 
 ```rust
 use iced::{

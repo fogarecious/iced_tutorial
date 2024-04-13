@@ -1,7 +1,7 @@
 # Container
 
-[Container](https://docs.rs/iced/latest/iced/widget/container/struct.Container.html) is another way to help us laying out widgets, especially when we need to algin a widget center both horizontally and vertically.
-[Container](https://docs.rs/iced/latest/iced/widget/container/struct.Container.html) accepts any widget including [Column](https://docs.rs/iced/latest/iced/widget/struct.Column.html) and [Row](https://docs.rs/iced/latest/iced/widget/struct.Row.html).
+[Container](https://docs.rs/iced/0.12.1/iced/widget/container/struct.Container.html) is another way to help us laying out widgets, especially when we need to algin a widget center both horizontally and vertically.
+[Container](https://docs.rs/iced/0.12.1/iced/widget/container/struct.Container.html) accepts any widget including [Column](https://docs.rs/iced/0.12.1/iced/widget/struct.Column.html) and [Row](https://docs.rs/iced/0.12.1/iced/widget/struct.Row.html).
 
 ```rust
 use iced::{

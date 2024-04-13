@@ -1,6 +1,6 @@
 # Loading Images Asynchronously
 
-In the previous tutorials, we introduced how to use [Application](https://docs.rs/iced/latest/iced/application/trait.Application.html) to execute an asynchronous operation and how to display an image.
+In the previous tutorials, we introduced how to use [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html) to execute an asynchronous operation and how to display an image.
 This tutorial combines both and demonstrates how to load an image asynchronously.
 
 It is assumed that there is an image named `ferris.png` in the Cargo project root directory.
@@ -10,7 +10,7 @@ The dependencies of the `Cargo.toml` file should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.10.0", features = ["image", "tokio"] }
+iced = { version = "0.12.1", features = ["image", "tokio"] }
 tokio = { version = "1.36.0", features = ["full"] }
 ```
 
@@ -155,7 +155,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message> {
         column![
             button("Load").on_press(MyMessage::Load),
             if self.show_container {

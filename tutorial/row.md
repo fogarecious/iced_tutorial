@@ -1,6 +1,6 @@
 # Row
 
-Similar to [Column](https://docs.rs/iced/latest/iced/widget/struct.Column.html), [Row](https://docs.rs/iced/latest/iced/widget/struct.Row.html) helps us placing widgets horizontally.
+Similar to [Column](https://docs.rs/iced/0.12.1/iced/widget/struct.Column.html), [Row](https://docs.rs/iced/0.12.1/iced/widget/struct.Row.html) helps us placing widgets horizontally.
 It can leave some space between its boundary and its inner content.
 It can also add spaces among its inner widgets.
 The inner widgets can be aligned top, middle or bottom.

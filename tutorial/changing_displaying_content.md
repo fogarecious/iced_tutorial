@@ -1,11 +1,11 @@
 # Changing Displaying Content
 
-To change the content in [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) dynamically, we can do the following:
+To change the content in [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) dynamically, we can do the following:
 
 * Add some fields (e.g., `counter`) to the main struct `MyApp`.
-* Display the fields in [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) (e.g., `text(self.counter)`).
-* Produce some messages in [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) (e.g., `button(...).on_press(MyAppMessage::ButtonPressed)`).
-* Update the fields when messages are received in [update](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.update) (e.g., `self.counter += 1`).
+* Display the fields in [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) (e.g., `text(self.counter)`).
+* Produce some messages in [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) (e.g., `button(...).on_press(MyAppMessage::ButtonPressed)`).
+* Update the fields when messages are received in [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) (e.g., `self.counter += 1`).
 
 ```rust
 use iced::{

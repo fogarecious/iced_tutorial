@@ -1,13 +1,13 @@
 # Width And Height
 
 Most widgets have the `width` and `height` methods to control their sizes.
-The methods accept a parameter [Length](https://docs.rs/iced/latest/iced/enum.Length.html).
-There are four types of [Length](https://docs.rs/iced/latest/iced/enum.Length.html):
+The methods accept a parameter [Length](https://docs.rs/iced/0.12.1/iced/latest/iced/enum.Length.html).
+There are four types of [Length](https://docs.rs/iced/0.12.1/iced/latest/iced/enum.Length.html):
 
-* [Shrink](https://docs.rs/iced/latest/iced/enum.Length.html#variant.Shrink): occupy the least space.
-* [Fill](https://docs.rs/iced/latest/iced/enum.Length.html#variant.Fill): occupy all the rest of space.
-* [FillPortion](https://docs.rs/iced/latest/iced/enum.Length.html#variant.FillPortion): occupy the space relative to other widgets with [FillPortion](https://docs.rs/iced/latest/iced/enum.Length.html#variant.FillPortion).
-* [Fixed](https://docs.rs/iced/latest/iced/enum.Length.html#variant.Fixed): occupy a fixed space.
+* [Shrink](https://docs.rs/iced/0.12.1/iced/latest/iced/enum.Length.html#variant.Shrink): occupy the least space.
+* [Fill](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.Fill): occupy all the rest of space.
+* [FillPortion](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.FillPortion): occupy the space relative to other widgets with [FillPortion](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.FillPortion).
+* [Fixed](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.Fixed): occupy a fixed space.
 
 ```rust
 use iced::{

@@ -4,9 +4,9 @@ The [previous tutorial](./more_than_one_page.md) has a problem that the fields c
 This brings potential security problems, e.g., the input password could be accessed in other pages.
 
 To fix this problem, we can use [trait objects](https://doc.rust-lang.org/stable/book/ch17-02-trait-objects.html).
-The `Page` trait below is responsible for [update](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.update) and [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) for a single page.
-In the main struct `MyApp`, we dispatch [update](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.update) and [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) to the corresponding page that is indicated by `page` field in `MyApp`.
-The [update](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.update) method in `MyApp` is also responsible for switching pages.
+The `Page` trait below is responsible for [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) and [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) for a single page.
+In the main struct `MyApp`, we dispatch [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) and [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) to the corresponding page that is indicated by `page` field in `MyApp`.
+The [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) method in `MyApp` is also responsible for switching pages.
 
 In addition, we explicitly distinguish messages from different pages in `MyAppMessage`.
 
@@ -146,7 +146,7 @@ impl Page for PageA {
     fn view(&self) -> iced::Element<'_, MyAppMessage> {
         column![
             text_input("Password", &self.password)
-                .password()
+                .secure(true)
                 .on_input(|s| MyAppMessage::PageA(Ma::TextChanged(s))),
             button("Log in").on_press(MyAppMessage::PageA(Ma::ButtonPressed)),
         ]

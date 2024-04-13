@@ -1,6 +1,6 @@
 # ComboBox
 
-The [ComboBox](https://docs.iced.rs/iced/widget/combo_box/struct.ComboBox.html) widget represents a choice among multiple values.
+The [ComboBox](https://docs.rs/iced/0.12.1/iced/widget/combo_box/struct.ComboBox.html) widget represents a choice among multiple values.
 The values are shown in a dropdown menu and is searchable.
 The widget has two methods of constructions.
 It supports reactions to keyboard inputs and mouse selections.

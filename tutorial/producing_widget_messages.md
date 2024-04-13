@@ -1,8 +1,8 @@
 # Producing Widget Messages
 
-Our custom widgets are able to send [Message](https://docs.rs/iced/latest/iced/trait.Sandbox.html#associatedtype.Message).
+Our custom widgets are able to send [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message).
 
-To do so, we need to store the [Message](https://docs.rs/iced/latest/iced/trait.Sandbox.html#associatedtype.Message) we are going to send in the widget.
+To do so, we need to store the [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) we are going to send in the widget.
 
 ```rust
 struct MyWidget<Message> {
@@ -16,7 +16,7 @@ impl<Message> MyWidget<Message> {
 }
 ```
 
-We use a generic type `Message` for `MyWidget`, so that the sent `pressed_message` in `MyWidget` will match the associated type [Message](https://docs.rs/iced/latest/iced/trait.Sandbox.html#associatedtype.Message) of [Sandbox](https://docs.rs/iced/latest/iced/trait.Sandbox.html).
+We use a generic type `Message` for `MyWidget`, so that the sent `pressed_message` in `MyWidget` will match the associated type [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
 
 The message `pressed_message` will be sent when the widget is pressed.
 
@@ -49,7 +49,7 @@ fn on_event(
 We use `shell.publish(self.pressed_message.clone())` to send `pressed_message` to our app.
 To ensure the mouse pressed event happens within the range of the widget, we use `cursor.is_over(layout.bounds())` to check the mouse position and match the `event` to `Event::Mouse(mouse::Event::ButtonPressed(_))` to check the mouse button state.
 
-Finally, we pass our [Message](https://docs.rs/iced/latest/iced/trait.Sandbox.html#associatedtype.Message) to the widget.
+Finally, we pass our [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) to the widget.
 
 ```rust
 #[derive(Debug, Clone)]
@@ -82,14 +82,14 @@ The full code is as follows:
 ```rust
 use iced::{
     advanced::{
+        graphics::core::event,
         layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
         Clipboard, Layout, Shell, Widget,
     },
-    event,
     widget::{column, container, text},
-    Alignment, Color, Element, Event, Length, Rectangle, Sandbox, Settings,
+    Alignment, Border, Color, Element, Event, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
@@ -124,9 +124,9 @@ impl Sandbox for MyApp {
 
     fn view(&self) -> iced::Element<'_, Self::Message> {
         container(
-            column![MyWidget::new(MyMessage::MyWidgetPressed), text(self.count),]
+            column![MyWidget::new(MyMessage::MyWidgetPressed), text(self.count)]
                 .spacing(20)
-                .align_items(Alignment::Center),
+                .align_items(iced::Alignment::Center),
         )
         .width(Length::Fill)
         .height(Length::Fill)
@@ -146,20 +146,24 @@ impl<Message> MyWidget<Message> {
     }
 }
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidget<Message>
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget<Message>
 where
-    Message: Clone,
     Renderer: iced::advanced::Renderer,
+    Message: Clone,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
         layout::Node::new([100, 100].into())
     }
 
@@ -167,7 +171,7 @@ where
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -176,9 +180,12 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.8, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.8, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             Color::from_rgb(0.0, 0.2, 0.4),
         );
@@ -209,7 +216,7 @@ where
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidget<Message>> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidget<Message>> for Element<'a, Message, Theme, Renderer>
 where
     Message: 'a + Clone,
     Renderer: iced::advanced::Renderer,

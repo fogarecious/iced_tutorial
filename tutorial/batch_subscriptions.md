@@ -1,17 +1,16 @@
 # Batch Subscriptions
 
 This tutorial follows from the previous two tutorials ([keyboard events](./producing_messages_by_keyboard_events.md) and [timers](./producing_messages_by_timers.md)).
-We combine the two [Subscriptions](https://docs.iced.rs/iced/subscription/struct.Subscription.html) of keyboard events and timers.
-This is done by [Subscription::batch](https://docs.iced.rs/iced/subscription/struct.Subscription.html#method.batch) function.
+We combine the two [Subscriptions](https://docs.rs/iced/0.12.1/iced/subscription/struct.Subscription.html) of keyboard events and timers.
+This is done by [Subscription::batch](https://docs.rs/iced/0.12.1/iced/subscription/struct.Subscription.html#method.batch) function.
 
 In the following app, press the space key to start or stop the timer.
 
 ```rust
 use iced::{
-    event::Status,
+    event::{self, Status},
     executor,
-    keyboard::KeyCode,
-    subscription,
+    keyboard::{key::Named, Key},
     time::{self, Duration},
     widget::text,
     Application, Command, Event, Settings, Subscription,
@@ -60,22 +59,22 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message> {
         text(self.seconds).into()
     }
 
     fn subscription(&self) -> iced::Subscription<Self::Message> {
-        let subscr_key = subscription::events_with(|event, status| match (event, status) {
+        let subscr_key = event::listen_with(|event, status| match (event, status) {
             (
                 Event::Keyboard(iced::keyboard::Event::KeyPressed {
-                    key_code: KeyCode::Space,
+                    key: Key::Named(Named::Space),
                     ..
                 }),
                 Status::Ignored,
             ) => Some(MyAppMessage::StartOrStop),
             _ => None,
         });
-        
+
         if self.running {
             Subscription::batch(vec![
                 subscr_key,

@@ -1,7 +1,7 @@
 # Executing Custom Commands
 
-[Commands](https://docs.iced.rs/iced/struct.Command.html) can help us executing asynchronous functions.
-To do this, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/latest/features#tokio), [async-std](https://docs.rs/crate/iced/latest/features#async-std), or [smol](https://docs.rs/crate/iced/latest/features#smol).
+[Commands](https://docs.rs/iced/0.12.1/iced/struct.Command.html) can help us executing asynchronous functions.
+To do this, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio), [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std), or [smol](https://docs.rs/crate/iced/0.12.1/features#smol).
 The corresponding asynchronous runtime ([tokio](https://crates.io/crates/tokio), [async-std](https://crates.io/crates/async-std), or [smol](https://crates.io/crates/smol)) must also be added.
 
 Here, we use [async-std](https://crates.io/crates/async-std) as an example.
@@ -11,11 +11,11 @@ The `Cargo.toml` should look like this:
 ```toml
 [dependencies]
 async-std = "1.12.0"
-iced = { version = "0.10.0", features = ["async-std"] }
+iced = { version = "0.12.1", features = ["async-std"] }
 ```
 
-We use [Command::perform](https://docs.iced.rs/iced/struct.Command.html#method.perform) to execute an asynchronous function.
-The first parameter of [Command::perform](https://docs.iced.rs/iced/struct.Command.html#method.perform) is an asynchronous function, and the second parameter is a function that returns `MyAppMessage`.
+We use [Command::perform](https://docs.rs/iced/0.12.1/iced/struct.Command.html#method.perform) to execute an asynchronous function.
+The first parameter of [Command::perform](https://docs.rs/iced/0.12.1/iced/struct.Command.html#method.perform) is an asynchronous function, and the second parameter is a function that returns `MyAppMessage`.
 The `MyAppMessage` will be produced once the asynchronous function is done.
 
 In the following code, we use a simple asynchronous function [async_std::task::sleep](https://docs.rs/async-std/1.12.0/async_std/task/fn.sleep.html).

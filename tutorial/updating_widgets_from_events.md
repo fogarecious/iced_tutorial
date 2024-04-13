@@ -1,9 +1,9 @@
 # Updating Widgets From Events
 
 Sometimes, we would like our widgets to handle their states by themselves.
-For example, a widget might change its states when receiving an [Event](https://docs.rs/iced/latest/iced/event/enum.Event.html).
+For example, a widget might change its states when receiving an [Event](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html).
 
-To do so, we implement the [on_event](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#method.on_event) method of [Widget](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html).
+To do so, we implement the [on_event](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#method.on_event) method of [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html).
 
 ```rust
 fn on_event(
@@ -18,8 +18,8 @@ fn on_event(
     _viewport: &Rectangle,
 ) -> event::Status {
     match event {
-        Event::Keyboard(keyboard::Event::KeyPressed {
-            key_code: KeyCode::Space,
+		Event::Keyboard(keyboard::Event::KeyPressed {
+			key: keyboard::Key::Named(Named::Space),
             ..
         }) => {
             self.highlight = !self.highlight;
@@ -32,8 +32,8 @@ fn on_event(
 
 Our widget changes its `highlight` field every time when the space bar is pressed.
 
-If the [Event](https://docs.rs/iced/latest/iced/event/enum.Event.html) passed to the [on_event](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#method.on_event) method is what the widget needs, we return [Status::Captured](https://docs.rs/iced/latest/iced/event/enum.Status.html#variant.Captured).
-Otherwise, we return [Status::Ignored](https://docs.rs/iced/latest/iced/event/enum.Status.html#variant.Ignored) to tell the system the event can be used by other widgets.
+If the [Event](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html) passed to the [on_event](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#method.on_event) method is what the widget needs, we return [Status::Captured](https://docs.rs/iced/0.12.1/iced/event/enum.Status.html#variant.Captured).
+Otherwise, we return [Status::Ignored](https://docs.rs/iced/0.12.1/iced/event/enum.Status.html#variant.Ignored) to tell the system the event can be used by other widgets.
 
 Since our widget maintains its own state, we do not need to pass the state from our app.
 
@@ -54,15 +54,15 @@ The full code is as follows:
 ```rust
 use iced::{
     advanced::{
+        graphics::core::event,
         layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
         Clipboard, Layout, Shell, Widget,
     },
-    event,
-    keyboard::{self, KeyCode},
+    keyboard::{self, key::Named},
     widget::container,
-    Color, Element, Event, Length, Rectangle, Sandbox, Settings,
+    Border, Color, Element, Event, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
@@ -104,19 +104,23 @@ impl MyWidget {
     }
 }
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidget
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget
 where
     Renderer: iced::advanced::Renderer,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
         layout::Node::new([100, 100].into())
     }
 
@@ -124,7 +128,7 @@ where
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -133,9 +137,12 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.8, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.8, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             if self.highlight {
                 Color::from_rgb(0.6, 0.8, 1.0)
@@ -158,7 +165,7 @@ where
     ) -> event::Status {
         match event {
             Event::Keyboard(keyboard::Event::KeyPressed {
-                key_code: KeyCode::Space,
+                key: keyboard::Key::Named(Named::Space),
                 ..
             }) => {
                 self.highlight = !self.highlight;
@@ -169,7 +176,7 @@ where
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {

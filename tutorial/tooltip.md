@@ -1,6 +1,6 @@
 # Tooltip
 
-The [Tooltip](https://docs.iced.rs/iced/widget/tooltip/struct.Tooltip.html) widget displays a text when the mouse is over a specified widget.
+The [Tooltip](https://docs.rs/iced/0.12.1/iced/widget/tooltip/struct.Tooltip.html) widget displays a text when the mouse is over a specified widget.
 It has two methods of constructions.
 It is able to change styles of the text.
 We can add padding around the text inside.
@@ -47,21 +47,6 @@ impl Sandbox for MyApp {
             ),
             tooltip(
                 button("Mouseover to see the tooltip"),
-                "Different font",
-                Position::Right
-            )
-            .font(Font {
-                family: Family::Fantasy,
-                ..Font::DEFAULT
-            }),
-            tooltip(
-                button("Mouseover to see the tooltip"),
-                "Larger text",
-                Position::Right
-            )
-            .size(24),
-            tooltip(
-                button("Mouseover to see the tooltip"),
                 "With padding",
                 Position::Right
             )
@@ -78,6 +63,11 @@ impl Sandbox for MyApp {
                 Position::Right
             )
             .snap_within_viewport(false),
+            tooltip(
+                button("Mouseover to see the tooltip"),
+                "Follow the cursor",
+                Position::FollowCursor
+            )
         ]
         .into()
     }

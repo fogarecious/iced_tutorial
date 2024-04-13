@@ -1,6 +1,6 @@
 # Checkbox
 
-The [Checkbox](https://docs.iced.rs/iced/widget/checkbox/struct.Checkbox.html) widget represents a boolean value.
+The [Checkbox](https://docs.rs/iced/0.12.1/iced/widget/checkbox/struct.Checkbox.html) widget represents a boolean value.
 It has two methods of constructions.
 It supports reactions to clicking and touching.
 It is able to change styles of the box and the text.
@@ -52,27 +52,27 @@ impl Sandbox for MyApp {
 
     fn view(&self) -> iced::Element<'_, Self::Message> {
         column![
-            Checkbox::new("Construct from struct", false, |_| MyAppMessage::DoNothing),
-            checkbox("Construct from function", false, |_| {
+            Checkbox::new("Construct from struct", false).on_toggle(|_| MyAppMessage::DoNothing),
+            checkbox("Construct from function", false).on_toggle(|_| {
                 MyAppMessage::DoNothing
             }),
-            checkbox("Functional checkbox", self.checkbox3, |b| MyAppMessage::Update3(b)),
-            checkbox("Shorter parameter", self.checkbox4, MyAppMessage::Update4),
-            checkbox("Larger box", false, |_| MyAppMessage::DoNothing).size(30),
-            checkbox("Different icon", true, |_| MyAppMessage::DoNothing).icon(Icon {
+            checkbox("Functional checkbox", self.checkbox3).on_toggle(|b| MyAppMessage::Update3(b)),
+            checkbox("Shorter parameter", self.checkbox4).on_toggle(MyAppMessage::Update4),
+            checkbox("Larger box", false).on_toggle(|_| MyAppMessage::DoNothing).size(30),
+            checkbox("Different icon", true).on_toggle(|_| MyAppMessage::DoNothing).icon(Icon {
                 font: Font::DEFAULT,
                 code_point: '*',
                 size: None,
                 line_height: LineHeight::default(),
                 shaping: Shaping::default()
             }),
-            checkbox("Different font", false, |_| MyAppMessage::DoNothing).font(Font {
+            checkbox("Different font", false).on_toggle(|_| MyAppMessage::DoNothing).font(Font {
                 family: Family::Fantasy,
                 ..Font::DEFAULT
             }),
-            checkbox("Larger text", false, |_| MyAppMessage::DoNothing).text_size(24),
-            checkbox("Special character 😊", false, |_| MyAppMessage::DoNothing).text_shaping(Shaping::Advanced),
-            checkbox("Space between box and text", false, |_| MyAppMessage::DoNothing).spacing(30),
+            checkbox("Larger text", false).on_toggle(|_| MyAppMessage::DoNothing).text_size(24),
+            checkbox("Special character 😊", false).on_toggle(|_| MyAppMessage::DoNothing).text_shaping(Shaping::Advanced),
+            checkbox("Space between box and text", false).on_toggle(|_| MyAppMessage::DoNothing).spacing(30),
         ]
         .into()
     }

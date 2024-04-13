@@ -1,40 +1,41 @@
 # Drawing Widgets
 
 In addition to the build-in widgets, we can also design our own custom widgets.
-To do so, we need to enable the [advanced](https://docs.rs/crate/iced/latest/features#advanced) feature.
+To do so, we need to enable the [advanced](https://docs.rs/crate/iced/0.12.1/features#advanced) feature.
 The dependencies of the `Cargo.toml` file should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.10.0", features = ["advanced"] }
+iced = { version = "0.12.1", features = ["advanced"] }
 ```
 
-Then, we need a struct that implement [Widget](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html) trait.
+Then, we need a struct that implement [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html) trait.
 
 ```rust
 struct MyWidget;
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidget
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget
 where
     Renderer: iced::advanced::Renderer,
 {
-    fn width(&self) -> Length {
-        // ...
-    }
-
-    fn height(&self) -> Length {
-        // ...
-    }
-
-    fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
-        // ...
+	fn size(&self) -> Size<Length> {
+		// ...
+	}
+	
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
+		// ...
     }
 
     fn draw(
         &self,
         _state: &Tree,
         _renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         _layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -45,16 +46,15 @@ where
 }
 ```
 
-We define the size of `MyWidget` by the methods: [width](https://docs.rs/iced/0.10.0/iced/advanced/widget/trait.Widget.html#tymethod.width), [height](https://docs.rs/iced/0.10.0/iced/advanced/widget/trait.Widget.html#tymethod.height) and [layout](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.layout).
-Currently, we set the [width](https://docs.rs/iced/0.10.0/iced/advanced/widget/trait.Widget.html#tymethod.width) and [height](https://docs.rs/iced/0.10.0/iced/advanced/widget/trait.Widget.html#tymethod.height) to [Length::Shrink](https://docs.rs/iced/latest/iced/enum.Length.html#variant.Shrink), to tell the layout system that we use the least space for this widget.
+We define the size of `MyWidget` by the methods: [size](https://docs.rs/iced/0.12.1/iced/advanced/trait.Widget.html#tymethod.size) and [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout).
+Currently, we set the width and height to [Length::Shrink](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.Shrink), to tell the layout system that we use the least space for this widget.
 
 ```rust
-fn width(&self) -> Length {
-    Length::Shrink
-}
-
-fn height(&self) -> Length {
-    Length::Shrink
+fn size(&self) -> Size<Length> {
+	Size {
+		width: Length::Shrink,
+		height: Length::Shrink,
+	}
 }
 ```
 
@@ -67,42 +67,45 @@ fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node
 }
 ```
 
-Usually, the [layout](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.layout) method would consider the [Limits](https://docs.rs/iced/latest/iced/advanced/layout/struct.Limits.html) parameter, which is the constraints from the layout system.
+Usually, the [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) method would consider the [Limits](https://docs.rs/iced/0.12.1/iced/advanced/layout/struct.Limits.html) parameter, which is the constraints from the layout system.
 But now, we ignore it for simplicity.
 
-Next, we draw our widget in the [draw](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.draw) method.
-We use the given [Renderer](https://docs.rs/iced/latest/iced/advanced/trait.Renderer.html) to do so.
-One may refer to the given [Theme](https://docs.rs/iced/0.10.0/iced/advanced/trait.Renderer.html#associatedtype.Theme) and [Style](https://docs.rs/iced/latest/iced/advanced/renderer/struct.Style.html) for the colors of the widget.
+Next, we draw our widget in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method.
+We use the given [Renderer](https://docs.rs/iced/0.12.1/iced/advanced/trait.Renderer.html) to do so.
+One may refer to the given [Theme](https://docs.rs/iced/0.12.1/iced/enum.Theme.html) and [Style](https://docs.rs/iced/0.12.1/iced/advanced/renderer/struct.Style.html) for the colors of the widget.
 
 ```rust
 fn draw(
     &self,
     _state: &Tree,
     renderer: &mut Renderer,
-    _theme: &Renderer::Theme,
+    _theme: &Theme,
     _style: &renderer::Style,
     layout: Layout<'_>,
     _cursor: mouse::Cursor,
     _viewport: &Rectangle,
 ) {
     renderer.fill_quad(
-        Quad {
-            bounds: layout.bounds(),
-            border_radius: 10.0.into(),
-            border_width: 1.0,
-            border_color: Color::from_rgb(0.6, 0.8, 1.0),
-        },
+		Quad {
+			bounds: layout.bounds(),
+			border: Border {
+				color: Color::from_rgb(0.6, 0.8, 1.0),
+				width: 1.0,
+				radius: 10.0.into(),
+			},
+			shadow: Shadow::default(),
+		},
         Color::from_rgb(0.0, 0.2, 0.4),
     );
 }
 ```
 
-The given [Layout](https://docs.rs/iced/latest/iced/advanced/struct.Layout.html) parameter would be calculated automatically by the layout system according to the [width](https://docs.rs/iced/0.10.0/iced/advanced/widget/trait.Widget.html#tymethod.width), [height](https://docs.rs/iced/0.10.0/iced/advanced/widget/trait.Widget.html#tymethod.height) and [layout](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.layout) methods we defined before.
+The given [Layout](https://docs.rs/iced/0.12.1/iced/advanced/struct.Layout.html) parameter would be calculated automatically by the layout system according to the [size](https://docs.rs/iced/0.12.1/iced/advanced/trait.Widget.html#tymethod.size) and [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) methods we defined before.
 
-For convenience, we can implement `From<MyWidget>` for [Element](https://docs.rs/iced/latest/iced/type.Element.html).
+For convenience, we can implement `From<MyWidget>` for [Element](https://docs.rs/iced/0.12.1/iced/type.Element.html).
 
 ```rust
-impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {
@@ -125,7 +128,7 @@ fn view(&self) -> iced::Element<'_, Self::Message> {
 }
 ```
 
-Note that it is not necessary to put `MyWidget` in a [Container](https://docs.rs/iced/latest/iced/widget/container/struct.Container.html).
+Note that it is not necessary to put `MyWidget` in a [Container](https://docs.rs/iced/0.12.1/iced/widget/container/struct.Container.html).
 We can add the widget directly into our app.
 
 ```rust
@@ -145,7 +148,7 @@ use iced::{
         Layout, Widget,
     },
     widget::container,
-    Color, Element, Length, Rectangle, Sandbox, Settings,
+    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
@@ -179,19 +182,23 @@ impl Sandbox for MyApp {
 
 struct MyWidget;
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidget
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget
 where
     Renderer: iced::advanced::Renderer,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
         layout::Node::new([100, 100].into())
     }
 
@@ -199,7 +206,7 @@ where
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -208,16 +215,19 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.8, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.8, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             Color::from_rgb(0.0, 0.2, 0.4),
         );
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {

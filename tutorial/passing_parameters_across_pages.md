@@ -54,7 +54,7 @@ impl Sandbox for MyApp {
 }
 ```
 
-For `PageA` (the login form), we have a [TextInput](https://docs.iced.rs/iced/widget/struct.TextInput.html) for names and a submit [Button](https://docs.iced.rs/iced/widget/struct.Button.html).
+For `PageA` (the login form), we have a [TextInput](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html) for names and a submit [Button](https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html).
 We pass `name` field of `PageA` to `new` function of `PageB` when we press the submit button.
 
 ```rust

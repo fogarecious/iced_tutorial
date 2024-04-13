@@ -4,7 +4,7 @@
 This tutorial serves as a quick start for the library.
 We try to keep each part of the tutorial as simple as possible.
 
-(Currently, this tutorial is for version `0.10.0`.)
+(Currently, this tutorial is for version `0.12.1`.)
 
 Contents:
 

@@ -1,6 +1,6 @@
 # PickList
 
-The [PickList](https://docs.iced.rs/iced/widget/pick_list/struct.PickList.html) widget represents a choice among multiple values.
+The [PickList](https://docs.rs/iced/0.12.1/iced/widget/pick_list/struct.PickList.html) widget represents a choice among multiple values.
 It has two methods of constructions.
 It supports reactions to option selections.
 A placeholder can be set when options are not selected yet.
@@ -12,7 +12,7 @@ We can also change the icon of the handle.
 use iced::{
     font::Family,
     widget::{column, pick_list, pick_list::Handle, text::Shaping, PickList},
-    Font, Sandbox, Settings,
+    Font, Pixels, Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
@@ -68,7 +68,7 @@ impl Sandbox for MyApp {
                 self.pick_list_3.clone(),
                 |s| MyAppMessage::Update3(s)
             ),
-            pick_list(vec!["A", "B", "C"], None, |_| MyAppMessage::DoNothing)
+            pick_list(vec!["A", "B", "C"], None::<&str>, |_| MyAppMessage::DoNothing)
                 .placeholder("Placeholder"),
             pick_list(vec!["Different font"], Some("Different font"), |_| {
                 MyAppMessage::DoNothing
@@ -94,7 +94,7 @@ impl Sandbox for MyApp {
             pick_list(vec!["Different handle"], Some("Different handle"), |_| {
                 MyAppMessage::DoNothing
             })
-            .handle(Handle::Arrow { size: Some(24.) }),
+            .handle(Handle::Arrow { size: Some(Pixels(24.)) }),
         ]
         .into()
     }

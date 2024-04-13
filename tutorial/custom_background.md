@@ -1,12 +1,12 @@
 # Custom Background
 
-We can also draw an image on a [Widget](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html).
+We can also draw an image on a [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html).
 
-Similar to the [Image](https://docs.rs/iced/latest/iced/widget/image/struct.Image.html) widget, we have to enable the [image](https://docs.rs/crate/iced/latest/features#image) feature.
+Similar to the [Image](https://docs.rs/iced/0.12.1/iced/widget/image/struct.Image.html) widget, we have to enable the [image](https://docs.rs/crate/iced/latest/features#image) feature.
 
 ```toml
 [dependencies]
-iced = { version = "0.10.0", features = ["image", "advanced"] }
+iced = { version = "0.12.1", features = ["image", "advanced"] }
 ```
 
 Assume we have an image, named `ferris.png`,  in the Cargo root directory.
@@ -26,10 +26,10 @@ impl MyWidgetWithImage {
 }
 ```
 
-Then, we use the [iced::widget::image::layout](https://docs.rs/iced/latest/iced/widget/image/fn.layout.html) function to determine the [layout](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.layout) of our widget.
+Then, we use the [iced::widget::image::layout](https://docs.rs/iced/0.12.1/iced/widget/image/fn.layout.html) function to determine the [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) of our widget.
 
 ```rust
-fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
+fn layout(&self, _tree: &mut Tree, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
     iced::widget::image::layout(
         renderer,
         limits,
@@ -41,7 +41,7 @@ fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
 }
 ```
 
-And we draw the image by the [iced::widget::image::draw](https://docs.rs/iced/latest/iced/widget/image/fn.draw.html) function.
+And we draw the image by the [iced::widget::image::draw](https://docs.rs/iced/0.12.1/iced/widget/image/fn.draw.html) function.
 
 ```rust
 fn draw(
@@ -55,23 +55,33 @@ fn draw(
     _viewport: &Rectangle,
 ) {
     renderer.fill_quad(
-        Quad {
-            bounds: layout.bounds(),
-            border_radius: 10.0.into(),
-            border_width: 1.0,
-            border_color: Color::from_rgb(1.0, 0.66, 0.6),
-        },
-        Color::BLACK,
+		Quad {
+			bounds: layout.bounds(),
+			border: Border {
+				color: Color::from_rgb(1.0, 0.66, 0.6),
+				width: 1.0,
+				radius: 10.0.into(),
+			},
+			shadow: Shadow::default(),
+		},
+		Color::BLACK,
     );
+	
+	iced::widget::image::draw(
+		renderer,
+		layout,
+		&self.handle,
+		iced::ContentFit::Contain,
+		iced::widget::image::FilterMethod::Linear,
+	);
 
-    iced::widget::image::draw(renderer, layout, &self.handle, iced::ContentFit::Contain);
 }
 ```
 
-Both functions require the `Renderer` to implement [iced::advanced::image::Renderer](https://docs.rs/iced/latest/iced/advanced/image/trait.Renderer.html).
+Both functions require the `Renderer` to implement [iced::advanced::image::Renderer](https://docs.rs/iced/0.12.1/iced/advanced/image/trait.Renderer.html).
 
 ```rust
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetWithImage
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetWithImage
 where
     Renderer: iced::advanced::Renderer + iced::advanced::image::Renderer<Handle = Handle>,
 ```
@@ -86,8 +96,8 @@ use iced::{
         widget::Tree,
         Layout, Widget,
     },
-    widget::{container, image::Handle},
-    Color, Element, Length, Rectangle, Sandbox, Settings,
+    widget::{container, image::Handle, Theme},
+    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size,
 };
 
 fn main() -> iced::Result {
@@ -131,19 +141,23 @@ impl MyWidgetWithImage {
     }
 }
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetWithImage
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetWithImage
 where
     Renderer: iced::advanced::Renderer + iced::advanced::image::Renderer<Handle = Handle>,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        renderer: &Renderer,
+        limits: &layout::Limits,
+    ) -> layout::Node {
         iced::widget::image::layout(
             renderer,
             limits,
@@ -158,7 +172,7 @@ where
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -167,18 +181,27 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(1.0, 0.66, 0.6),
+                border: Border {
+                    color: Color::from_rgb(1.0, 0.66, 0.6),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             Color::BLACK,
         );
 
-        iced::widget::image::draw(renderer, layout, &self.handle, iced::ContentFit::Contain);
+        iced::widget::image::draw(
+            renderer,
+            layout,
+            &self.handle,
+            iced::ContentFit::Contain,
+            iced::widget::image::FilterMethod::Linear,
+        );
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidgetWithImage> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidgetWithImage> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer + iced::advanced::image::Renderer<Handle = Handle>,
 {

@@ -1,6 +1,6 @@
 # Changing Themes
 
-We can implement [theme](https://docs.iced.rs/iced/trait.Sandbox.html#method.theme) method in [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html) to return the desired theme.
+We can implement [theme](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#method.theme) method in [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) to return the desired theme.
 
 ```rust
 use iced::{Sandbox, Settings};
