@@ -1,10 +1,10 @@
 # Changing Styles
 
 Most widgets support `style` method to change their styles.
-These methods take parameters from [enums](https://doc.rust-lang.org/std/keyword.enum.html) of [theme](https://docs.iced.rs/iced/theme/index.html) module.
-For example, [widget::Text](https://docs.iced.rs/iced/widget/type.Text.html) takes [theme::Text](https://docs.iced.rs/iced/theme/enum.Text.html) as the parameter of its [style](https://docs.iced.rs/iced/advanced/widget/struct.Text.html#method.style) method, and [widget::Button](https://docs.iced.rs/iced/widget/struct.Button.html) takes [theme::Button](https://docs.iced.rs/iced/theme/enum.Button.html) as the parameter of its [style](https://docs.iced.rs/iced/widget/struct.Button.html#method.style) method.
+These methods take parameters from [enums](https://doc.rust-lang.org/std/keyword.enum.html) of [theme](https://docs.rs/iced/0.12.1/iced/theme/index.html) module.
+For example, [widget::Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html) takes [theme::Text](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html) as the parameter of its [style](https://docs.rs/iced/0.12.1/iced/advanced/widget/struct.Text.html#method.style) method, and [widget::Button](https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html) takes [theme::Button](https://docs.rs/iced/0.12.1/iced/theme/enum.Button.html) as the parameter of its [style](https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html#method.style) method.
 
-Since [theme::Text](https://docs.iced.rs/iced/theme/enum.Text.html) implements [From\<Color>](https://docs.iced.rs/iced/theme/enum.Text.html#impl-From%3CColor%3E-for-Text), we can also use [Color](https://docs.iced.rs/iced/struct.Color.html) struct directly for the [style](https://docs.iced.rs/iced/advanced/widget/struct.Text.html#method.style) method of [widget::Text](https://docs.iced.rs/iced/widget/type.Text.html).
+Since [theme::Text](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html) implements [From\<Color>](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html#impl-From%3CColor%3E-for-Text), we can also use [Color](https://docs.rs/iced/0.12.1/iced/struct.Color.html) struct directly for the [style](https://docs.rs/iced/0.12.1/iced/advanced/widget/struct.Text.html#method.style) method of [widget::Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html).
 
 ```rust
 use iced::{

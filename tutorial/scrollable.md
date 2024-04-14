@@ -1,7 +1,7 @@
 # Scrollable
 
 When there are too many widgets, they may go beyond the boundary of the window.
-[Scrollable](https://docs.rs/iced/latest/iced/widget/scrollable/struct.Scrollable.html) provides an infinite space that widgets can be navigated by scroll bars.
+[Scrollable](https://docs.rs/iced/0.12.1/iced/widget/scrollable/struct.Scrollable.html) provides an infinite space that widgets can be navigated by scroll bars.
 The scroll bars can be vertical, horizontal or both.
 When the scroll bars are changed, we can also receive their scroll positions and update other widgets.
 
@@ -51,20 +51,17 @@ impl Sandbox for MyApp {
         let long_vertical_texts = column(
             (0..10)
                 .map(|i| text(format!("{} vertical scrollable", i + 1)).into())
-                .collect(),
         );
         let long_horizontal_texts = row((0..10)
             .map(|i| text(format!("{} horizontal scrollable  ", i + 1)).into())
-            .collect());
+        );
         let long_both_texts = column(
             (0..10)
                 .map(|i| text(format!("{} vertical and horizontal scrollable", i + 1)).into())
-                .collect(),
         );
         let long_both_texts_2 = column(
             (0..10)
                 .map(|i| text(format!("{} vertical and horizontal scrollable", i + 1)).into())
-                .collect(),
         );
 
         column![
@@ -103,7 +100,7 @@ impl Sandbox for MyApp {
 
 ![Scrollable](./pic/scrollable.png)
 
-Instead of using [Scrollable::new](https://docs.rs/iced/latest/iced/widget/scrollable/struct.Scrollable.html#method.new), we can also use the [scrollable](https://docs.rs/iced/latest/iced/widget/fn.scrollable.html) function.
+Instead of using [Scrollable::new](https://docs.rs/iced/0.12.1/iced/widget/scrollable/struct.Scrollable.html#method.new), we can also use the [scrollable](https://docs.rs/iced/0.12.1/iced/widget/fn.scrollable.html) function.
 
 :arrow_right:  Next: [Changing Themes](./changing_themes.md)
 

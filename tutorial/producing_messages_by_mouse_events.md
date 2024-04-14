@@ -1,23 +1,24 @@
 # Producing Messages By Mouse Events
 
-To capture events of the window, we implement [subscription](https://docs.iced.rs/iced/application/trait.Application.html#method.subscription) method in [Application](https://docs.iced.rs/iced/application/trait.Application.html).
-This method returns [Subscription](https://docs.iced.rs/iced/struct.Subscription.html) struct, which allows us to specify how to handle events.
-We can use [events_with](https://docs.rs/iced/latest/iced/subscription/fn.events_with.html) function to construct a [Subscription](https://docs.iced.rs/iced/struct.Subscription.html).
-The [events_with](https://docs.rs/iced/latest/iced/subscription/fn.events_with.html) function takes a function as its input.
-The input function takes two parameters, [Event](https://docs.iced.rs/iced/event/enum.Event.html) and [Status](https://docs.iced.rs/iced/event/enum.Status.html), and returns [Option](https://doc.rust-lang.org/std/option/enum.Option.html)\<`MyAppMessage`>, which means this function is capable of transforming [Event](https://docs.iced.rs/iced/event/enum.Event.html) to `MyAppMessage`.
-We then receive the transformed `MyAppMessage` in [update](https://docs.iced.rs/iced/application/trait.Application.html#tymethod.update) method.
+To capture events of the window, we implement [subscription](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#method.subscription) method in [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html).
+This method returns [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html) struct, which allows us to specify how to handle events.
+We can use [listen_with](https://docs.rs/iced/0.12.1/iced/event/fn.listen_with.html) function to construct a [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html).
+The [listen_with](https://docs.rs/iced/0.12.1/iced/event/fn.listen_with.html) function takes a function as its input.
+The input function takes two parameters, [Event](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html) and [Status](https://docs.rs/iced/0.12.1/iced/event/enum.Status.html), and returns [Option](https://doc.rust-lang.org/std/option/enum.Option.html)\<`MyAppMessage`>, which means this function is capable of transforming [Event](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html) to `MyAppMessage`.
+We then receive the transformed `MyAppMessage` in [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
 
-In the input function, we only care about ignored events (i.e., events that is not handled by widgets) by checking if [Status](https://docs.iced.rs/iced/widget/canvas/event/enum.Status.html) is [Status::Ignored](https://docs.iced.rs/iced/widget/canvas/event/enum.Status.html#variant.Ignored).
+In the input function, we only care about ignored events (i.e., events that is not handled by widgets) by checking if [Status](https://docs.rs/iced/0.12.1/iced/widget/canvas/event/enum.Status.html) is [Status::Ignored](https://docs.rs/iced/0.12.1/iced/widget/canvas/event/enum.Status.html#variant.Ignored).
 
-In this tutorial, we capture [Event::Mouse(...)](https://docs.iced.rs/iced/enum.Event.html#variant.Mouse) and [Event::Touch(...)](https://docs.iced.rs/iced/enum.Event.html#variant.Touch) and produce messages.
-
-Note: [events_with](https://docs.rs/iced/latest/iced/subscription/fn.events_with.html) will be deprecated.
-If you cannot find this function, try using [listen_with](https://docs.iced.rs/iced/event/fn.listen_with.html).
+In this tutorial, we capture [Event::Mouse(...)](https://docs.rs/iced/0.12.1/iced/enum.Event.html#variant.Mouse) and [Event::Touch(...)](https://docs.rs/iced/0.12.1/iced/enum.Event.html#variant.Touch) and produce messages.
 
 ```rust
 use iced::{
-    event::Status, executor, mouse::Event::CursorMoved, subscription, touch::Event::FingerMoved,
-    widget::text, Application, Event, Point, Settings,
+    event::{self, Event, Status},
+    executor,
+    mouse::Event::CursorMoved,
+    touch::Event::FingerMoved,
+    widget::text,
+    Application, Point, Settings,
 };
 
 fn main() -> iced::Result {
@@ -64,7 +65,7 @@ impl Application for MyApp {
     }
 
     fn subscription(&self) -> iced::Subscription<Self::Message> {
-        subscription::events_with(|event, status| match (event, status) {
+        event::listen_with(|event, status| match (event, status) {
             (Event::Mouse(CursorMoved { position }), Status::Ignored)
             | (Event::Touch(FingerMoved { position, .. }), Status::Ignored) => {
                 Some(MyAppMessage::PointUpdated(position))

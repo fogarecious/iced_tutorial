@@ -1,6 +1,6 @@
 # Rule
 
-The [Rule](https://docs.iced.rs/iced/widget/rule/struct.Rule.html) widget is a horizontal (or vertical) line for separating widgets clearly.
+The [Rule](https://docs.rs/iced/0.12.1/iced/widget/rule/struct.Rule.html) widget is a horizontal (or vertical) line for separating widgets clearly.
 It has two methods of constructions.
 We can change the space around it.
 The widget can be set to be either horizontal or vertical.

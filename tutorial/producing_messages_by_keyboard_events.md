@@ -1,16 +1,13 @@
 # Producing Messages By Keyboard Events
 
 This tutorial follows from the [previous tutorial](./producing_messages_by_mouse_events.md).
-Instead of capturing [Event::Mouse](https://docs.iced.rs/iced/event/enum.Event.html#variant.Mouse) and [Event::Touch](https://docs.iced.rs/iced/event/enum.Event.html#variant.Touch), we capture [Event::Keyboard](https://docs.iced.rs/iced/event/enum.Event.html#variant.Keyboard) in the [events_with](https://docs.rs/iced/latest/iced/subscription/fn.events_with.html) function.
-
-Note: [events_with](https://docs.rs/iced/latest/iced/subscription/fn.events_with.html) will be deprecated.
-If you cannot find this function, try using [listen_with](https://docs.iced.rs/iced/event/fn.listen_with.html).
+Instead of capturing [Event::Mouse](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html#variant.Mouse) and [Event::Touch](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html#variant.Touch), we capture [Event::Keyboard](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html#variant.Keyboard) in the [listen_with](https://docs.rs/iced/0.12.1/iced/event/fn.listen_with.html) function.
 
 ```rust
 use iced::{
-    event::Status,
+    event::{self, Status},
     executor,
-    keyboard::{Event::KeyPressed, KeyCode},
+    keyboard::{Event::KeyPressed, Key},
     subscription,
     widget::text,
     Application, Event, Settings,
@@ -55,7 +52,7 @@ impl Application for MyApp {
         iced::Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message> {
         text(self.pressed_key.as_str()).into()
     }
 
@@ -63,14 +60,14 @@ impl Application for MyApp {
         subscription::events_with(|event, status| match (event, status) {
             (
                 Event::Keyboard(KeyPressed {
-                    key_code: KeyCode::Enter,
+                    key: Key::Named(Named::Enter),
                     ..
                 }),
                 Status::Ignored,
             ) => Some(MyAppMessage::KeyPressed("Enter".into())),
             (
                 Event::Keyboard(KeyPressed {
-                    key_code: KeyCode::Space,
+                    key: Key::Named(Named::Space),
                     ..
                 }),
                 Status::Ignored,

@@ -1,6 +1,6 @@
 # Radio
 
-The [Radio](https://docs.iced.rs/iced/widget/radio/struct.Radio.html) widget represents a choice among multiple values.
+The [Radio](https://docs.rs/iced/0.12.1/iced/widget/radio/struct.Radio.html) widget represents a choice among multiple values.
 It has two methods of constructions.
 It supports reactions to clicking and touching.
 It is able to change styles of the button and the text.

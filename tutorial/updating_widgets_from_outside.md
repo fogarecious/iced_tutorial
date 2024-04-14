@@ -8,14 +8,14 @@ struct MyWidget {
 }
 ```
 
-We use the `highlight` variable to change the color of our widget in the [draw](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.draw) method.
+We use the `highlight` variable to change the color of our widget in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method.
 
 ```rust
 fn draw(
     &self,
     _state: &Tree,
     renderer: &mut Renderer,
-    _theme: &Renderer::Theme,
+    _theme: &Theme,
     _style: &renderer::Style,
     layout: Layout<'_>,
     _cursor: mouse::Cursor,
@@ -24,15 +24,18 @@ fn draw(
     renderer.fill_quad(
         Quad {
             bounds: layout.bounds(),
-            border_radius: 10.0.into(),
-            border_width: 1.0,
-            border_color: Color::from_rgb(0.6, 0.8, 1.0),
-        },
-        if self.highlight {
-            Color::from_rgb(0.6, 0.8, 1.0)
-        } else {
-            Color::from_rgb(0.0, 0.2, 0.4)
-        },
+			border: Border {
+				color: Color::from_rgb(0.6, 0.8, 1.0),
+				width: 1.0,
+				radius: 10.0.into(),
+				},
+			shadow: Shadow::default(),
+		},
+		if self.highlight {
+			Color::from_rgb(0.6, 0.8, 1.0)
+		} else {
+			Color::from_rgb(0.0, 0.2, 0.4)
+		},
     );
 }
 ```
@@ -49,7 +52,7 @@ impl MyWidget {
 }
 ```
 
-Then, we initialize `MyWidget` in the [view](https://docs.rs/iced/latest/iced/trait.Sandbox.html#tymethod.view) method of [Sandbox](https://docs.rs/iced/latest/iced/trait.Sandbox.html) with an input value for the `highlight` variable.
+Then, we initialize `MyWidget` in the [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) method of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) with an input value for the `highlight` variable.
 
 ```rust
 struct MyApp {
@@ -84,7 +87,7 @@ use iced::{
         Layout, Widget,
     },
     widget::{checkbox, column, container},
-    Color, Element, Length, Rectangle, Sandbox, Settings,
+    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
@@ -95,7 +98,6 @@ fn main() -> iced::Result {
 enum MyMessage {
     Highlight(bool),
 }
-
 struct MyApp {
     highlight: bool,
 }
@@ -121,7 +123,7 @@ impl Sandbox for MyApp {
         container(
             column![
                 MyWidget::new(self.highlight),
-                checkbox("Highlight", self.highlight, MyMessage::Highlight),
+                checkbox("Highlight", self.highlight).on_toggle(MyMessage::Highlight),
             ]
             .spacing(20),
         )
@@ -143,19 +145,23 @@ impl MyWidget {
     }
 }
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidget
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget
 where
     Renderer: iced::advanced::Renderer,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
         layout::Node::new([100, 100].into())
     }
 
@@ -163,7 +169,7 @@ where
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -172,9 +178,12 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.8, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.8, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             if self.highlight {
                 Color::from_rgb(0.6, 0.8, 1.0)
@@ -185,7 +194,7 @@ where
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {

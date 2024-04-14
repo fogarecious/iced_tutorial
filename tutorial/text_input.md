@@ -1,8 +1,8 @@
 # TextInput
 
-The [TextInput](https://docs.rs/iced/latest/iced/widget/struct.TextInput.html) widget let users to input texts.
+The [TextInput](https://docs.rs/iced/0.12.1/iced/latest/iced/widget/struct.TextInput.html) widget let users to input texts.
 It has two methods of constructions.
-If the [on_input](https://docs.rs/iced/latest/iced/widget/struct.TextInput.html#method.on_input) method is set, it is enabled, and is disabled otherwise.
+If the [on_input](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html#method.on_input) method is set, it is enabled, and is disabled otherwise.
 It supports reactions to pasting texts or keyboard submissions.
 It is able to change fonts and text sizes.
 We can add padding around the text inside.
@@ -96,7 +96,7 @@ impl Sandbox for MyApp {
                 .on_submit(MyAppMessage::Submit6),
             text(self.info6.as_str()),
             text_input("Password", self.text7.as_str())
-                .password()
+                .secure(true)
                 .on_input(MyAppMessage::Update7),
             text_input("Different font", "").font(Font {
                 family: Family::Fantasy,

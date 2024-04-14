@@ -1,7 +1,7 @@
 # First App - Hello World!
 
-We need a struct to implement [Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html), and call its [run](https://docs.iced.rs/iced/trait.Sandbox.html#method.run) method from `main`.
-All widgets should be placed inside the [view](https://docs.iced.rs/iced/trait.Sandbox.html#tymethod.view) method.
+We need a struct to implement [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html), and call its [run](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#method.run) method from `main`.
+All widgets should be placed inside the [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) method.
 
 ```rust
 use iced::{Sandbox, Settings};

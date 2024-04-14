@@ -1,6 +1,6 @@
 # Explanation of Sandbox Trait
 
-[Sandbox](https://docs.iced.rs/iced/trait.Sandbox.html) works as follows.
+[Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) works as follows.
 
 ![Sandbox trait](./pic/explanation_of_sandbox_trait.png)
 

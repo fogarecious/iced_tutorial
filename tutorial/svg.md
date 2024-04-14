@@ -1,15 +1,15 @@
 # Svg
 
-The [Svg](https://docs.iced.rs/iced/widget/svg/struct.Svg.html) widget is able to display an [SVG](https://en.wikipedia.org/wiki/SVG) image.
+The [Svg](https://docs.rs/iced/0.12.1/iced/widget/svg/struct.Svg.html) widget is able to display an [SVG](https://en.wikipedia.org/wiki/SVG) image.
 It has two methods of constructions.
 We can set how to fit the image content into the widget bounds.
 
-To use the widget, we have to enable the [svg](https://docs.rs/crate/iced/latest/features#svg) feature.
+To use the widget, we have to enable the [svg](https://docs.rs/iced/0.12.1/iced/latest/features#svg) feature.
 The `Cargo.toml` dependencies should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.10.0", features = ["svg"] }
+iced = { version = "0.12.1", features = ["svg"] }
 ```
 
 Let's add an [SVG](https://en.wikipedia.org/wiki/SVG) image named `pic.svg` into the project root directory, i.e., the image has the path `my_project/pic.svg` where `my_project` is the name of our project.

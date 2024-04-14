@@ -1,6 +1,6 @@
 # Space
 
-[Space](https://docs.rs/iced/latest/iced/widget/space/struct.Space.html) is a convenient widget that helps us laying out our widgets.
+[Space](https://docs.rs/iced/0.12.1/iced/widget/space/struct.Space.html) is a convenient widget that helps us laying out our widgets.
 It is an empty widget that occupies a space.
 It has several constructions to help us allocating spaces horizontally, vertically or both.
 
@@ -45,16 +45,16 @@ impl Sandbox for MyApp {
 
             row![
                 button("Horizontal space 3A"),
-                horizontal_space(50),
+                horizontal_space(),
                 button("Horizontal space 3B"),
             ],
 
             button("Vertical space 1A"),
             Space::with_height(50),
             button("Vertical space 1B"),
-            
+            Space::with_height(Length::Fill),
             button("Vertical space 2A"),
-            vertical_space(50),
+            vertical_space(),
             button("Vertical space 2B"),
             
             button("Diagonal space A"),

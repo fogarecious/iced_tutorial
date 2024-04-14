@@ -1,8 +1,8 @@
 # Button
 
-The [Button](https://docs.iced.rs/iced/widget/button/struct.Button.html) widget supports reactions to pressing/touching events.
+The [Button](https://docs.rs/iced/0.12.1/iced/widget/button/struct.Button.html) widget supports reactions to pressing/touching events.
 It has two methods of constructions.
-If the method [on_press](https://docs.iced.rs/iced/widget/button/struct.Button.html#method.on_press) is set, the button is enabled, and is disabled otherwise.
+If the method [on_press](https://docs.rs/iced/0.12.1/iced/widget/button/struct.Button.html#method.on_press) is set, the button is enabled, and is disabled otherwise.
 We can also set padding around the text of the button.
 
 ```rust

@@ -1,6 +1,6 @@
 # Text
 
-The [Text](https://docs.iced.rs/iced/widget/type.Text.html) widget is able to display texts.
+The [Text](https://docs.rs/iced/0.12.1/ced/widget/type.Text.html) widget is able to display texts.
 It has three methods of constructions.
 It is able to change the font, the size of the font, and display special characters.
 The text inside the widget can be horizontally or vertically centered.

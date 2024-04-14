@@ -1,6 +1,6 @@
 # Slider And VerticalSlider
 
-The [Slider](https://docs.iced.rs/iced/widget/slider/struct.Slider.html) widget represents a chosen value in a given range.
+The [Slider](https://docs.rs/iced/0.12.1/iced/widget/slider/struct.Slider.html) widget represents a chosen value in a given range.
 It has two methods of constructions.
 It supports reactions to mouse pressing/releasing and touching.
 The selected value can be snapped to a given step.
@@ -73,7 +73,7 @@ impl Sandbox for MyApp {
             text("Shorter parameter"),
             slider(0..=100, self.value4, MyAppMessage::Update4),
             text("Different step"),
-            slider(0..=100, self.value5, MyAppMessage::Update5).step(10),
+            slider(0..=100, self.value5, MyAppMessage::Update5).step(10u32),
             text(format!("React to mouse release: {}", self.released_value_6)),
             slider(0..=100, self.value6, MyAppMessage::Update6).on_release(MyAppMessage::Release6),
             text("Vertical slider"),

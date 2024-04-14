@@ -1,8 +1,8 @@
 # On Pressed/Released Of Some Widgets
 
-If we only consider mouse pressed or released events, we can use [MouseArea](https://docs.iced.rs/iced/widget/struct.MouseArea.html).
-The [MouseArea](https://docs.iced.rs/iced/widget/struct.MouseArea.html) gives the widget being put in it the sense of mouse pressed/released events, even if the widget has no build-in support of the events.
-For example, we can make a [Text](https://docs.iced.rs/iced/widget/type.Text.html) to respond to mouse pressed/released events.
+If we only consider mouse pressed or released events, we can use [MouseArea](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html).
+The [MouseArea](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html) gives the widget being put in it the sense of mouse pressed/released events, even if the widget has no build-in support of the events.
+For example, we can make a [Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html) to respond to mouse pressed/released events.
 
 ```rust
 use iced::{widget::mouse_area, Sandbox, Settings};
@@ -50,7 +50,7 @@ impl Sandbox for MyApp {
 }
 ```
 
-In addition to [on_press](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_press) and [on_release](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_release) methods, [MouseArea](https://docs.iced.rs/iced/widget/struct.MouseArea.html) also supports [on_middle_press](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_middle_press), [on_right_press](https://docs.iced.rs/iced/widget/struct.MouseArea.html#method.on_right_press), etc.
+In addition to [on_press](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_press) and [on_release](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_release) methods, [MouseArea](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html) also supports [on_middle_press](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_middle_press), [on_right_press](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_right_press), etc.
 
 When the mouse is pressed:
 

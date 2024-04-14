@@ -1,11 +1,11 @@
 # Changing The Window Dynamically
 
-We can use functions provided in [window](https://docs.iced.rs/iced/window/index.html) module to change the window after it is initialized.
-For example, to [resize](https://docs.iced.rs/iced/window/fn.resize.html) the window.
-These functions return [Command](https://docs.iced.rs/iced/struct.Command.html), which can be used as the return value in [update](https://docs.iced.rs/iced/application/trait.Application.html#tymethod.update) method.
-Developers might be interested in other [Commands](https://docs.iced.rs/iced/struct.Command.html) in [window](https://docs.iced.rs/iced/window/index.html) module.
+We can use functions provided in [window](https://docs.rs/iced/0.12.1/iced/window/index.html) module to change the window after it is initialized.
+For example, to [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html) the window.
+These functions return [Command](https://docs.rs/iced/0.12.1/iced/struct.Command.html), which can be used as the return value in [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
+Developers might be interested in other [Commands](https://docs.rs/iced/0.12.1/iced/struct.Command.html) in [window](https://docs.rs/iced/0.12.1/iced/window/index.html) module.
 
-Note: If you find [resize](https://docs.iced.rs/iced/window/fn.resize.html) needs an [Id](https://docs.iced.rs/iced/window/struct.Id.html), you can get it by [fetch_id](https://docs.iced.rs/iced/window/fn.fetch_id.html).
+Note: If you find [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html) needs an [Id](https://docs.rs/iced/0.12.1/iced/window/struct.Id.html), you can get it by [fetch_id](https://docs.rs/iced/0.12.1/iced/window/fn.fetch_id.html).
 
 ```rust
 use iced::{
@@ -64,7 +64,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message> {
         row![
             text_input("Width", &self.width).on_input(MyAppMessage::UpdateWidth),
             text_input("Height", &self.height).on_input(MyAppMessage::UpdateHeight),

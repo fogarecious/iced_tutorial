@@ -8,14 +8,14 @@ The `MyWidgetInner`, which is the same as before, is a simple rectangle.
 ```rust
 struct MyWidgetInner;
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetInner
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetInner
 where
     Renderer: iced::advanced::Renderer,
 {
     // ...
 }
 
-impl<'a, Message, Renderer> From<MyWidgetInner> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidgetInner> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {
@@ -39,14 +39,14 @@ impl MyWidgetOuter {
 }
 ```
 
-In the [draw](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.draw) method of `MyWidgetOuter`, we draw the `MyWidgetInner` as well.
+In the [draw](https://docs.rs/iced/12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method of `MyWidgetOuter`, we draw the `MyWidgetInner` as well.
 
 ```rust
 fn draw(
     &self,
     state: &Tree,
     renderer: &mut Renderer,
-    theme: &Renderer::Theme,
+    theme: &Theme,
     style: &renderer::Style,
     layout: Layout<'_>,
     cursor: mouse::Cursor,
@@ -77,25 +77,25 @@ fn draw(
 
 When drawing the `MyWidgetInner` in `MyWidgetOuter`, we need to pass the layout of the `MyWidgetInner`.
 This layout information can be obtained by `layout.children().next().unwrap()`.
-[layout.children()](https://docs.rs/iced/latest/iced/advanced/struct.Layout.html#method.children) is an [Iterator](https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html) that stores all the child layouts of `MyWidgetOuter`.
+[layout.children()](https://docs.rs/iced/0.12.1/iced/advanced/struct.Layout.html#method.children) is an [Iterator](https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html) that stores all the child layouts of `MyWidgetOuter`.
 
-To make the underlying system aware of the child layouts of `MyWidgetOuter`, we have to explicitly tell the system in the [layout](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.layout) method.
-Otherwise, the [layout.children()](https://docs.rs/iced/latest/iced/advanced/struct.Layout.html#method.children) in the [draw](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.draw) method will be empty.
+To make the underlying system aware of the child layouts of `MyWidgetOuter`, we have to explicitly tell the system in the [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) method.
+Otherwise, the [layout.children()](https://docs.rs/iced/0.12.1/iced/advanced/struct.Layout.html#method.children) in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method will be empty.
 
 ```rust
-fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
+fn layout(&self, tree: &mut Tree, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
     let inner_widget = &self.inner_widget as &dyn Widget<Message, Renderer>;
-    let mut child_node = inner_widget.layout(renderer, limits);
+    let mut child_node = inner_widget.layout(tree, renderer, limits);
 
     let size_of_this_node = Size::new(200., 200.);
 
-    child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
+    child_node = child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
     
     layout::Node::with_children(size_of_this_node, vec![child_node])
 }
 ```
 
-We use the [Node::with_children](https://docs.rs/iced/latest/iced/advanced/layout/struct.Node.html#method.with_children) function to bind the parent layout and its child layouts.
+We use the [Node::with_children](https://docs.rs/iced/0.12.1/iced/advanced/layout/struct.Node.html#method.with_children) function to bind the parent layout and its child layouts.
 
 The full code is as follows:
 
@@ -107,8 +107,8 @@ use iced::{
         widget::Tree,
         Layout, Widget,
     },
-    widget::container,
-    Alignment, Color, Element, Length, Rectangle, Sandbox, Settings, Size,
+    widget::{container, Theme},
+    Alignment, Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size,
 };
 
 fn main() -> iced::Result {
@@ -142,19 +142,23 @@ impl Sandbox for MyApp {
 
 struct MyWidgetInner;
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetInner
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetInner
 where
     Renderer: iced::advanced::Renderer,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, _renderer: &Renderer, _limits: &layout::Limits) -> layout::Node {
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
         layout::Node::new([100, 100].into())
     }
 
@@ -162,7 +166,7 @@ where
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
+        _theme: &Theme,
         _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
@@ -171,16 +175,19 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.8, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.8, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             Color::from_rgb(0.0, 0.2, 0.4),
         );
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidgetInner> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidgetInner> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {
@@ -201,26 +208,30 @@ impl MyWidgetOuter {
     }
 }
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetOuter
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetOuter
 where
     Renderer: iced::advanced::Renderer,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
-        let inner_widget = &self.inner_widget as &dyn Widget<Message, Renderer>;
-        let mut child_node = inner_widget.layout(renderer, limits);
+    fn layout(
+        &self,
+        tree: &mut Tree,
+        renderer: &Renderer,
+        limits: &layout::Limits,
+    ) -> layout::Node {
+        let inner_widget = &self.inner_widget as &dyn Widget<Message, Theme, Renderer>;
+        let mut child_node = inner_widget.layout(tree, renderer, limits);
 
         let size_of_this_node = Size::new(200., 200.);
 
-        child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
-        
+        child_node = child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
+
         layout::Node::with_children(size_of_this_node, vec![child_node])
     }
 
@@ -228,7 +239,7 @@ where
         &self,
         state: &Tree,
         renderer: &mut Renderer,
-        theme: &Renderer::Theme,
+        theme: &Theme,
         style: &renderer::Style,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
@@ -237,14 +248,17 @@ where
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.93, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.93, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             Color::from_rgb(0.0, 0.33, 0.4),
         );
 
-        let inner_widget = &self.inner_widget as &dyn Widget<Message, Renderer>;
+        let inner_widget = &self.inner_widget as &dyn Widget<Message, Theme, Renderer>;
         inner_widget.draw(
             state,
             renderer,
@@ -257,7 +271,7 @@ where
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidgetOuter> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidgetOuter> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
 {
