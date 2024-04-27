@@ -9,9 +9,8 @@ If the tooltip is allowed to be out of the window, the parts outside are clipped
 
 ```rust
 use iced::{
-    font::Family,
     widget::{button, column, tooltip, tooltip::Position, Tooltip},
-    Font, Sandbox, Settings,
+    Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
