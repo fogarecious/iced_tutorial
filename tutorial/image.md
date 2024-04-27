@@ -4,7 +4,7 @@ The [Image](https://docs.rs/iced/0.12.1/iced/widget/image/struct.Image.html) wid
 It has two methods of constructions.
 We can set how to fit the image content into the widget bounds.
 
-To use the widget, we have to enable the [image](https://docs.rs/iced/0.12.1/iced/latest/features#image) feature.
+To use the widget, we have to enable the [image](https://docs.rs/crate/iced/0.12.1/features#image) feature.
 The `Cargo.toml` dependencies should look like this:
 
 ```toml
