@@ -1,6 +1,6 @@
 # TextInput
 
-The [TextInput](https://docs.rs/iced/0.12.1/iced/latest/iced/widget/struct.TextInput.html) widget let users to input texts.
+The [TextInput](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html) widget let users to input texts.
 It has two methods of constructions.
 If the [on_input](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html#method.on_input) method is set, it is enabled, and is disabled otherwise.
 It supports reactions to pasting texts or keyboard submissions.
