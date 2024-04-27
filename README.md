@@ -21,7 +21,7 @@ Contents:
   * [Checkbox](./tutorial/checkbox.md)
   * [Toggler](./tutorial/toggler.md)
   * [Radio](./tutorial/radio.md)
-  * [PickList](./tutorial/pickList.md)
+  * [PickList](./tutorial/picklist.md)
   * [ComboBox](./tutorial/combobox.md)
   * [Slider And VerticalSlider](./tutorial/slider.md)
   * [ProgressBar](./tutorial/progressbar.md)
