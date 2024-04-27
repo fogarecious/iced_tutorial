@@ -1,7 +1,7 @@
 # ComboBox
 
 The [ComboBox](https://docs.rs/iced/0.12.1/iced/widget/combo_box/struct.ComboBox.html) widget represents a choice among multiple values.
-The values are shown in a dropdown menu and is searchable.
+The values are shown in a dropdown menu and are searchable.
 The widget has two methods of constructions.
 It supports reactions to keyboard inputs and mouse selections.
 It is able to change fonts.
@@ -58,6 +58,7 @@ struct MyApp {
     state9: State<u32>,
     state10: State<u32>,
     state11: State<u32>,
+    state12: State<u32>,
 }
 
 impl Sandbox for MyApp {
@@ -83,6 +84,7 @@ impl Sandbox for MyApp {
             state9: State::new(vec![]),
             state10: State::new(vec![]),
             state11: State::new(vec![]),
+            state12: State::new(vec![]),
         }
     }
 
@@ -159,11 +161,15 @@ impl Sandbox for MyApp {
                 family: Family::Fantasy,
                 ..Font::DEFAULT
             }),
-            combo_box(&self.state10, "With padding", None, |_| {
+            combo_box(&self.state10, "Larger text", None, |_| {
+                MyAppMessage::DoNothing
+            })
+            .size(24.),
+            combo_box(&self.state11, "With padding", None, |_| {
                 MyAppMessage::DoNothing
             })
             .padding(20),
-            combo_box(&self.state11, "Icon", None, |_| MyAppMessage::DoNothing).icon(Icon {
+            combo_box(&self.state12, "Icon", None, |_| MyAppMessage::DoNothing).icon(Icon {
                 font: Font::DEFAULT,
                 code_point: '\u{2705}',
                 size: None,
