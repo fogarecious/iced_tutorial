@@ -2,7 +2,7 @@
 
 The [PickList](https://docs.rs/iced/0.12.1/iced/widget/pick_list/struct.PickList.html) widget represents a choice among multiple values.
 It has two methods of constructions.
-It supports reactions to option selections.
+It supports reactions to option selections and menu opening/closing.
 A placeholder can be set when options are not selected yet.
 It is able to change styles of the text.
 We can add padding around the text inside.
@@ -11,7 +11,7 @@ We can also change the icon of the handle.
 ```rust
 use iced::{
     font::Family,
-    widget::{column, pick_list, pick_list::Handle, text::Shaping, PickList},
+    widget::{column, pick_list, pick_list::Handle, row, text, text::Shaping, PickList},
     Font, Pixels, Sandbox, Settings,
 };
 
@@ -23,10 +23,14 @@ fn main() -> iced::Result {
 enum MyAppMessage {
     DoNothing,
     Update3(String),
+    Open10,
+    Close11,
 }
 
 struct MyApp {
     pick_list_3: Option<String>,
+    info_10: String,
+    info_11: String,
 }
 
 impl Sandbox for MyApp {
@@ -35,6 +39,8 @@ impl Sandbox for MyApp {
     fn new() -> Self {
         Self {
             pick_list_3: Some("Functional pick list".into()),
+            info_10: "".into(),
+            info_11: "".into(),
         }
     }
 
@@ -46,6 +52,8 @@ impl Sandbox for MyApp {
         match message {
             MyAppMessage::DoNothing => {}
             MyAppMessage::Update3(s) => self.pick_list_3 = Some(s),
+            MyAppMessage::Open10 => self.info_10 = "Open".into(),
+            MyAppMessage::Close11 => self.info_11 = "Close".into(),
         }
     }
 
@@ -68,8 +76,10 @@ impl Sandbox for MyApp {
                 self.pick_list_3.clone(),
                 |s| MyAppMessage::Update3(s)
             ),
-            pick_list(vec!["A", "B", "C"], None::<&str>, |_| MyAppMessage::DoNothing)
-                .placeholder("Placeholder"),
+            pick_list(vec!["A", "B", "C"], None::<&str>, |_| {
+                MyAppMessage::DoNothing
+            })
+            .placeholder("Placeholder"),
             pick_list(vec!["Different font"], Some("Different font"), |_| {
                 MyAppMessage::DoNothing
             })
@@ -94,13 +104,25 @@ impl Sandbox for MyApp {
             pick_list(vec!["Different handle"], Some("Different handle"), |_| {
                 MyAppMessage::DoNothing
             })
-            .handle(Handle::Arrow { size: Some(Pixels(24.)) }),
+            .handle(Handle::Arrow {
+                size: Some(Pixels(24.))
+            }),
+            row![
+                pick_list(vec!["Respond to open"], Some("Respond to open"), |_| {
+                    MyAppMessage::DoNothing
+                })
+                .on_open(MyAppMessage::Open10),
+                text(&self.info_10),
+            ],
+            row![
+                pick_list(vec!["Respond to close"], Some("Respond to close"), |_| {
+                    MyAppMessage::DoNothing
+                })
+                .on_close(MyAppMessage::Close11),
+                text(&self.info_11),
+            ],
         ]
         .into()
-    }
-
-    fn theme(&self) -> iced::Theme {
-        iced::Theme::Dark
     }
 }
 ```

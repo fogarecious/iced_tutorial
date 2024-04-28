@@ -4,7 +4,7 @@ The [Svg](https://docs.rs/iced/0.12.1/iced/widget/svg/struct.Svg.html) widget is
 It has two methods of constructions.
 We can set how to fit the image content into the widget bounds.
 
-To use the widget, we have to enable the [svg](https://docs.rs/iced/0.12.1/iced/latest/features#svg) feature.
+To use the widget, we have to enable the [svg](https://docs.rs/crate/iced/0.12.1/features#svg) feature.
 The `Cargo.toml` dependencies should look like this:
 
 ```toml

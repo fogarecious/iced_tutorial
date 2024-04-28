@@ -23,7 +23,9 @@ enum MyAppMessage {
     Update4(u32),
     Update5(u32),
     Update6(u32),
-    Release6,
+    Update7(u32),
+    Release7,
+    Update8(u32),
 }
 
 struct MyApp {
@@ -31,7 +33,9 @@ struct MyApp {
     value4: u32,
     value5: u32,
     value6: u32,
-    released_value_6: u32,
+    value7: u32,
+    released_value_7: u32,
+    value8: u32,
 }
 
 impl Sandbox for MyApp {
@@ -43,7 +47,9 @@ impl Sandbox for MyApp {
             value4: 50,
             value5: 50,
             value6: 50,
-            released_value_6: 50,
+            value7: 50,
+            released_value_7: 50,
+            value8: 50,
         }
     }
 
@@ -58,7 +64,9 @@ impl Sandbox for MyApp {
             MyAppMessage::Update4(v) => self.value4 = v,
             MyAppMessage::Update5(v) => self.value5 = v,
             MyAppMessage::Update6(v) => self.value6 = v,
-            MyAppMessage::Release6 => self.released_value_6 = self.value6,
+            MyAppMessage::Update7(v) => self.value7 = v,
+            MyAppMessage::Release7 => self.released_value_7 = self.value7,
+            MyAppMessage::Update8(v) => self.value8 = v,
         }
     }
 
@@ -74,8 +82,12 @@ impl Sandbox for MyApp {
             slider(0..=100, self.value4, MyAppMessage::Update4),
             text("Different step"),
             slider(0..=100, self.value5, MyAppMessage::Update5).step(10u32),
-            text(format!("React to mouse release: {}", self.released_value_6)),
-            slider(0..=100, self.value6, MyAppMessage::Update6).on_release(MyAppMessage::Release6),
+            text("Different step when a shift key is pressed"),
+            slider(0..=100, self.value6, MyAppMessage::Update6).shift_step(10u32),
+            text(format!("React to mouse release: {}", self.released_value_7)),
+            slider(0..=100, self.value7, MyAppMessage::Update7).on_release(MyAppMessage::Release7),
+            text("Press Ctrl (or Command) and click to return to the default value"),
+            slider(0..=100, self.value8, MyAppMessage::Update8).default(30u32),
             text("Vertical slider"),
             vertical_slider(0..=100, 50, |_| MyAppMessage::DoNothing),
         ]
