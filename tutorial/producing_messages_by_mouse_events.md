@@ -60,7 +60,7 @@ impl Application for MyApp {
         iced::Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message, Self::Theme, iced::Renderer> {
         text(format!("{:?}", self.mouse_point)).into()
     }
 

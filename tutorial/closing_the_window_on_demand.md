@@ -45,7 +45,7 @@ impl Application for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message, Self::Theme, iced::Renderer> {
         row![button("Close window").on_press(MyAppMessage::CloseWindow),].into()
     }
 }

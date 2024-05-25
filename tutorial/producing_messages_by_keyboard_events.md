@@ -7,8 +7,7 @@ Instead of capturing [Event::Mouse](https://docs.rs/iced/0.12.1/iced/event/enum.
 use iced::{
     event::{self, Status},
     executor,
-    keyboard::{Event::KeyPressed, Key},
-    subscription,
+    keyboard::{key::Named, Event::KeyPressed, Key},
     widget::text,
     Application, Event, Settings,
 };
@@ -57,7 +56,7 @@ impl Application for MyApp {
     }
 
     fn subscription(&self) -> iced::Subscription<Self::Message> {
-        subscription::events_with(|event, status| match (event, status) {
+        event::listen_with(|event, status| match (event, status) {
             (
                 Event::Keyboard(KeyPressed {
                     key: Key::Named(Named::Enter),
