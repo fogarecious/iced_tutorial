@@ -76,7 +76,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message, Self::Theme,iced::Renderer> {
         column![
             button("Execute").on_press(MyAppMessage::Execute),
             text(self.state.as_str()),
