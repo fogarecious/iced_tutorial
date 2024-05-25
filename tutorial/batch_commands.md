@@ -58,7 +58,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+    fn view(&self) -> iced::Element<'_, Self::Message, Self::Theme, iced::Renderer> {
         column![
             text_input("", &self.some_text)
                 .id(text_input::Id::new(MY_TEXT_ID))
