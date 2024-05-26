@@ -1,5 +1,7 @@
 # Texts In Widgets
 
+(This page of tutorial does not work. We are trying to fix it.)
+
 In addition to draw a [Quad](https://docs.rs/iced/latest/iced/advanced/renderer/struct.Quad.html), we can also draw texts in our widgets.
 
 For example, suppose we would like to draw a string slice named `CONTENT`.

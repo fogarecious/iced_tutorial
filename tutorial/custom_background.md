@@ -55,26 +55,25 @@ fn draw(
     _viewport: &Rectangle,
 ) {
     renderer.fill_quad(
-		Quad {
-			bounds: layout.bounds(),
-			border: Border {
-				color: Color::from_rgb(1.0, 0.66, 0.6),
-				width: 1.0,
-				radius: 10.0.into(),
-			},
-			shadow: Shadow::default(),
-		},
-		Color::BLACK,
+        Quad {
+            bounds: layout.bounds(),
+            border: Border {
+                color: Color::from_rgb(1.0, 0.66, 0.6),
+                width: 1.0,
+                radius: 10.0.into(),
+            },
+            shadow: Shadow::default(),
+        },
+        Color::BLACK,
     );
-	
-	iced::widget::image::draw(
-		renderer,
-		layout,
-		&self.handle,
-		iced::ContentFit::Contain,
-		iced::widget::image::FilterMethod::Linear,
-	);
 
+    iced::widget::image::draw(
+        renderer,
+        layout,
+        &self.handle,
+        iced::ContentFit::Contain,
+        iced::widget::image::FilterMethod::Linear,
+    );
 }
 ```
 
@@ -119,7 +118,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(MyWidgetWithImage::new())
             .width(Length::Fill)
             .height(Length::Fill)

@@ -89,7 +89,7 @@ use iced::{
         Clipboard, Layout, Shell, Widget,
     },
     widget::{column, container, text},
-    Alignment, Border, Color, Element, Event, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
+    Border, Color, Element, Event, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
@@ -122,7 +122,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(
             column![MyWidget::new(MyMessage::MyWidgetPressed), text(self.count)]
                 .spacing(20)

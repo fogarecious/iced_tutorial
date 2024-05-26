@@ -25,21 +25,21 @@ So, we have to cast it as [Widget](https://docs.rs/iced/0.12.1/iced/advanced/wid
 
 ```rust
 fn layout(
-	&self,
-	tree: &mut Tree,
-	renderer: &Renderer,
-	limits: &layout::Limits,
+    &self,
+    tree: &mut Tree,
+    renderer: &Renderer,
+    limits: &layout::Limits,
 ) -> layout::Node {
-	let mut child_node =
-		self.inner_widget
-			.as_widget()
-			.layout(&mut tree.children[0], renderer, limits);
+    let mut child_node =
+        self.inner_widget
+            .as_widget()
+            .layout(&mut tree.children[0], renderer, limits);
 
-	let size_of_this_node = child_node.size().expand(Size::new(50., 50.));
+    let size_of_this_node = child_node.size().expand(Size::new(50., 50.));
 
-	child_node = child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
+    child_node = child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
 
-	layout::Node::with_children(size_of_this_node, vec![child_node])
+    layout::Node::with_children(size_of_this_node, vec![child_node])
 }
 ```
 
@@ -50,37 +50,37 @@ Then, in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widge
 
 ```rust
 fn draw(
-	&self,
-	state: &Tree,
-	renderer: &mut Renderer,
-	theme: &Theme,
-	style: &renderer::Style,
-	layout: Layout<'_>,
-	cursor: mouse::Cursor,
-	viewport: &Rectangle,
+    &self,
+    state: &Tree,
+    renderer: &mut Renderer,
+    theme: &Theme,
+    style: &renderer::Style,
+    layout: Layout<'_>,
+    cursor: mouse::Cursor,
+    viewport: &Rectangle,
 ) {
-	renderer.fill_quad(
-		Quad {
-			bounds: layout.bounds(),
-			border: Border {
-				color: Color::from_rgb(0.6, 0.93, 1.0),
-				width: 1.0,
-				radius: 10.0.into(),
-			},
-			shadow: Shadow::default(),
-		},
-		Color::from_rgb(0.0, 0.33, 0.4),
-	);
-	
-	self.inner_widget.as_widget().draw(
-		&state.children[0],
-		renderer,
-		theme,
-		style,
-		layout.children().next().unwrap(),
-		cursor,
-		viewport,
-	);
+    renderer.fill_quad(
+        Quad {
+            bounds: layout.bounds(),
+            border: Border {
+                color: Color::from_rgb(0.6, 0.93, 1.0),
+                width: 1.0,
+                radius: 10.0.into(),
+            },
+            shadow: Shadow::default(),
+        },
+        Color::from_rgb(0.0, 0.33, 0.4),
+    );
+
+    self.inner_widget.as_widget().draw(
+        &state.children[0],
+        renderer,
+        theme,
+        style,
+        layout.children().next().unwrap(),
+        cursor,
+        viewport,
+    );
 }
 ```
 
@@ -95,7 +95,7 @@ fn children(&self) -> Vec<Tree> {
 }
 
 fn diff(&self, tree: &mut Tree) {
-	tree.diff_children(std::slice::from_ref(&self.inner_widget));
+    tree.diff_children(std::slice::from_ref(&self.inner_widget));
 }
 ```
 
@@ -132,7 +132,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(MyWidgetOuter::new(button("Other widget").into()))
             .width(Length::Fill)
             .height(Length::Fill)

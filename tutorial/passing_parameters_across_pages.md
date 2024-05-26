@@ -21,7 +21,7 @@ enum MyAppMessage {
 
 trait Page {
     fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>>;
-    fn view(&self) -> iced::Element<'_, MyAppMessage>;
+    fn view(&self) -> iced::Element<MyAppMessage>;
 }
 
 struct MyApp {
@@ -48,7 +48,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         self.page.view()
     }
 }
@@ -90,7 +90,7 @@ impl Page for PageA {
         None
     }
 
-    fn view(&self) -> iced::Element<'_, MyAppMessage> {
+    fn view(&self) -> iced::Element<MyAppMessage> {
         column![
             text_input("Name", &self.name).on_input(|s| MyAppMessage::PageA(Ma::TextChanged(s))),
             button("Log in").on_press(MyAppMessage::PageA(Ma::ButtonPressed)),
@@ -131,7 +131,7 @@ impl Page for PageB {
         None
     }
 
-    fn view(&self) -> iced::Element<'_, MyAppMessage> {
+    fn view(&self) -> iced::Element<MyAppMessage> {
         column![
             text(format!("Hello {}!", self.name)),
             button("Log out").on_press(MyAppMessage::PageB(Mb::ButtonPressed)),

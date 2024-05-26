@@ -41,7 +41,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         mouse_area(self.state.as_str())
             .on_press(MyAppMessage::Pressed)
             .on_release(MyAppMessage::Released)

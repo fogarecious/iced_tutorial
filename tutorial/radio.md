@@ -51,7 +51,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             Radio::new("Construct from struct", 0, None, |_| {
                 MyAppMessage::DoNothing

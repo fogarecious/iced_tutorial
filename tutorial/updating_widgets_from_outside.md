@@ -24,18 +24,18 @@ fn draw(
     renderer.fill_quad(
         Quad {
             bounds: layout.bounds(),
-			border: Border {
-				color: Color::from_rgb(0.6, 0.8, 1.0),
-				width: 1.0,
-				radius: 10.0.into(),
-				},
-			shadow: Shadow::default(),
-		},
-		if self.highlight {
-			Color::from_rgb(0.6, 0.8, 1.0)
-		} else {
-			Color::from_rgb(0.0, 0.2, 0.4)
-		},
+            border: Border {
+                color: Color::from_rgb(0.6, 0.8, 1.0),
+                width: 1.0,
+                radius: 10.0.into(),
+            },
+            shadow: Shadow::default(),
+        },
+        if self.highlight {
+            Color::from_rgb(0.6, 0.8, 1.0)
+        } else {
+            Color::from_rgb(0.0, 0.2, 0.4)
+        },
     );
 }
 ```
@@ -98,6 +98,7 @@ fn main() -> iced::Result {
 enum MyMessage {
     Highlight(bool),
 }
+
 struct MyApp {
     highlight: bool,
 }
@@ -119,7 +120,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(
             column![
                 MyWidget::new(self.highlight),

@@ -18,17 +18,17 @@ impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget
 where
     Renderer: iced::advanced::Renderer,
 {
-	fn size(&self) -> Size<Length> {
-		// ...
-	}
-	
+    fn size(&self) -> Size<Length> {
+        // ...
+    }
+
     fn layout(
         &self,
         _tree: &mut Tree,
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-		// ...
+        // ...
     }
 
     fn draw(
@@ -51,10 +51,10 @@ Currently, we set the width and height to [Length::Shrink](https://docs.rs/iced/
 
 ```rust
 fn size(&self) -> Size<Length> {
-	Size {
-		width: Length::Shrink,
-		height: Length::Shrink,
-	}
+    Size {
+        width: Length::Shrink,
+        height: Length::Shrink,
+    }
 }
 ```
 
@@ -86,15 +86,15 @@ fn draw(
     _viewport: &Rectangle,
 ) {
     renderer.fill_quad(
-		Quad {
-			bounds: layout.bounds(),
-			border: Border {
-				color: Color::from_rgb(0.6, 0.8, 1.0),
-				width: 1.0,
-				radius: 10.0.into(),
-			},
-			shadow: Shadow::default(),
-		},
+        Quad {
+            bounds: layout.bounds(),
+            border: Border {
+                color: Color::from_rgb(0.6, 0.8, 1.0),
+                width: 1.0,
+                radius: 10.0.into(),
+            },
+            shadow: Shadow::default(),
+        },
         Color::from_rgb(0.0, 0.2, 0.4),
     );
 }
@@ -118,7 +118,7 @@ where
 Finally, the widget can be added to our app by the following code.
 
 ```rust
-fn view(&self) -> iced::Element<'_, Self::Message> {
+fn view(&self) -> iced::Element<Self::Message> {
     container(MyWidget)
         .width(Length::Fill)
         .height(Length::Fill)
@@ -132,7 +132,7 @@ Note that it is not necessary to put `MyWidget` in a [Container](https://docs.rs
 We can add the widget directly into our app.
 
 ```rust
-fn view(&self) -> iced::Element<'_, Self::Message> {
+fn view(&self) -> iced::Element<Self::Message> {
     MyWidget.into()
 }
 ```
@@ -170,7 +170,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(MyWidget)
             .width(Length::Fill)
             .height(Length::Fill)

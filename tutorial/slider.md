@@ -70,7 +70,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             text("Construct from struct"),
             Slider::new(0..=100, 50, |_| MyAppMessage::DoNothing),

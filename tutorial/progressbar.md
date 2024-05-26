@@ -28,7 +28,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             text("Construct from struct"),
             ProgressBar::new(0.0..=100.0, 50.),

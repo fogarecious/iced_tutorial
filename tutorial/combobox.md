@@ -107,7 +107,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             ComboBox::new(&self.state1, "Construct from struct", None, |_| {
                 MyAppMessage::DoNothing

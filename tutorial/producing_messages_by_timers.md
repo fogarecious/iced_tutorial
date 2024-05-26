@@ -1,12 +1,12 @@
 # Producing Messages By Timers
 
 To use build-in timers, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio), [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std), or [smol](https://docs.rs/crate/iced/0.12.1/features#smol).
-In this tutorial, we use [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std) feature.
-The `Cargo.toml` should look like this:
+In this tutorial, we use [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio) feature.
+The dependencies of `Cargo.toml` should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.10.0", features = ["async-std"] }
+iced = { version = "0.12.1", features = ["tokio"] }
 ```
 
 We use [time::every](https://docs.rs/iced/0.12.1/iced/time/fn.every.html) function to obtain [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html)\<[Instant](https://docs.rs/iced/0.12.1/iced/time/struct.Instant.html)> struct.
@@ -56,7 +56,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         text(self.seconds).into()
     }
 

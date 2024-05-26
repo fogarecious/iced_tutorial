@@ -40,7 +40,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             radio("Choice A", "A", Some("A"), |s| MyAppMessage::Choose(
                 s.to_string()
