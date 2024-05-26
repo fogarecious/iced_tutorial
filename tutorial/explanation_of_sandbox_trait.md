@@ -35,7 +35,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         // View logic
     }
 }

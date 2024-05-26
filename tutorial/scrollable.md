@@ -47,21 +47,16 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
-        let long_vertical_texts = column(
-            (0..10)
-                .map(|i| text(format!("{} vertical scrollable", i + 1)).into())
-        );
-        let long_horizontal_texts = row((0..10)
-            .map(|i| text(format!("{} horizontal scrollable  ", i + 1)).into())
-        );
+    fn view(&self) -> iced::Element<Self::Message> {
+        let long_vertical_texts =
+            column((0..10).map(|i| text(format!("{} vertical scrollable", i + 1)).into()));
+        let long_horizontal_texts =
+            row((0..10).map(|i| text(format!("{} horizontal scrollable  ", i + 1)).into()));
         let long_both_texts = column(
-            (0..10)
-                .map(|i| text(format!("{} vertical and horizontal scrollable", i + 1)).into())
+            (0..10).map(|i| text(format!("{} vertical and horizontal scrollable", i + 1)).into()),
         );
         let long_both_texts_2 = column(
-            (0..10)
-                .map(|i| text(format!("{} vertical and horizontal scrollable", i + 1)).into())
+            (0..10).map(|i| text(format!("{} vertical and horizontal scrollable", i + 1)).into()),
         );
 
         column![

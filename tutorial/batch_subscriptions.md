@@ -59,7 +59,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         text(self.seconds).into()
     }
 

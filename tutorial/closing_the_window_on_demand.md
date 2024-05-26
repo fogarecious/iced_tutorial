@@ -2,9 +2,10 @@
 
 This tutorial follows the [previous tutorial](./changing_the_window_dynamically.md).
 We use the [close](https://docs.rs/iced/0.12.1/iced/window/fn.close.html) function in [window](https://docs.rs/iced/0.12.1/iced/window/index.html) module to close the window.
-This is also done by returning the [Command](https://docs.rs/iced/0.12.1/iced/struct.Command.html) obtained by [close](https://docs.rs/iced/0.12.1/iced/window/fn.close.html) function.
+This is also done by returning the [Command](https://docs.rs/iced/0.12.1/iced/struct.Command.html) obtained by the [close](https://docs.rs/iced/0.12.1/iced/window/fn.close.html) function.
 
-Note: If you find the function needs an [Id](https://docs.rs/iced/0.12.1/iced/window/struct.Id.html), you can get it by [fetch_id](https://docs.rs/iced/0.12.1/iced/window/fn.fetch_id.html).
+Similar to the [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html) function, the [close](https://docs.rs/iced/0.12.1/iced/window/fn.close.html) function also needs an ID of the window.
+We pass [window::Id::MAIN](https://docs.rs/iced/0.12.1/iced/window/struct.Id.html#associatedconstant.MAIN) for the ID.
 
 ```rust
 use iced::{
@@ -40,12 +41,11 @@ impl Application for MyApp {
 
     fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
         match message {
-            MyAppMessage::CloseWindow => window::close(),
-			// MyAppMessage::CloseWindow => window::close(window::Id::MAIN),
+            MyAppMessage::CloseWindow => window::close(window::Id::MAIN),
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, Self::Theme, iced::Renderer> {
+    fn view(&self) -> iced::Element<Self::Message> {
         row![button("Close window").on_press(MyAppMessage::CloseWindow),].into()
     }
 }

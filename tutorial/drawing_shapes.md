@@ -70,7 +70,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             "A Canvas",
             Canvas::new(MyProgram)
@@ -96,7 +96,7 @@ impl<Message> Program<Message> for MyProgram {
         _cursor: mouse::Cursor,
     ) -> Vec<Geometry> {
         let mut frame = Frame::new(renderer, bounds.size());
-        
+
         frame.fill_rectangle(Point::ORIGIN, bounds.size(), Color::from_rgb(0.0, 0.2, 0.4));
 
         frame.fill(

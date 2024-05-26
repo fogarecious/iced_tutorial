@@ -10,7 +10,7 @@ Since [theme::Text](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html) imple
 use iced::{
     theme,
     widget::{button, column, row, text},
-    Sandbox, Settings, Color,
+    Color, Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
@@ -37,7 +37,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             text("Ready?").style(Color::from_rgb(1., 0.6, 0.2)),
             row![

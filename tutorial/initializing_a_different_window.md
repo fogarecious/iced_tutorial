@@ -11,7 +11,7 @@ fn main() -> iced::Result {
         window: window::Settings {
             size: Size {
                 width: 70.,
-                height: 20.,
+                height: 30.,
             },
             position: window::Position::Specific(Point { x: 50., y: 60. }),
             ..window::Settings::default()
@@ -35,7 +35,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         "Hello".into()
     }
 }

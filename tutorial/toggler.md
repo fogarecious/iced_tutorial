@@ -50,7 +50,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             Toggler::new(Some("Construct from struct".into()), false, |_| {
                 MyAppMessage::DoNothing

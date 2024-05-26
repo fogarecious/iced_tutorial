@@ -4,21 +4,21 @@
 To do this, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio), [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std), or [smol](https://docs.rs/crate/iced/0.12.1/features#smol).
 The corresponding asynchronous runtime ([tokio](https://crates.io/crates/tokio), [async-std](https://crates.io/crates/async-std), or [smol](https://crates.io/crates/smol)) must also be added.
 
-Here, we use [async-std](https://crates.io/crates/async-std) as an example.
-We enable [async-std](https://docs.rs/crate/iced/latest/features#async-std) feature and add [async-std](https://crates.io/crates/async-std) crate.
-The `Cargo.toml` should look like this:
+Here, we use [tokio](https://crates.io/crates/tokio) as an example.
+We enable [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio) feature and add [tokio](https://crates.io/crates/tokio) crate.
+The dependencies of `Cargo.toml` should look like this:
 
 ```toml
 [dependencies]
-async-std = "1.12.0"
-iced = { version = "0.12.1", features = ["async-std"] }
+iced = { version = "0.12.1", features = ["tokio"] }
+tokio = { version = "1.37.0", features = ["time"] }
 ```
 
 We use [Command::perform](https://docs.rs/iced/0.12.1/iced/struct.Command.html#method.perform) to execute an asynchronous function.
 The first parameter of [Command::perform](https://docs.rs/iced/0.12.1/iced/struct.Command.html#method.perform) is an asynchronous function, and the second parameter is a function that returns `MyAppMessage`.
 The `MyAppMessage` will be produced once the asynchronous function is done.
 
-In the following code, we use a simple asynchronous function [async_std::task::sleep](https://docs.rs/async-std/1.12.0/async_std/task/fn.sleep.html).
+In the following code, we use a simple asynchronous function [tokio::time::sleep](https://docs.rs/tokio/latest/tokio/time/fn.sleep.html).
 When the asynchronous function finished, we will receive `MyAppMessage::Done`.
 
 ```rust
@@ -67,7 +67,7 @@ impl Application for MyApp {
         match message {
             MyAppMessage::Execute => {
                 self.state = "Executing".into();
-                return Command::perform(async_std::task::sleep(Duration::from_secs(1)), |_| {
+                return Command::perform(tokio::time::sleep(Duration::from_secs(1)), |_| {
                     MyAppMessage::Done
                 });
             }
@@ -76,7 +76,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message, Self::Theme,iced::Renderer> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             button("Execute").on_press(MyAppMessage::Execute),
             text(self.state.as_str()),

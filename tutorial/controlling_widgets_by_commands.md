@@ -57,7 +57,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             button("Edit text").on_press(MyAppMessage::EditText),
             text_input("", &self.some_text)

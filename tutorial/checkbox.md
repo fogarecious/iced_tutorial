@@ -56,7 +56,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             Checkbox::new("Construct from struct", false),
             checkbox("Construct from function", false),

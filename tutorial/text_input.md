@@ -80,7 +80,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             text_input("Construct from function", ""),
             TextInput::new("Construct from struct", ""),

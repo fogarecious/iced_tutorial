@@ -31,7 +31,7 @@ enum Navigation {
 
 trait Page {
     fn update(&mut self, message: MyAppMessage) -> Navigation;
-    fn view(&self) -> iced::Element<'_, MyAppMessage>;
+    fn view(&self) -> iced::Element<MyAppMessage>;
 }
 
 struct MyApp {
@@ -64,7 +64,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         self.pages.last().unwrap().view()
     }
 }
@@ -99,7 +99,7 @@ impl Page for PageA {
         Navigation::None
     }
 
-    fn view(&self) -> iced::Element<'_, MyAppMessage> {
+    fn view(&self) -> iced::Element<MyAppMessage> {
         column![
             text("Start"),
             button("Next").on_press(MyAppMessage::PageA(Ma::ButtonPressed)),
@@ -144,7 +144,7 @@ impl Page for PageB {
         Navigation::None
     }
 
-    fn view(&self) -> iced::Element<'_, MyAppMessage> {
+    fn view(&self) -> iced::Element<MyAppMessage> {
         column![
             text(self.id),
             row![

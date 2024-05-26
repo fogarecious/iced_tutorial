@@ -18,8 +18,8 @@ fn on_event(
     _viewport: &Rectangle,
 ) -> event::Status {
     match event {
-		Event::Keyboard(keyboard::Event::KeyPressed {
-			key: keyboard::Key::Named(Named::Space),
+        Event::Keyboard(keyboard::Event::KeyPressed {
+            key: keyboard::Key::Named(Named::Space),
             ..
         }) => {
             self.highlight = !self.highlight;
@@ -84,7 +84,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(MyWidget::new())
             .width(Length::Fill)
             .height(Length::Fill)

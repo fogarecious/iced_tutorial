@@ -38,7 +38,7 @@ In the *loading* state, the app shows the text `Loading...`.
 And in the *loaded* state, the app shows the image.
 
 ```rust
-fn view(&self) -> iced::Element<'_, Self::Message, iced::Renderer<Self::Theme>> {
+fn view(&self) -> iced::Element<Self::Message> {
     column![
         button("Load").on_press(MyMessage::Load),
         if self.show_container {
@@ -155,7 +155,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             button("Load").on_press(MyMessage::Load),
             if self.show_container {

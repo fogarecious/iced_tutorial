@@ -80,7 +80,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         column![
             "A Canvas",
             Canvas::new(self).width(Length::Fill).height(Length::Fill)

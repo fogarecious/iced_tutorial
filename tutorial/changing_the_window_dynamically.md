@@ -5,8 +5,8 @@ For example, to [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html)
 These functions return [Command](https://docs.rs/iced/0.12.1/iced/struct.Command.html), which can be used as the return value in [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
 Developers might be interested in other [Commands](https://docs.rs/iced/0.12.1/iced/struct.Command.html) in [window](https://docs.rs/iced/0.12.1/iced/window/index.html) module.
 
-Internally Iced reserves `window::Id::MAIN` for the first window spawned.
-
+The [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html) function needs an ID of the window we are going to resize.
+Internally, Iced reserves [window::Id::MAIN](https://docs.rs/iced/0.12.1/iced/window/struct.Id.html#associatedconstant.MAIN) for the first window spawned.
 
 ```rust
 use iced::{
@@ -65,7 +65,7 @@ impl Application for MyApp {
         Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         row![
             text_input("Width", &self.width).on_input(MyAppMessage::UpdateWidth),
             text_input("Height", &self.height).on_input(MyAppMessage::UpdateHeight),

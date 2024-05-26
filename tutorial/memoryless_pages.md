@@ -55,7 +55,7 @@ impl Sandbox for MyApp {
         }
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         self.page.view()
     }
 }
@@ -91,7 +91,7 @@ impl Page for PageB {
         None
     }
 
-    fn view(&self) -> iced::Element<'_, MyAppMessage> {
+    fn view(&self) -> iced::Element<MyAppMessage> {
         column![
             text("Hello!"),
             button("Log out").on_press(MyAppMessage::PageB(Mb::ButtonPressed)),
@@ -143,7 +143,7 @@ impl Page for PageA {
         None
     }
 
-    fn view(&self) -> iced::Element<'_, MyAppMessage> {
+    fn view(&self) -> iced::Element<MyAppMessage> {
         column![
             text_input("Password", &self.password)
                 .secure(true)

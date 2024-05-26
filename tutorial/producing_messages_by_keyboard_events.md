@@ -51,7 +51,7 @@ impl Application for MyApp {
         iced::Command::none()
     }
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         text(self.pressed_key.as_str()).into()
     }
 

@@ -130,7 +130,7 @@ impl Sandbox for MyApp {
 
     fn update(&mut self, _message: Self::Message) {}
 
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<Self::Message> {
         container(MyWidgetOuter::new())
             .width(Length::Fill)
             .height(Length::Fill)
