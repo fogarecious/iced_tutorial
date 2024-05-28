@@ -26,7 +26,7 @@ Note: If you encounter `WGPU Error`, you can disable `wgpu` in `Cargo.toml` file
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1"", default-features = false }
+iced = { version = "0.12.1", default-features = false }
 ```
 
 :arrow_right:  Next: [First App - Hello World!](./first_app.md)
