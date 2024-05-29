@@ -130,7 +130,6 @@ where
 impl<'a, Message, Renderer> From<MyWidget> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer,
-    Message: Clone + 'a,
 {
     fn from(widget: MyWidget) -> Self {
         Self::new(widget)

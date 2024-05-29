@@ -1,7 +1,5 @@
 # Texts In Widgets
 
-(This page of tutorial does not work. We are trying to fix it.)
-
 In addition to draw a [Quad](https://docs.rs/iced/latest/iced/advanced/renderer/struct.Quad.html), we can also draw texts in our widgets.
 
 For example, suppose we would like to draw a string slice named `CONTENT`.
@@ -18,74 +16,56 @@ impl MyWidgetWithText {
 }
 ```
 
-We use the build-in [draw](https://docs.rs/iced/latest/iced/widget/text/fn.draw.html) function to draw the text.
+We use the [Renderer](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html)'s [fill_text](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html#tymethod.fill_text) method to draw the text.
 
 ```rust
 fn draw(
     &self,
     _state: &Tree,
     renderer: &mut Renderer,
-    _theme: &Renderer::Theme,
-    style: &renderer::Style,
+    _theme: &Theme,
+    _style: &renderer::Style,
     layout: Layout<'_>,
     _cursor: mouse::Cursor,
-    _viewport: &Rectangle,
+    viewport: &Rectangle,
 ) {
-    renderer.fill_quad(
-        Quad {
-            bounds: layout.bounds(),
-            border_radius: 10.0.into(),
-            border_width: 1.0,
-            border_color: Color::from_rgb(0.6, 0.8, 1.0),
-        },
-        Color::from_rgb(0.0, 0.2, 0.4),
-    );
+    // ...
 
-    iced::widget::text::draw(
-        renderer,
-        style,
-        layout,
-        Self::CONTENT,
-        None,
-        Default::default(),
-        None,
-        iced::widget::text::Appearance {
-            color: Some(Color::from_rgb(0.6, 0.8, 1.0)),
+    let bounds = layout.bounds();
+
+    renderer.fill_text(
+        Text {
+            content: Self::CONTENT,
+            bounds: bounds.size(),
+            size: renderer.default_size(),
+            line_height: LineHeight::default(),
+            font: renderer.default_font(),
+            horizontal_alignment: Horizontal::Center,
+            vertical_alignment: Vertical::Center,
+            shaping: Shaping::default(),
         },
-        alignment::Horizontal::Center,
-        alignment::Vertical::Center,
-        Default::default(),
+        bounds.center(),
+        Color::from_rgb(0.6, 0.8, 1.0),
+        *viewport,
     );
 }
 ```
 
-The [draw](https://docs.rs/iced/latest/iced/widget/text/fn.draw.html) function needs the `Renderer` to implement [iced::advanced::text::Renderer](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html).
+The [fill_text](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html#tymethod.fill_text) method needs the `Renderer` type to implement [iced::advanced::text::Renderer](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html).
 Thus we have to require this in our [Widget](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html) implementation.
 
 ```rust
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetWithText
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetWithText
 where
     Renderer: iced::advanced::Renderer + iced::advanced::text::Renderer,
 ```
 
-Furthermore, we can use the [Text](https://docs.rs/iced/latest/iced/widget/type.Text.html) widget to help us determining the [layout](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html#tymethod.layout) of our widget.
+Since the requirement of the `Renderer` type is changed, we have to change the requirement in `From<MyWidgetWithText>` for [Element](https://docs.rs/iced/latest/iced/type.Element.html), too.
 
 ```rust
-fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
-    let text = iced::widget::Text::new(Self::CONTENT);
-    let text = &text as &dyn Widget<Message, Renderer>;
-
-    text.layout(renderer, limits)
-}
-```
-
-This require the `Renderer` to have an associated type `Theme` that implements [iced::widget::text::StyleSheet](https://docs.rs/iced/latest/iced/widget/text/trait.StyleSheet.html).
-
-```rust
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetWithText
+impl<'a, Message, Renderer> From<MyWidgetWithText> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer + iced::advanced::text::Renderer,
-    Renderer::Theme: iced::widget::text::StyleSheet,
 ```
 
 The full code is as follows:
@@ -96,11 +76,14 @@ use iced::{
         layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Widget,
+        Layout, Text, Widget,
     },
-    alignment,
-    widget::container,
-    Color, Element, Length, Rectangle, Sandbox, Settings,
+    alignment::{Horizontal, Vertical},
+    widget::{
+        container,
+        text::{LineHeight, Shaping},
+    },
+    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
@@ -135,75 +118,79 @@ impl Sandbox for MyApp {
 struct MyWidgetWithText;
 
 impl MyWidgetWithText {
-    const CONTENT: &'static str = "  My Widget  ";
+    const CONTENT: &'static str = "My Widget";
 
     fn new() -> Self {
         Self
     }
 }
 
-impl<Message, Renderer> Widget<Message, Renderer> for MyWidgetWithText
+impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetWithText
 where
     Renderer: iced::advanced::Renderer + iced::advanced::text::Renderer,
-    Renderer::Theme: iced::widget::text::StyleSheet,
 {
-    fn width(&self) -> Length {
-        Length::Shrink
+    fn size(&self) -> Size<Length> {
+        Size {
+            width: Length::Shrink,
+            height: Length::Shrink,
+        }
     }
 
-    fn height(&self) -> Length {
-        Length::Shrink
-    }
-
-    fn layout(&self, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
-        let text = iced::widget::Text::new(Self::CONTENT);
-        let text = &text as &dyn Widget<Message, Renderer>;
-
-        text.layout(renderer, limits)
+    fn layout(
+        &self,
+        _tree: &mut Tree,
+        _renderer: &Renderer,
+        _limits: &layout::Limits,
+    ) -> layout::Node {
+        layout::Node::new([200, 100].into())
     }
 
     fn draw(
         &self,
         _state: &Tree,
         renderer: &mut Renderer,
-        _theme: &Renderer::Theme,
-        style: &renderer::Style,
+        _theme: &Theme,
+        _style: &renderer::Style,
         layout: Layout<'_>,
         _cursor: mouse::Cursor,
-        _viewport: &Rectangle,
+        viewport: &Rectangle,
     ) {
         renderer.fill_quad(
             Quad {
                 bounds: layout.bounds(),
-                border_radius: 10.0.into(),
-                border_width: 1.0,
-                border_color: Color::from_rgb(0.6, 0.8, 1.0),
+                border: Border {
+                    color: Color::from_rgb(0.6, 0.8, 1.0),
+                    width: 1.0,
+                    radius: 10.0.into(),
+                },
+                shadow: Shadow::default(),
             },
             Color::from_rgb(0.0, 0.2, 0.4),
         );
 
-        iced::widget::text::draw(
-            renderer,
-            style,
-            layout,
-            Self::CONTENT,
-            None,
-            Default::default(),
-            None,
-            iced::widget::text::Appearance {
-                color: Some(Color::from_rgb(0.6, 0.8, 1.0)),
+        let bounds = layout.bounds();
+
+        renderer.fill_text(
+            Text {
+                content: Self::CONTENT,
+                bounds: bounds.size(),
+                size: renderer.default_size(),
+                line_height: LineHeight::default(),
+                font: renderer.default_font(),
+                horizontal_alignment: Horizontal::Center,
+                vertical_alignment: Vertical::Center,
+                shaping: Shaping::default(),
             },
-            alignment::Horizontal::Center,
-            alignment::Vertical::Center,
-            Default::default(),
+            bounds.center(),
+            Color::from_rgb(0.6, 0.8, 1.0),
+            *viewport,
         );
     }
 }
 
-impl<'a, Message, Renderer> From<MyWidgetWithText> for Element<'a, Message, Renderer>
+impl<'a, Message, Renderer> From<MyWidgetWithText> for Element<'a, Message, Theme, Renderer>
 where
     Renderer: iced::advanced::Renderer + iced::advanced::text::Renderer,
-    Renderer::Theme: iced::widget::text::StyleSheet,
 {
     fn from(widget: MyWidgetWithText) -> Self {
         Self::new(widget)

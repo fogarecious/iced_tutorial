@@ -283,6 +283,36 @@ where
 
 ![Widgets With Children](./pic/widgets_with_children.png)
 
+If `MyWidgetInner` receives events (i.e., implementing [on_event](https://docs.rs/iced/latest/iced/advanced/trait.Widget.html#method.on_event)), we have to call this [on_event](https://docs.rs/iced/latest/iced/advanced/trait.Widget.html#method.on_event) method from `MyWidgetOuter`'s [on_event](https://docs.rs/iced/latest/iced/advanced/trait.Widget.html#method.on_event) method.
+This ensures the [Event](https://docs.rs/iced/latest/iced/enum.Event.html) is passing from `MyWidgetOuter` to `MyWidgetInner`.
+
+```rust
+fn on_event(
+    &mut self,
+    state: &mut Tree,
+    event: Event,
+    layout: Layout<'_>,
+    cursor: mouse::Cursor,
+    renderer: &Renderer,
+    clipboard: &mut dyn Clipboard,
+    shell: &mut Shell<'_, Message>,
+    viewport: &Rectangle,
+) -> event::Status {
+    let inner_widget = &mut self.inner_widget as &mut dyn Widget<Message, Theme, Renderer>;
+
+    inner_widget.on_event(
+        state,
+        event,
+        layout.children().next().unwrap(),
+        cursor,
+        renderer,
+        clipboard,
+        shell,
+        viewport,
+    )
+}
+```
+
 :arrow_right:  Next: [Taking Any Children](./taking_any_children.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

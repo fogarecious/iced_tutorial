@@ -54,18 +54,7 @@ fn draw(
     _cursor: mouse::Cursor,
     _viewport: &Rectangle,
 ) {
-    renderer.fill_quad(
-        Quad {
-            bounds: layout.bounds(),
-            border: Border {
-                color: Color::from_rgb(1.0, 0.66, 0.6),
-                width: 1.0,
-                radius: 10.0.into(),
-            },
-            shadow: Shadow::default(),
-        },
-        Color::BLACK,
-    );
+    // ...
 
     iced::widget::image::draw(
         renderer,
