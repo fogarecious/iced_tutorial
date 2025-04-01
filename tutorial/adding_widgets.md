@@ -1,46 +1,31 @@
 # Adding Widgets
 
-Use [column!](https://docs.rs/iced/0.12.1/iced/widget/macro.column.html) and [row!](https://docs.rs/iced/0.12.1/iced/widget/macro.row.html) to group multiple widgets such as [text](https://docs.rs/iced/0.12.1/iced/widget/fn.text.html) and [button](https://docs.rs/iced/0.12.1/iced/widget/fn.button.html).
+Use [column!](https://docs.rs/iced/0.13.1/iced/widget/macro.column.html) and [row!](https://docs.rs/iced/0.13.1/iced/widget/macro.row.html) to group multiple widgets such as [text](https://docs.rs/iced/0.13.1/iced/widget/fn.text.html) and [button](https://docs.rs/iced/0.13.1/iced/widget/fn.button.html).
 
 ```rust
-use iced::{
-    widget::{button, column, row, text},
-    Sandbox, Settings,
-};
+use iced::widget::{button, column, row, text};
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("MyApp", MyApp::update, MyApp::view)
 }
 
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+#[derive(Debug, Clone)]
+enum Message {}
 
-    fn new() -> Self {
-        Self
-    }
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
-        column![
-            text("Yes or no?"),
-            row![
-                button("Yes"),
-                button("No"),
-            ],
-        ].into()
+    fn view(&self) -> iced::Element<Message> {
+        column![text("Yes or no?"), row![button("Yes"), button("No"),],].into()
     }
 }
 ```
 
 ![Adding widgets](./pic/adding_widgets.png)
 
-:arrow_right:  Next: [Changing Displaying Content](./changing_displaying_content.md)
+:arrow_right: Next: [Changing Displaying Content](./changing_displaying_content.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
