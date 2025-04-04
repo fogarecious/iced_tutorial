@@ -1,11 +1,3 @@
-# Checkbox
-
-The [Checkbox](https://docs.rs/iced/0.13.1/iced/widget/checkbox/struct.Checkbox.html) widget represents a boolean value.
-It has two methods of construction: the `checkbox` function and the `Checkbox::new` constructor.
-It is disabled by default if [on_toggle](https://docs.rs/iced/0.13.1/iced/widget/struct.Checkbox.html#method.on_toggle) is not defined.
-It supports reactions to clicking and touching, change styles of the box and the text, and change the space between them.
-
-```rust
 use iced::{
     Font,
     font::Family,
@@ -81,10 +73,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Checkbox](./pic/checkbox.png)
-
-:arrow_right: Next: [Toggler](./toggler.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

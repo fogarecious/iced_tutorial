@@ -1,12 +1,3 @@
-# TextInput
-
-The [TextInput](https://docs.rs/iced/0.13.1/iced/widget/struct.TextInput.html) widget let users to input texts.
-It has two methods of construction: the `text_input` function and the `TextInput::new` constructor.
-It is disabled by default if [on_input](https://docs.rs/iced/0.13.1/iced/widget/struct.TextInput.html#method.on_input) is not defined.
-It supports reactions to pasting texts or keyboard submissions.
-You can change fonts, text sizes, add password masks, add padding around the inner text, and add an icon.
-
-```rust
 use iced::{
     Font,
     font::Family,
@@ -103,10 +94,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![TextInput](./pic/text_input.png)
-
-:arrow_right: Next: [Checkbox](./checkbox.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

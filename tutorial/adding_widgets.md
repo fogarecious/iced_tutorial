@@ -26,6 +26,6 @@ impl MyApp {
 
 ![Adding widgets](./pic/adding_widgets.png)
 
-:arrow_right: Next: [Changing Displaying Content](./changing_displaying_content.md)
+:arrow_right: Next: [Widgets](./widgets.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

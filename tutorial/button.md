@@ -1,45 +1,33 @@
 # Button
 
-The [Button](https://docs.rs/iced/0.12.1/iced/widget/button/struct.Button.html) widget supports reactions to pressing/touching events.
-It has two methods of constructions.
-If the method [on_press](https://docs.rs/iced/0.12.1/iced/widget/button/struct.Button.html#method.on_press) is set, the button is enabled, and is disabled otherwise.
+The [Button](https://docs.rs/iced/0.13.1/iced/widget/button/struct.Button.html) widget supports reactions to pressing/touching events.
+It has two methods of constructions: the `button` function, and the `Button::new` constructor.
+By default, the button is disabled if [on_press](https://docs.rs/iced/0.12.1/iced/widget/button/struct.Button.html#method.on_press) is not defined.
 We can also set padding around the text of the button.
 
 ```rust
-use iced::{
-    widget::{button, column, Button},
-    Sandbox, Settings,
-};
+use iced::widget::{Button, button, column};
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     DoSomething,
 }
 
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             Button::new("Disabled button"),
             button("Construct from function"),
-            button("Enabled button").on_press(MyAppMessage::DoSomething),
+            button("Enabled button").on_press(Message::DoSomething),
             button("With padding").padding(20),
         ]
         .into()
@@ -49,6 +37,6 @@ impl Sandbox for MyApp {
 
 ![Button](./pic/button.png)
 
-:arrow_right:  Next: [TextInput](./text_input.md)
+:arrow_right: Next: [TextInput](./text_input.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

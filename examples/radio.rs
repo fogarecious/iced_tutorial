@@ -1,10 +1,3 @@
-# Radio
-
-The [Radio](https://docs.rs/iced/0.13.1/iced/widget/radio/struct.Radio.html) widget represents a choice among multiple values.
-It has two methods of constructions: the `radio` function and the `Radio::new` constructor.
-It supports reactions to clicking and touching, changing styles of the button and the text, and changing the space between them.
-
-```rust
 use iced::{
     Font,
     font::Family,
@@ -79,10 +72,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Radio](./pic/radio.png)
-
-:arrow_right: Next: [PickList](./picklist.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

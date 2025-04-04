@@ -1,31 +1,23 @@
 # First App - Hello World!
 
-We need a struct to implement [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html), and call its [run](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#method.run) method from `main`.
-All widgets should be placed inside the [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) method.
+> **Info:** The Sandbox trait has been dropped on 0.13.1.
+
+The most basic app should have a struct with implementations of an update and view functions. Then, the [run](https://docs.rs/iced/0.13.1/iced/fn.run.html) function should be called passing the application title, and the update and view functions. Notice that we define the Message as a simple type just to make sure the signature of update and view are correct. Later we'll see more uses for it.
 
 ```rust
-use iced::{Sandbox, Settings};
-
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+type Message = ();
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         "Hello World!".into()
     }
 }
@@ -33,6 +25,6 @@ impl Sandbox for MyApp {
 
 ![First app](./pic/first_app.png)
 
-:arrow_right:  Next: [Explanation of Sandbox Trait](./explanation_of_sandbox_trait.md)
+:arrow_right: Next: [Explanation of App Structure](./explanation_of_app_structure.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

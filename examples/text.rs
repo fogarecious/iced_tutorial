@@ -1,10 +1,3 @@
-# Text
-
-The [Text](https://docs.rs/iced/0.13.1/iced/widget/type.Text.html) widget displays texts.
-It has three methods of constructions: raw `&str`, the `text` function, and the `Text::new` constructor.
-You can change the font, set different sizes, set its width and height, and align vertically or horizontally.
-
-```rust
 use iced::{
     Font, Length,
     alignment::{Horizontal, Vertical},
@@ -46,10 +39,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Text](./pic/text.png)
-
-:arrow_right: Next: [Button](./button.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

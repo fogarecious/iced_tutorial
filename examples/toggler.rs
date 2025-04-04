@@ -1,11 +1,3 @@
-# Toggler
-
-The [Toggler](https://docs.rs/iced/0.13.1/iced/widget/toggler/struct.Toggler.html) widget represents a boolean value.
-It has two methods of constructions: the `toggler` function and the `Toggler::new` constructor.
-It supports reactions to clicking and touching.
-It is able to change styles of the button, the text, the space between them, and also align the text.
-
-```rust
 use iced::{
     Font, Length,
     alignment::Horizontal,
@@ -79,10 +71,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Toggler](./pic/toggler.png)
-
-:arrow_right: Next: [Radio](./radio.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

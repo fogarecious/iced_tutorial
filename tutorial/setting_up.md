@@ -19,16 +19,16 @@ You should see the dependency in the end of `Cargo.toml` file.
 
 ```toml
 [dependencies]
-iced = "0.12.1"
+iced = "0.13.1"
 ```
 
 Note: If you encounter `WGPU Error`, you can disable `wgpu` in `Cargo.toml` file.
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1", default-features = false }
+iced = { version = "0.13.1", default-features = false }
 ```
 
-:arrow_right:  Next: [First App - Hello World!](./first_app.md)
+:arrow_right: Next: [First App - Hello World!](./first_app.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
