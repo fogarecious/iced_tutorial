@@ -1,11 +1,3 @@
-# Rule
-
-The [Rule](https://docs.rs/iced/0.13.1/iced/widget/rule/struct.Rule.html) widget is a horizontal (or vertical) line for separating widgets clearly.
-It has two methods of construction: the `horizontal_rule` function and the `Rule::horizontal` constructor.
-For the vertical rule, we can use the `vertical_rule` function or the `Rule::vertical` constructor.
-We can change the space around it,
-
-```rust
 use iced::widget::{Rule, column, horizontal_rule, text, vertical_rule};
 
 fn main() -> iced::Result {
@@ -35,10 +27,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Rule](./pic/rule.png)
-
-:arrow_right: Next: [Image](./image.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

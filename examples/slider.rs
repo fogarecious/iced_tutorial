@@ -1,11 +1,3 @@
-# Slider And VerticalSlider
-
-The [Slider](https://docs.rs/iced/0.13.1/iced/widget/slider/struct.Slider.html) widget represents a chosen value in a given range.
-It has two methods of construction: the `slider` function and the `Slider::new` constructor.
-It supports reactions to mouse pressing/releasing and touching, changing fonts, and setting a step.
-The widget can be set to be either horizontal or vertical.
-
-```rust
 use iced::{
     Task,
     widget::{Slider, column, slider, text, vertical_slider},
@@ -91,10 +83,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Slider](./pic/slider.png)
-
-:arrow_right: Next: [ProgressBar](./progressbar.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

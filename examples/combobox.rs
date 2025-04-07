@@ -1,13 +1,3 @@
-# ComboBox
-
-The [ComboBox](https://docs.rs/iced/0.13.1/iced/widget/combo_box/struct.ComboBox.html) widget represents a choice among multiple values.
-The values are shown in a dropdown menu and are searchable.
-The widget has two methods of constructions: the `combo_box` function and the `ComboBox::new` constructor.
-It supports reactions to keyboard inputs and mouse selections, changing fonts, and adding padding and an optional icon.
-
-**Note:** This example uses the `iced::application` instead of `iced::run`. More on this function later.
-
-```rust
 use iced::{
     Font, Task,
     font::Family,
@@ -176,10 +166,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![ComboBox](./pic/combobox.png)
-
-:arrow_right: Next: [Slider And VerticalSlider](./slider.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

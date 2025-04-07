@@ -1,8 +1,8 @@
 # Image
 
-The [Image](https://docs.rs/iced/0.12.1/iced/widget/image/struct.Image.html) widget is able to display an image.
-It has two methods of constructions.
-We can set how to fit the image content into the widget bounds.
+The [Image](https://docs.rs/iced/0.13.1/iced/widget/image/struct.Image.html) widget is able to display an image.
+It has two methods of construction: the `image` function and the `Image::new` constructor.
+We can set how to fit the image content into the widget bounds and the size of the image.
 
 To use the widget, we have to enable the [image](https://docs.rs/crate/iced/0.12.1/features#image) feature.
 The `Cargo.toml` dependencies should look like this:
@@ -12,41 +12,38 @@ The `Cargo.toml` dependencies should look like this:
 iced = { version = "0.12.1", features = ["image"] }
 ```
 
-Assume we have an image named `ferris.png` in the project root directory, i.e., the image has the path `my_project/ferris.png` where `my_project` is the name of our project.
+The image path is resolved relative to the current working directory. Since we run the application with cargo, the root directory is the project root. In our example below, the image `ferris.png` is in the `tutorial/pic` directory.
 
 ```rust
 use iced::{
-    widget::{column, image, text, Image},
-    ContentFit, Sandbox, Settings,
+    ContentFit,
+    widget::{Image, column, image, text},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             text("Construct from struct"),
-            Image::new("ferris.png"),
+            Image::new("tutorial/pic/ferris.png").width(100).height(100),
             text("Construct from function"),
-            image("ferris.png"),
+            image("tutorial/pic/ferris.png").width(100).height(100),
             text("Different content fit"),
-            image("ferris.png").content_fit(ContentFit::Cover),
+            image("tutorial/pic/ferris.png")
+                .content_fit(ContentFit::Cover)
+                .width(100)
+                .height(100),
         ]
         .into()
     }
@@ -55,6 +52,6 @@ impl Sandbox for MyApp {
 
 ![Image](./pic/image.png)
 
-:arrow_right:  Next: [Svg](./svg.md)
+:arrow_right: Next: [Svg](./svg.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

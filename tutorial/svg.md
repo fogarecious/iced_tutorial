@@ -1,7 +1,7 @@
 # Svg
 
-The [Svg](https://docs.rs/iced/0.12.1/iced/widget/svg/struct.Svg.html) widget is able to display an [SVG](https://en.wikipedia.org/wiki/SVG) image.
-It has two methods of constructions.
+The [Svg](https://docs.rs/iced/0.13.1/iced/widget/svg/struct.Svg.html) widget is able to display an [SVG](https://en.wikipedia.org/wiki/SVG) drawings.
+It has two methods of constructions: the `svg` function and the `Svg::new` constructor.
 We can set how to fit the image content into the widget bounds.
 
 To use the widget, we have to enable the [svg](https://docs.rs/crate/iced/0.12.1/features#svg) feature.
@@ -12,51 +12,43 @@ The `Cargo.toml` dependencies should look like this:
 iced = { version = "0.12.1", features = ["svg"] }
 ```
 
-Let's add an [SVG](https://en.wikipedia.org/wiki/SVG) image named `pic.svg` into the project root directory, i.e., the image has the path `my_project/pic.svg` where `my_project` is the name of our project.
-The file `pic.svg` contains the following content:
-
-```svg
-<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-    <rect width="400" height="300" style="fill:rgb(100,130,160)"/>
-    <circle cx="200" cy="150" r="100" style="fill:rgb(180,210,240)"/>
-</svg>
-```
-
-Our example is as follows:
+Similar to the [Image](./image.md) widget, the `svg` widget expects a path to the SVG file.
+The path is resolved relative to the current working directory. Since we run the application with cargo, the root directory is the project root. In our example below, the SVG file `ferris.svg` is in the `tutorial/pic` directory.
 
 ```rust
 use iced::{
-    widget::{column, svg, svg::Handle, text, Svg},
-    ContentFit, Sandbox, Settings,
+    ContentFit,
+    widget::{Svg, column, svg, svg::Handle, text},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             text("Construct from struct"),
-            Svg::from_path("pic.svg"),
+            Svg::from_path("tutorial/pic/ferris.svg")
+                .width(100)
+                .height(100),
             text("Construct from function"),
-            svg(Handle::from_path("pic.svg")),
+            svg(Handle::from_path("tutorial/pic/ferris.svg"))
+                .width(100)
+                .height(100),
             text("Different content fit"),
-            Svg::from_path("pic.svg").content_fit(ContentFit::None),
+            Svg::from_path("tutorial/pic/ferris.svg")
+                .content_fit(ContentFit::Cover)
+                .width(100)
+                .height(100),
         ]
         .into()
     }
@@ -65,6 +57,6 @@ impl Sandbox for MyApp {
 
 ![Svg](./pic/svg.png)
 
-:arrow_right:  Next: [Width And Height](./width_and_height.md)
+:arrow_right: Next: [Layouts](./layouts.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

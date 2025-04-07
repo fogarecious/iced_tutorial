@@ -1,11 +1,3 @@
-# Tooltip
-
-The [Tooltip](https://docs.rs/iced/0.13.1/iced/widget/tooltip/struct.Tooltip.html) widget displays a text when the mouse is over a specified widget.
-It has two methods of construction: the `tooltip` function and the `Tooltip::new` constructor.
-It is able to change styles of the text, add padding around the text inside, and change the space between the tooltip and the target widget.
-If the tooltip is allowed to be out of the window, the parts outside are clipped.
-
-```rust
 use iced::widget::{Tooltip, button, column, tooltip, tooltip::Position};
 
 fn main() -> iced::Result {
@@ -60,10 +52,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Tooltip](./pic/tooltip.png)
-
-:arrow_right: Next: [Rule](./rule.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

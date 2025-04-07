@@ -1,12 +1,3 @@
-# PickList
-
-The [PickList](https://docs.rs/iced/0.13.1/iced/widget/pick_list/struct.PickList.html) widget represents a choice among multiple values.
-It has two methods of construction: the `pick_list` function and the `PickList::new` constructor.
-It supports reactions to option selections and menu opening/closing, and we can add padding around the text inside.
-A placeholder can be set when options are not selected yet. The text can be styled with a font and a size.
-We can also change the icon of the handle.
-
-```rust
 use iced::{
     Font, Pixels,
     font::Family,
@@ -110,10 +101,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![PickList](./pic/picklist.png)
-
-:arrow_right: Next: [ComboBox](./combobox.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

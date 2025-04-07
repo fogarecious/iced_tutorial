@@ -1,9 +1,3 @@
-# ProgressBar
-
-The [ProgressBar](https://docs.rs/iced/0.13.1/iced/widget/progress_bar/struct.ProgressBar.html) widget represents a value in a given range.
-It has two methods of construction: the `progress_bar` function and the `ProgressBar::new` constructor.
-
-```rust
 use iced::widget::{ProgressBar, column, progress_bar, text};
 
 fn main() -> iced::Result {
@@ -29,10 +23,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![ProgressBar](./pic/progressbar.png)
-
-:arrow_right: Next: [Tooltip](./tooltip.md)
-
-:blue_book: Back: [Table of contents](./../README.md)
