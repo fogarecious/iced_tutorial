@@ -1,11 +1,3 @@
-# Scrollable
-
-When there are too many widgets, they may go beyond the boundary of the window.
-[Scrollable](https://docs.rs/iced/0.13.1/iced/widget/scrollable/struct.Scrollable.html) provides an infinite space that widgets can be navigated by scroll bars. A scrollbar has two methods of construction: the `scrollbar` function and the `Scrollbar::new` constructor.
-The scroll bars can be vertical, horizontal or both.
-When the scroll bars are changed, we can also receive their scroll positions and update other widgets.
-
-```rust
 use iced::widget::{
     Scrollable, column, row,
     scrollable::{Direction, Scrollbar, Viewport},
@@ -79,10 +71,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Scrollable](./pic/scrollable.png)
-
-:arrow_right: Next: [Changing Themes](./changing_themes.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

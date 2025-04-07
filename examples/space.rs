@@ -1,10 +1,3 @@
-# Space
-
-[Space](https://docs.rs/iced/0.13.1/iced/widget/struct.Space.html) is a convenient widget that helps us laying out our widgets.
-It is an empty widget that occupies a space.
-It has several constructions to help us allocating spaces horizontally, vertically or both.
-
-```rust
 use iced::{
     Alignment, Length,
     widget::{Space, button, column, horizontal_space, row, vertical_space},
@@ -53,10 +46,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Space](./pic/space.png)
-
-:arrow_right: Next: [Container](./container.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

@@ -1,14 +1,3 @@
-# Width And Height
-
-Most widgets have the `width` and `height` methods to control their sizes.
-The methods accept a parameter [Length](https://docs.rs/iced/0.13.1/iced/enum.Length.html).
-
-- [Shrink](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.Shrink): occupy the least space.
-- [Fill](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.Fill): occupy all the rest of space.
-- [FillPortion](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.FillPortion): occupy the space relative to other widgets with FillPortion.
-- [Fixed](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.Fixed): occupy a fixed space.
-
-```rust
 use iced::{
     Length,
     widget::{button, column, row},
@@ -43,10 +32,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Width And Height](./pic/width_and_height.png)
-
-:arrow_right: Next: [Column](./column.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

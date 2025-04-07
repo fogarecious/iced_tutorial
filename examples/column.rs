@@ -1,11 +1,3 @@
-# Column
-
-[Column](https://docs.rs/iced/0.13.1/iced/widget/struct.Column.html) helps us placing widgets vertically.
-It can leave some space between its boundary and its inner content.
-It can also add spaces among its inner widgets.
-The inner widgets can be aligned left, middle or right.
-
-```rust
 use iced::{
     Alignment, Length,
     widget::{Column, column},
@@ -44,10 +36,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Column](./pic/column.png)
-
-:arrow_right: Next: [Row](./row.md)
-
-:blue_book: Back: [Table of contents](./../README.md)
