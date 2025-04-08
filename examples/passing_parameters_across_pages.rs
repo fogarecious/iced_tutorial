@@ -1,9 +1,3 @@
-# Passing Parameters Across Pages
-
-This tutorial follows the [previous tutorial](./memoryless_pages.md).
-We use the same `Page` trait and `MyApp` struct.
-
-```rust
 use iced::{
     Task,
     widget::{button, column, text, text_input},
@@ -49,12 +43,8 @@ impl MyApp {
         self.page.view()
     }
 }
-```
 
-For `PageA` (the login form), we have a [TextInput](https://docs.rs/iced/0.13.1/iced/widget/struct.TextInput.html) for names and a submit [Button](https://docs.rs/iced/0.13.1/iced/widget/struct.Button.html).
-We pass `name` field of `PageA` to `new` function of `PageB` when we press the submit button.
-
-```rust
+// Page A
 #[derive(Debug, Clone)]
 enum PageAMessage {
     TextChanged(String),
@@ -95,13 +85,8 @@ impl Page for PageA {
         .into()
     }
 }
-```
 
-![Page A](./pic/passing_parameters_across_pages_a.png)
-
-In `PageB`, we receive the name from `new` function and display the name in `view`.
-
-```rust
+// Page B
 #[derive(Debug, Clone)]
 enum PageBMessage {
     ButtonPressed,
@@ -136,10 +121,3 @@ impl Page for PageB {
         .into()
     }
 }
-```
-
-![Page B](./pic/passing_parameters_across_pages_b.png)
-
-:arrow_right: Next: [Navigation History](./navigation_history.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

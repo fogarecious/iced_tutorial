@@ -1,20 +1,3 @@
-# Memoryless Pages
-
-The [previous tutorial](./more_than_one_page.md) has a problem: the fields from one page can still be accessed when we navigate to other pages.
-This brings potential security problems, e.g., the input password could be accessed in other pages.
-
-Also, the solution in the previous tutorial is not scalable.
-If we have more than two pages, the `Message` enum will become very messy.
-
-To fix this problem, we can use [trait objects](https://doc.rust-lang.org/stable/book/ch17-02-trait-objects.html).
-The `Page` trait below is responsible for implementing the `update` and `view` methods for a single page.
-
-In the main struct `MyApp`, we dispatch `update` and `view` to the corresponding page that is indicated by `page` state field in `MyApp`.
-The `update` method in `MyApp` is also responsible for switching pages.
-
-In addition, we explicitly distinguish messages from different pages in `Message`.
-
-```rust
 use iced::{
     Task,
     widget::{button, column, text, text_input},
@@ -60,14 +43,8 @@ impl MyApp {
         self.page.view()
     }
 }
-```
 
-In this tutorial, we have two pages, `PageA` and `PageB`.
-`PageA` is a simple login form and `PageB` is a simple hello page.
-Let's start with `PageB`.
-In its `update` method, we only care about messages of `PageBMessage`.
-
-```rust
+// Page B
 #[derive(Debug, Clone)]
 enum PageBMessage {
     ButtonPressed,
@@ -100,16 +77,8 @@ impl Page for PageB {
         .into()
     }
 }
-```
 
-![Page B](./pic/memoryless_pages_b.png)
-
-In `PageA`, we check the password when the login button is pressed.
-If it is a valid password, we switch to `PageB`.
-Note that `PageA` (and its `password` field) is dropped after we switch to `PageB`.
-This ensures the password is protected.
-
-```rust
+// Page A
 #[derive(Debug, Clone)]
 enum PageAMessage {
     TextChanged(String),
@@ -154,10 +123,3 @@ impl Page for PageA {
         .into()
     }
 }
-```
-
-![Page A](./pic/memoryless_pages_a.png)
-
-:arrow_right: Next: [Passing Parameters Across Pages](./passing_parameters_across_pages.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

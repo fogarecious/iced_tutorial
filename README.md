@@ -54,8 +54,7 @@ For older Iced versions, please refer to the following branches:
 - [Styles](./tutorial/styles.md)
   - [Changing Themes](./tutorial/changing_themes.md)
   - [Changing Styles](./tutorial/changing_styles.md)
-  - [Custom Styles](./tutorial/custom_styles.md)
-- Multipage Apps
+- [Multipage Apps](./tutorial/multipage_apps.md)
   - [More Than One Page](./tutorial/more_than_one_page.md)
   - [Memoryless Pages](./tutorial/memoryless_pages.md)
   - [Passing Parameters Across Pages](./tutorial/passing_parameters_across_pages.md)

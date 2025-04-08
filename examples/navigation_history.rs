@@ -1,13 +1,3 @@
-# Navigation History
-
-This tutorial follows the [previous tutorial](./passing_parameters_across_pages.md).
-The framework introduced in the [previous tutorial](./passing_parameters_across_pages.md) can be extended to handle page navigation history, which is capable of restoring past pages.
-
-Instead of keeping a single page in the main struct `MyApp`, we can keep a [Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) of pages.
-We control how the [Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) would change in [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) method of [SandBox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
-The communication between [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) and `update` of `Page` trait is through a custom [enum](https://doc.rust-lang.org/std/keyword.enum.html) `Navigation`.
-
-```rust
 use iced::{
     Task,
     widget::{button, column, row, text},
@@ -65,11 +55,8 @@ impl MyApp {
         self.pages.last().unwrap().view()
     }
 }
-```
 
-The page A:
-
-```rust
+// Page A
 #[derive(Debug, Clone)]
 enum PageAMessage {
     ButtonPressed,
@@ -104,13 +91,8 @@ impl Page for PageA {
         .into()
     }
 }
-```
 
-![Page A](./pic/navigation_history_a.png)
-
-The page B:
-
-```rust
+// Page B
 #[derive(Debug, Clone)]
 enum PageBMessage {
     BackButtonPressed,
@@ -152,10 +134,3 @@ impl Page for PageB {
         .into()
     }
 }
-```
-
-![Page B](./pic/navigation_history_b.png)
-
-:arrow_right: Next: [From Sandbox To Application](./from_sandbox_to_application.md)
-
-:blue_book: Back: [Table of contents](./../README.md)
