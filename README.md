@@ -27,7 +27,7 @@ For older Iced versions, please refer to the following branches:
 - [Explanation of Sandbox Trait](./tutorial/explanation_of_sandbox_trait.md)
 - [Adding Widgets](./tutorial/adding_widgets.md)
 - [Changing Displaying Content](./tutorial/changing_displaying_content.md)
-- Widgets
+- [Widgets](./tutorial/widgets.md)
   - [Text](./tutorial/text.md)
   - [Button](./tutorial/button.md)
   - [TextInput](./tutorial/text_input.md)
@@ -43,7 +43,7 @@ For older Iced versions, please refer to the following branches:
   - [Image](./tutorial/image.md)
   - [Svg](./tutorial/svg.md)
   <!-- * PaneGrid -->
-- Layouts
+- [Layouts](./tutorial/layouts.md)
   - [Width And Height](./tutorial/width_and_height.md)
   - [Column](./tutorial/column.md)
   - [Row](./tutorial/row.md)
@@ -51,8 +51,8 @@ For older Iced versions, please refer to the following branches:
   - [Container](./tutorial/container.md)
   - [Scrollable](./tutorial/scrollable.md)
   <!-- * Responsive -->
-- [Changing Themes](./tutorial/changing_themes.md)
-- Styles
+- [Styles](./tutorial/styles.md)
+  - [Changing Themes](./tutorial/changing_themes.md)
   - [Changing Styles](./tutorial/changing_styles.md)
   - [Custom Styles](./tutorial/custom_styles.md)
 - Multipage Apps

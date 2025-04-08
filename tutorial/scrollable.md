@@ -83,6 +83,6 @@ impl MyApp {
 
 ![Scrollable](./pic/scrollable.png)
 
-:arrow_right: Next: [Changing Themes](./changing_themes.md)
+:arrow_right: Next: [Styles](./styles.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

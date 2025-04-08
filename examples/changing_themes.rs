@@ -1,8 +1,3 @@
-# Changing Themes
-
-To change the theme of the application, we can implement the [`theme`](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#method.theme) method in the application. Changing the theme can be done at runtime.
-
-```rust
 use iced::widget::{button, column, text};
 
 fn main() -> iced::Result {
@@ -47,11 +42,3 @@ impl MyApp {
         self.theme.clone()
     }
 }
-```
-
-![Light Theme](./pic/changing_themes_light.png)
-![Dark Theme](./pic/changing_themes_dark.png)
-
-:arrow_right: Next: [Changing Styles](./changing_styles.md)
-
-:blue_book: Back: [Table of contents](./../README.md)
