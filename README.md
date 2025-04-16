@@ -59,11 +59,11 @@ For older Iced versions, please refer to the following branches:
   - [Memoryless Pages](./tutorial/memoryless_pages.md)
   - [Passing Parameters Across Pages](./tutorial/passing_parameters_across_pages.md)
   - [Navigation History](./tutorial/navigation_history.md)
-- Applications
-  - [From Sandbox To Application](./tutorial/from_sandbox_to_application.md)
-  - [Controlling Widgets By Commands](./tutorial/controlling_widgets_by_commands.md)
-  - [Batch Commands](./tutorial/batch_commands.md)
-  - [Executing Custom Commands](./tutorial/executing_custom_commands.md)
+- [Tasks](./tutorial/tasks.md)
+  - [Controlling Widgets behavior](./tutorial/controlling_widgets_behavior.md)
+  - [Dispatching Tasks at Startup](./tutorial/dispatching_tasks_at_startup.md)
+  - [Batch Tasks](./tutorial/batch_tasks.md)
+  - [Executing Custom Tasks](./tutorial/executing_custom_tasks.md)
 - Windows
   - [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
   - [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
