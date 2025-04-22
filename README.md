@@ -64,8 +64,8 @@ For older Iced versions, please refer to the following branches:
   - [Dispatching Tasks at Startup](./tutorial/dispatching_tasks_at_startup.md)
   - [Batch Tasks](./tutorial/batch_tasks.md)
   - [Executing Custom Tasks](./tutorial/executing_custom_tasks.md)
-- Windows
-  - [Initializing A Different Window](./tutorial/initializing_a_different_window.md)
+- [Windows](./tutorial/windows.md)
+  - [Customizing The Window On Launch](./tutorial/customizing_the_window_on_launch.md)
   - [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
   - [Closing The Window On Demand](./tutorial/closing_the_window_on_demand.md)
 - Events

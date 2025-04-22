@@ -1,13 +1,3 @@
-# Changing The Window Dynamically
-
-We can use functions provided in [window](https://docs.rs/iced/0.13.1/iced/window/index.html) module to change the window after it is initialized.
-
-For example, the [resize](https://docs.rs/iced/0.13.1/iced/window/fn.resize.html) function of the window
-returns a task that can be used as the return value in the `update` method. There are many other functions that return tasks in the [window](https://docs.rs/iced/0.13.1/iced/window/index.html) module.
-
-The [resize](https://docs.rs/iced/0.13.1/iced/window/fn.resize.html) function needs an ID of the window we are going to resize. To do that, the window module has a [`get_latest`](https://docs.rs/iced/0.13.1/iced/window/fn.get_latest.html) function. This function also returns a task that needs to be resolved to the Id of the latest window. In our case, since we have a single window, it will always return the Id of the main window.
-
-```rust
 use iced::{
     Element, Result, Size, Task,
     widget::{button, row, text_input},
@@ -71,10 +61,3 @@ impl MyApp {
         .into()
     }
 }
-```
-
-![Changing the window dynamically](./pic/changing_the_window_dynamically.png)
-
-:arrow_right:  Next: [Closing The Window On Demand](./closing_the_window_on_demand.md)
-
-:blue_book: Back: [Table of contents](./../README.md)
