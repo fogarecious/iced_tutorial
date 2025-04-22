@@ -86,6 +86,6 @@ impl MyApp {
 
 ![Executing custom tasks](./pic/executing_custom_tasks.png)
 
-:arrow_right:  Next: [Initializing A Different Window](./initializing_a_different_window.md)
+:arrow_right:  Next: [Windows](./windows.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
