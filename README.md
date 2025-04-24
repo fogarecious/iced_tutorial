@@ -68,13 +68,13 @@ For older Iced versions, please refer to the following branches:
   - [Customizing The Window On Launch](./tutorial/customizing_the_window_on_launch.md)
   - [Changing The Window Dynamically](./tutorial/changing_the_window_dynamically.md)
   - [Closing The Window On Demand](./tutorial/closing_the_window_on_demand.md)
-- Events
+- [Events](./tutorial/events.md)
   - [On Pressed/Released Of Some Widgets](./tutorial/on_pressed_released_of_some_widgets.md)
   - [Producing Messages By Mouse Events](./tutorial/producing_messages_by_mouse_events.md)
   - [Producing Messages By Keyboard Events](./tutorial/producing_messages_by_keyboard_events.md)
   - [Producing Messages By Timers](./tutorial/producing_messages_by_timers.md)
   - [Batch Subscriptions](./tutorial/batch_subscriptions.md)
-- Canvas
+- [Canvas](./tutorial/canvas.md)
   - [Drawing Shapes](./tutorial/drawing_shapes.md)
   - [Drawing With Caches](./tutorial/drawing_with_caches.md)
 - Custom Widgets

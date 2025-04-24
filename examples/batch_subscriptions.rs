@@ -1,12 +1,3 @@
-# Batch Subscriptions
-
-This tutorial follows from the previous two tutorials ([keyboard events](./producing_messages_by_keyboard_events.md) and [timers](./producing_messages_by_timers.md)).
-We combine the two [Subscriptions](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html) of keyboard events and timers.
-This is done by [Subscription::batch](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.batch) function.
-
-In the following app, press the space key to start or stop the timer.
-
-```rust
 use iced::{
     Event, Subscription, Task,
     event::{self, Status},
@@ -78,10 +69,3 @@ impl MyApp {
         }
     }
 }
-```
-
-![Batch subscriptions](./pic/batch_subscriptions.png)
-
-:arrow_right:  Next: [Canvas](./canvas.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

@@ -1,15 +1,15 @@
 # Drawing Shapes
 
-[Canvas](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Canvas.html) is a widget that helps us drawing free-style shapes.
-To use the widget, we need to enable the [canvas](https://docs.rs/crate/iced/0.12.1/features#canvas) feature.
+[Canvas](https://docs.rs/iced/0.13.1/iced/widget/canvas/struct.Canvas.html) is a widget that helps us drawing free-style shapes.
+To use the widget, we need to enable the [canvas](https://docs.rs/crate/iced/0.13.1/features#canvas) feature.
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1", features = ["canvas"] }
+iced = { version = "0.13.1", features = ["canvas"] }
 ```
 
-We use [Canvas::new](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Canvas.html#method.new) to obtain the canvas widget.
-This function accepts a [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) trait.
+We use [Canvas::new](https://docs.rs/iced/0.13.1/iced/widget/canvas/struct.Canvas.html#method.new) to obtain the canvas widget. This function accepts a [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) trait. The difference between a program and an application is that a program brings much more control over drawing, updating and event dispatching, at the cost of more complexity.
+
 We can create a struct (say, `MyProgram`) to implement this trait.
 
 ```rust
@@ -29,17 +29,18 @@ impl<Message> Program<Message> for MyProgram {
 }
 ```
 
-There is a generic data type `Message` when we implement the [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) trait.
-This helps us adapting to our [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) in [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
+We need to provide a generic data type `Message` when we implement the [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) trait. This helps us adapting to our `Message` used by our applications.
 
-The associated type [State](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#associatedtype.State) is not used in our example, so we set it to `()`.
+The associated type [State](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html#associatedtype.State) is not used in our example, so we set it to `()`.
 
-The key of [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) is the [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
-In the method, we define what shapes we are going to draw.
-We use [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html) as a *pen* to draw shapes.
-For example, we use the [fill_rectangle](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html#method.fill_rectangle) method of [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html) to draw a filled rectangle.
-Or we can stroke and fill any [Path](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Path.html).
-Finally, we use the [into_geometry](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html#method.into_geometry) method of [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html) to return the [Geometry](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Geometry.html) as required by the [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
+The most important part of [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) is the [draw](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
+In this method, we define what shapes we are going to be drawn.
+
+To actually draw a shape, we need to use a pointer. Think of it as a pen. [Frame](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Frame.html) is the enum we are going to use for that.
+
+For example, we use the [fill_rectangle](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Frame.html#method.fill_rectangle) method of [Frame](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Frame.html) to draw a filled rectangle.
+Or we can stroke and fill any [Path](https://docs.rs/iced/0.13.1/iced/widget/canvas/struct.Path.html).
+Finally, we use the [into_geometry](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Frame.html#method.into_geometry) method of [Frame](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Frame.html) to return the [Geometry](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Geometry.html) as required by the [draw](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method.
 
 ```rust
 use iced::{
