@@ -44,41 +44,35 @@ Finally, we use the [into_geometry](https://docs.rs/iced/0.13.1/iced/widget/canv
 
 ```rust
 use iced::{
-    mouse,
+    Alignment, Color, Length, Point, Rectangle, Renderer, Theme, Vector, mouse,
     widget::{
+        Canvas,
         canvas::{Frame, Geometry, Path, Program, Stroke},
-        column, Canvas,
+        column,
     },
-    Alignment, Color, Length, Point, Rectangle, Renderer, Sandbox, Settings, Theme, Vector,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Clone, Debug)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             "A Canvas",
             Canvas::new(MyProgram)
                 .width(Length::Fill)
                 .height(Length::Fill)
         ]
-        .align_items(Alignment::Center)
+        .align_x(Alignment::Center)
         .into()
     }
 }
