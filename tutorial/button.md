@@ -2,7 +2,7 @@
 
 The [Button](https://docs.rs/iced/0.13.1/iced/widget/button/struct.Button.html) widget supports reactions to pressing/touching events.
 It has two methods of constructions: the `button` function, and the `Button::new` constructor.
-By default, the button is disabled if [on_press](https://docs.rs/iced/0.12.1/iced/widget/button/struct.Button.html#method.on_press) is not defined.
+By default, the button is disabled if [on_press](https://docs.rs/iced/0.13.1/iced/widget/button/struct.Button.html#method.on_press) is not defined.
 We can also set padding around the text of the button.
 
 ```rust

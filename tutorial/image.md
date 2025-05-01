@@ -4,12 +4,12 @@ The [Image](https://docs.rs/iced/0.13.1/iced/widget/image/struct.Image.html) wid
 It has two methods of construction: the `image` function and the `Image::new` constructor.
 We can set how to fit the image content into the widget bounds and the size of the image.
 
-To use the widget, we have to enable the [image](https://docs.rs/crate/iced/0.12.1/features#image) feature.
+To use the widget, we have to enable the [image](https://docs.rs/crate/iced/0.13.1/features#image) feature.
 The `Cargo.toml` dependencies should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1", features = ["image"] }
+iced = { version = "0.13.1", features = ["image"] }
 ```
 
 The image path is resolved relative to the current working directory. Since we run the application with cargo, the root directory is the project root. In our example below, the image `ferris.png` is in the `tutorial/pic` directory.

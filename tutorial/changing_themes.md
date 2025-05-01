@@ -1,6 +1,6 @@
 # Changing Themes
 
-To change the theme of the application, we can implement the [`theme`](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#method.theme) method in the application. Changing the theme can be done at runtime.
+To change the theme of the application, we can implement the [`theme`](https://docs.rs/iced/0.13.1/iced/application/trait.Application.html#method.theme) method in the application. Changing the theme can be done at runtime.
 
 ```rust
 use iced::widget::{button, column, text};

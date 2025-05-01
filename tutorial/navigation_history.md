@@ -4,8 +4,8 @@ This tutorial follows the [previous tutorial](./passing_parameters_across_pages.
 The framework introduced in the [previous tutorial](./passing_parameters_across_pages.md) can be extended to handle page navigation history, which is capable of restoring past pages.
 
 Instead of keeping a single page in the main struct `MyApp`, we can keep a [Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) of pages.
-We control how the [Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) would change in [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) method of [SandBox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
-The communication between [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) and `update` of `Page` trait is through a custom [enum](https://doc.rust-lang.org/std/keyword.enum.html) `Navigation`.
+We control how the [Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html) would change in [update](https://docs.rs/iced/0.13.1/iced/trait.Sandbox.html#tymethod.update) method of [SandBox](https://docs.rs/iced/0.13.1/iced/trait.Sandbox.html).
+The communication between [update](https://docs.rs/iced/0.13.1/iced/trait.Sandbox.html#tymethod.update) of [Sandbox](https://docs.rs/iced/0.13.1/iced/trait.Sandbox.html) and `update` of `Page` trait is through a custom [enum](https://doc.rust-lang.org/std/keyword.enum.html) `Navigation`.
 
 ```rust
 use iced::{

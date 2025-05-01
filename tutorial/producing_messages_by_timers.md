@@ -3,9 +3,9 @@
 For this tutorial, we will use timers. Since timers are an async feature, we need to enable it before usage.
 
 Iced offers three mutually exclusive features for that. They need to be enabled before usage:
-- [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio)
-- [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std)
-- [smol](https://docs.rs/crate/iced/0.12.1/features#smol).
+- [tokio](https://docs.rs/crate/iced/0.13.1/features#tokio)
+- [async-std](https://docs.rs/crate/iced/0.13.1/features#async-std)
+- [smol](https://docs.rs/crate/iced/0.13.1/features#smol).
 
 Depending on your choice, your must also add the dependency crate to your `Cargo.toml` file:
 - [tokio](https://crates.io/crates/tokio)
@@ -13,7 +13,7 @@ Depending on your choice, your must also add the dependency crate to your `Cargo
 - [smol](https://crates.io/crates/smol)
 
 The [tokio](https://crates.io/crates/tokio) crate is very popular, and we will use it as an example.
-First, we enable [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio) feature and add [tokio](https://crates.io/crates/tokio) crate.
+First, we enable [tokio](https://docs.rs/crate/iced/0.13.1/features#tokio) feature and add [tokio](https://crates.io/crates/tokio) crate.
 
 The dependencies of `Cargo.toml` should look like this:
 

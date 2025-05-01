@@ -17,7 +17,7 @@ cargo run --example <example_name>
 This tutorial is for the latest Iced version (`v0.13.1`)
 For older Iced versions, please refer to the following branches:
 
-- [0.12.1](https://github.com/fogarecious/iced_tutorial/tree/0.12.x).
+- [0.13.1](https://github.com/fogarecious/iced_tutorial/tree/0.13.x).
 - [0.10.0](https://github.com/fogarecious/iced_tutorial/tree/0.10.x).
 
 ## Contents
