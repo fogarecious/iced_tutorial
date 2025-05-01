@@ -1,37 +1,13 @@
-# Mouse Pointer Over Widgets
-
-To change the mouse pointer based on the requirement of our widgets, we can use the [mouse_interaction](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#method.mouse_interaction) method of [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html).
-
-```rust
-fn mouse_interaction(
-    &self,
-    _state: &Tree,
-    layout: Layout<'_>,
-    cursor: mouse::Cursor,
-    _viewport: &Rectangle,
-    _renderer: &Renderer,
-) -> mouse::Interaction {
-    if cursor.is_over(layout.bounds()) {
-        mouse::Interaction::Pointer
-    } else {
-        mouse::Interaction::Idle
-    }
-}
-```
-
-The method returns [Interaction](https://docs.rs/iced/0.13.1/iced/mouse/enum.Interaction.html), which specifies the type of the mouse pointer.
-In our example, we specify [Interaction::Pointer](https://docs.rs/iced/0.13.1/iced/mouse/enum.Interaction.html#variant.Pointer) when the mouse is over the widget.
-
-The full code is as follows:
-
-```rust
 use iced::{
-    Border, Color, Element, Length, Rectangle, Shadow, Size, Theme,
+    Border, Color, Element, Event, Length, Rectangle, Shadow, Size, Theme,
     advanced::{
-        Layout, Widget, layout, mouse,
+        Clipboard, Layout, Shell, Widget,
+        graphics::core::event,
+        layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
     },
+    keyboard::{self, key::Named},
     widget::container,
 };
 
@@ -49,7 +25,7 @@ impl MyApp {
     fn update(&mut self, _message: Message) {}
 
     fn view(&self) -> iced::Element<Message> {
-        container(MyWidget)
+        container(MyWidget::new())
             .width(Length::Fill)
             .height(Length::Fill)
             .center_x(Length::Fill)
@@ -58,7 +34,15 @@ impl MyApp {
     }
 }
 
-struct MyWidget;
+struct MyWidget {
+    highlight: bool,
+}
+
+impl MyWidget {
+    fn new() -> Self {
+        Self { highlight: false }
+    }
+}
 
 impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidget
 where
@@ -103,22 +87,34 @@ where
                 },
                 shadow: Shadow::default(),
             },
-            Color::from_rgb(0.0, 0.2, 0.4),
+            if self.highlight {
+                Color::from_rgb(0.6, 0.8, 1.0)
+            } else {
+                Color::from_rgb(0.0, 0.2, 0.4)
+            },
         );
     }
 
-    fn mouse_interaction(
-        &self,
-        _state: &Tree,
-        layout: Layout<'_>,
-        cursor: mouse::Cursor,
-        _viewport: &Rectangle,
+    fn on_event(
+        &mut self,
+        _state: &mut Tree,
+        event: Event,
+        _layout: Layout<'_>,
+        _cursor: mouse::Cursor,
         _renderer: &Renderer,
-    ) -> mouse::Interaction {
-        if cursor.is_over(layout.bounds()) {
-            mouse::Interaction::Pointer
-        } else {
-            mouse::Interaction::Idle
+        _clipboard: &mut dyn Clipboard,
+        _shell: &mut Shell<'_, Message>,
+        _viewport: &Rectangle,
+    ) -> event::Status {
+        match event {
+            Event::Keyboard(keyboard::Event::KeyPressed {
+                key: keyboard::Key::Named(Named::Space),
+                ..
+            }) => {
+                self.highlight = !self.highlight;
+                event::Status::Captured
+            }
+            _ => event::Status::Ignored,
         }
     }
 }
@@ -131,10 +127,3 @@ where
         Self::new(widget)
     }
 }
-```
-
-![Mouse Pointer Over Widgets](./pic/mouse_pointer_over_widgets.png)
-
-:arrow_right:  Next: [Texts In Widgets](./texts_in_widgets.md)
-
-:blue_book: Back: [Table of contents](./../README.md)

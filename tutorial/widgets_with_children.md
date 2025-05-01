@@ -39,7 +39,7 @@ impl MyWidgetOuter {
 }
 ```
 
-In the [draw](https://docs.rs/iced/12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method of `MyWidgetOuter`, we draw the `MyWidgetInner` as well.
+In the [draw](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method of `MyWidgetOuter`, we draw the `MyWidgetInner` as well.
 
 ```rust
 fn draw(
@@ -77,10 +77,10 @@ fn draw(
 
 When drawing the `MyWidgetInner` in `MyWidgetOuter`, we need to pass the layout of the `MyWidgetInner`.
 This layout information can be obtained by `layout.children().next().unwrap()`.
-[layout.children()](https://docs.rs/iced/0.12.1/iced/advanced/struct.Layout.html#method.children) is an [Iterator](https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html) that stores all the child layouts of `MyWidgetOuter`.
+[layout.children()](https://docs.rs/iced/0.13.1/iced/advanced/struct.Layout.html#method.children) is an [Iterator](https://doc.rust-lang.org/nightly/core/iter/trait.Iterator.html) that stores all the child layouts of `MyWidgetOuter`.
 
-To make the underlying system aware of the child layouts of `MyWidgetOuter`, we have to explicitly tell the system in the [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) method.
-Otherwise, the [layout.children()](https://docs.rs/iced/0.12.1/iced/advanced/struct.Layout.html#method.children) in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method will be empty.
+To make the underlying system aware of the child layouts of `MyWidgetOuter`, we have to explicitly tell the system in the [layout](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) method.
+Otherwise, the [layout.children()](https://docs.rs/iced/0.13.1/iced/advanced/struct.Layout.html#method.children) in the [draw](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method will be empty.
 
 ```rust
 fn layout(&self, tree: &mut Tree, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
@@ -90,52 +90,45 @@ fn layout(&self, tree: &mut Tree, renderer: &Renderer, limits: &layout::Limits) 
     let size_of_this_node = Size::new(200., 200.);
 
     child_node = child_node.align(Alignment::Center, Alignment::Center, size_of_this_node);
-    
+
     layout::Node::with_children(size_of_this_node, vec![child_node])
 }
 ```
 
-We use the [Node::with_children](https://docs.rs/iced/0.12.1/iced/advanced/layout/struct.Node.html#method.with_children) function to bind the parent layout and its child layouts.
+We use the [Node::with_children](https://docs.rs/iced/0.13.1/iced/advanced/layout/struct.Node.html#method.with_children) function to bind the parent layout and its child layouts.
 
 The full code is as follows:
 
 ```rust
 use iced::{
+    Alignment, Border, Color, Element, Length, Rectangle, Shadow, Size,
     advanced::{
-        layout, mouse,
+        Layout, Widget, layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Widget,
     },
-    widget::{container, Theme},
-    Alignment, Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size,
+    widget::{Theme, container},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(MyWidgetOuter::new())
             .width(Length::Fill)
             .height(Length::Fill)
-            .center_x()
-            .center_y()
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
             .into()
     }
 }
@@ -159,7 +152,10 @@ where
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-        layout::Node::new([100, 100].into())
+        layout::Node::new(iced::Size {
+            width: 100.0,
+            height: 100.0,
+        })
     }
 
     fn draw(
@@ -283,8 +279,8 @@ where
 
 ![Widgets With Children](./pic/widgets_with_children.png)
 
-If `MyWidgetInner` receives events (i.e., implementing [on_event](https://docs.rs/iced/latest/iced/advanced/trait.Widget.html#method.on_event)), we have to call this [on_event](https://docs.rs/iced/latest/iced/advanced/trait.Widget.html#method.on_event) method from `MyWidgetOuter`'s [on_event](https://docs.rs/iced/latest/iced/advanced/trait.Widget.html#method.on_event) method.
-This ensures the [Event](https://docs.rs/iced/latest/iced/enum.Event.html) is passing from `MyWidgetOuter` to `MyWidgetInner`.
+If `MyWidgetInner` receives events (i.e., implementing [on_event](https://docs.rs/iced/0.13.1/iced/advanced/trait.Widget.html#method.on_event)), we have to call this [on_event](https://docs.rs/iced/0.13.1/iced/advanced/trait.Widget.html#method.on_event) method from `MyWidgetOuter`'s [on_event](https://docs.rs/iced/0.13.1/iced/advanced/trait.Widget.html#method.on_event) method.
+This ensures the [Event](https://docs.rs/iced/0.13.1/iced/enum.Event.html) is passing from `MyWidgetOuter` to `MyWidgetInner`.
 
 ```rust
 fn on_event(

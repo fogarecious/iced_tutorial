@@ -77,7 +77,7 @@ For older Iced versions, please refer to the following branches:
 - [Canvas](./tutorial/canvas.md)
   - [Drawing Shapes](./tutorial/drawing_shapes.md)
   - [Drawing With Caches](./tutorial/drawing_with_caches.md)
-- Custom Widgets
+- [Custom Widgets](./tutorial/custom_widgets.md)
   - [Drawing Widgets](./tutorial/drawing_widgets.md)
   - [Updating Widgets From Outside](./tutorial/updating_widgets_from_outside.md)
   - [Updating Widgets From Events](./tutorial/updating_widgets_from_events.md)

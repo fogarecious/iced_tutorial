@@ -1,9 +1,9 @@
 # Updating Widgets From Events
 
 Sometimes, we would like our widgets to handle their states by themselves.
-For example, a widget might change its states when receiving an [Event](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html).
+For example, a widget might change its state when receiving an [Event](https://docs.rs/iced/0.13.1/iced/event/enum.Event.html).
 
-To do so, we implement the [on_event](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#method.on_event) method of [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html).
+To do so, we implement the [on_event](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#method.on_event) method of [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html).
 
 ```rust
 fn on_event(
@@ -32,8 +32,8 @@ fn on_event(
 
 Our widget changes its `highlight` field every time when the space bar is pressed.
 
-If the [Event](https://docs.rs/iced/0.12.1/iced/event/enum.Event.html) passed to the [on_event](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#method.on_event) method is what the widget needs, we return [Status::Captured](https://docs.rs/iced/0.12.1/iced/event/enum.Status.html#variant.Captured).
-Otherwise, we return [Status::Ignored](https://docs.rs/iced/0.12.1/iced/event/enum.Status.html#variant.Ignored) to tell the system the event can be used by other widgets.
+If the [Event](https://docs.rs/iced/0.13.1/iced/event/enum.Event.html) passed to the [on_event](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#method.on_event) method is what the widget needs, we return [Status::Captured](https://docs.rs/iced/0.13.1/iced/event/enum.Status.html#variant.Captured).
+Otherwise, we return [Status::Ignored](https://docs.rs/iced/0.13.1/iced/event/enum.Status.html#variant.Ignored) to tell the system the event can be used by other widgets.
 
 Since our widget maintains its own state, we do not need to pass the state from our app.
 
@@ -53,43 +53,37 @@ The full code is as follows:
 
 ```rust
 use iced::{
+    Border, Color, Element, Event, Length, Rectangle, Shadow, Size, Theme,
     advanced::{
+        Clipboard, Layout, Shell, Widget,
         graphics::core::event,
         layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Clipboard, Layout, Shell, Widget,
     },
     keyboard::{self, key::Named},
     widget::container,
-    Border, Color, Element, Event, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(MyWidget::new())
             .width(Length::Fill)
             .height(Length::Fill)
-            .center_x()
-            .center_y()
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
             .into()
     }
 }
@@ -121,7 +115,10 @@ where
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-        layout::Node::new([100, 100].into())
+        layout::Node::new(iced::Size {
+            width: 100.0,
+            height: 100.0,
+        })
     }
 
     fn draw(

@@ -1,8 +1,8 @@
 # Taking Any Children
 
-Since all [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html) can be transformed to [Element](https://docs.rs/iced_core/0.12.1/iced_core/struct.Element.html), our custom widget is able to take any [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html) as its children.
+Since all [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html) can be transformed to [Element](https://docs.rs/iced_core/0.13.1/iced_core/struct.Element.html), our custom widget is able to take any [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html) as its children.
 
-This time, our `MyWidgetOuter` will take an [Element](https://docs.rs/iced_core/0.12.1/iced_core/struct.Element.html) as its inner widget when it is initialized.
+This time, our `MyWidgetOuter` will take an [Element](https://docs.rs/iced_core/0.13.1/iced_core/struct.Element.html) as its inner widget when it is initialized.
 
 ```rust
 struct MyWidgetOuter<'a, Message, Renderer> {
@@ -19,9 +19,9 @@ where
 }
 ```
 
-When we draw or layout the `inner_widget`, we will use its methods from [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html).
-Yet, the `inner_widget` is of type [Element](https://docs.rs/iced_core/0.12.1/iced_core/struct.Element.html).
-So, we have to cast it as [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html) by the [as_widget](https://docs.rs/iced_core/0.12.1/iced_core/struct.Element.html#method.as_widget) method.
+When we draw or layout the `inner_widget`, we will use its methods from [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html).
+Yet, the `inner_widget` is of type [Element](https://docs.rs/iced_core/0.13.1/iced_core/struct.Element.html).
+So, we have to cast it as [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html) by the [as_widget](https://docs.rs/iced_core/0.13.1/iced_core/struct.Element.html#method.as_widget) method.
 
 ```rust
 fn layout(
@@ -44,9 +44,9 @@ fn layout(
 ```
 
 In the code above, we make the size of `MyWidgetOuter` relative to its `inner_widget`.
-More precisely, we retrieve the size of `inner_widget` and [pad](https://docs.rs/iced_core/0.12.1/iced_core/struct.Size.html#method.pad) the size as the size of `MyWidgetOuter`.
+More precisely, we retrieve the size of `inner_widget` and [pad](https://docs.rs/iced_core/0.13.1/iced_core/struct.Size.html#method.pad) the size as the size of `MyWidgetOuter`.
 
-Then, in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method of `MyWidgetOuter`, we also draw the `inner_widget`.
+Then, in the [draw](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method of `MyWidgetOuter`, we also draw the `inner_widget`.
 
 ```rust
 fn draw(
@@ -87,7 +87,7 @@ fn draw(
 Note that we have to pass the child state `&state.children[0]` to `inner_widget` since the anonymous widget may need the information about its state.
 
 To make the underlying system aware of the child state, we have to explicitly tell the system the existence of the child.
-Otherwise, `state.children` in [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) will be empty.
+Otherwise, `state.children` in [draw](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) will be empty.
 
 ```rust
 fn children(&self) -> Vec<Tree> {
@@ -103,41 +103,34 @@ The full code is as follows:
 
 ```rust
 use iced::{
+    Alignment, Border, Color, Element, Length, Rectangle, Shadow, Size, Theme,
     advanced::{
-        layout, mouse,
+        Layout, Widget, layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Widget,
     },
     widget::{button, container},
-    Alignment, Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(MyWidgetOuter::new(button("Other widget").into()))
             .width(Length::Fill)
             .height(Length::Fill)
-            .center_x()
-            .center_y()
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
             .into()
     }
 }
