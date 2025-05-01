@@ -2,7 +2,7 @@
 
 It is also possible to free draw on Iced using the Canvas widget.
 
-- Canvas
+### Contents
   - [Drawing Shapes](./drawing_shapes.md)
   - [Drawing With Caches](./drawing_with_caches.md)
 

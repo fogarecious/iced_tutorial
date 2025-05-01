@@ -5,7 +5,7 @@ The values are shown in a dropdown menu and are searchable.
 The widget has two methods of constructions: the `combo_box` function and the `ComboBox::new` constructor.
 It supports reactions to keyboard inputs and mouse selections, changing fonts, and adding padding and an optional icon.
 
-**Note:** This example uses the `iced::application` instead of `iced::run`. More on this function later.
+> **Note:** This example uses the `iced::application` instead of `iced::run`. More on this function later.
 
 ```rust
 use iced::{

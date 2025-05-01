@@ -2,7 +2,7 @@
 
 Sometimes, the default widgets provided by Iced are not enough. You might need to draw a knob for a sound production program, or a custom slider for some other application, or even a custom UI for a car panel. This section goes through some techniques to achieve that.
 
-- Custom Widgets
+### Contents
   - [Drawing Widgets](./drawing_widgets.md)
   - [Updating Widgets From Outside](./updating_widgets_from_outside.md)
   - [Updating Widgets From Events](./updating_widgets_from_events.md)

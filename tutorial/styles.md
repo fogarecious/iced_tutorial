@@ -3,9 +3,9 @@
 Styles are used to change the appearance of widgets.
 They are used to customize the UI of the application.
 
-- Styles
-  - [Changing Themes](./changing_themes.md)
-  - [Changing Styles](./changing_styles.md)
+### Contents
+- [Changing Themes](./changing_themes.md)
+- [Changing Styles](./changing_styles.md)
 
 :arrow_right: Next: [Changing Themes](./changing_themes.md)
 

@@ -1,4 +1,4 @@
-# Initializing A Different Window
+# Customizing The Window On Launch
 
 By using the [`window`](https://docs.rs/iced/0.13.1/iced/application/struct.Application.html#method.window) function of [`Application`](https://docs.rs/iced/0.13.1/iced/application/struct.Application.html), we can pass a [window::Settings](https://docs.rs/iced/0.13.1/iced/window/settings/struct.Settings.html) struct to change the properties of the window (such as [position](https://docs.rs/iced/0.13.1/iced/window/settings/struct.Settings.html#structfield.position) and [size](https://docs.rs/iced/0.13.1/iced/window/settings/struct.Settings.html#structfield.size)).
 

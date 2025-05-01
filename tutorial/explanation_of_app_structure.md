@@ -1,6 +1,6 @@
 # Explanation of the App Structure
 
-> _Info_ On 0.13.1, the Sandbox trait has been dropped.
+> **Info:** On 0.13.1, the Sandbox trait has been dropped.
 
 The application consists of defining a struct, which represents the application itself, and a Message enum for the message passing. The application struct should have two basic implementations: `update` and `view`. Optionally, a `new` implementation can also be provided. More on that later.
 

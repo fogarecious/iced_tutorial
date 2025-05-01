@@ -5,6 +5,7 @@ Depending on user input, you may need to navigate between pages.
 
 In this section, we will learn how to handle this scenario in Iced.
 
+### Contents
 - [More Than One Page](./more_than_one_page.md)
 - [Memoryless Pages](./memoryless_pages.md)
 - [Passing Parameters Across Pages](./passing_parameters_across_pages.md)

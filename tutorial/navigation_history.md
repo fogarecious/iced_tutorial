@@ -156,6 +156,6 @@ impl Page for PageB {
 
 ![Page B](./pic/navigation_history_b.png)
 
-:arrow_right: Next: [From Sandbox To Application](./from_sandbox_to_application.md)
+:arrow_right: Next: [Tasks](./tasks.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
