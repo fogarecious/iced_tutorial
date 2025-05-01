@@ -1,17 +1,27 @@
 # Loading Images Asynchronously
 
-In the previous tutorials, we introduced how to use [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html) to execute an asynchronous operation and how to display an image.
+In the previous tutorials, we introduced how to use [`Tasks`](./tasks.md) to execute asynchronous operations, and how to display [images](./images.md).
 This tutorial combines both and demonstrates how to load an image asynchronously.
 
-It is assumed that there is an image named `ferris.png` in the Cargo project root directory.
+Iced offers three mutually exclusive features for asynchronous operations. They need to be enabled before usage:
+- [tokio](https://docs.rs/crate/iced/0.13.1/features#tokio)
+- [async-std](https://docs.rs/crate/iced/0.13.1/features#async-std)
+- [smol](https://docs.rs/crate/iced/0.13.1/features#smol).
 
-To use asynchronous and image functions, we have to include the corresponding asynchronous library and enable the corresponding features.
-The dependencies of the `Cargo.toml` file should look like this:
+Depending on your choice, your must also add the dependency crate to your `Cargo.toml` file:
+- [tokio](https://crates.io/crates/tokio)
+- [async-std](https://crates.io/crates/async-std)
+- [smol](https://crates.io/crates/smol)
+
+The [tokio](https://crates.io/crates/tokio) crate is very popular, and we will use it as an example.
+First, we enable [tokio](https://docs.rs/crate/iced/0.13.1/features#tokio) feature and add [tokio](https://crates.io/crates/tokio) crate with `fs` and `io-util` features.
+
+The dependencies of `Cargo.toml` should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1", features = ["image", "tokio"] }
-tokio = { version = "1.36.0", features = ["full"] }
+iced = { version = "0.13.1", features = ["tokio"] }
+tokio = { version = "1.44.2", features = ["fs", "io-util"] }
 ```
 
 Our app will have three states: *start*, *loading* and *loaded*.
@@ -77,7 +87,7 @@ fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
             self.show_container = true;
             return Command::perform(
                 async {
-                    let mut file = File::open("ferris.png").await.unwrap();
+                    let mut file = File::open("../tutorial/pic/ferris.png").await.unwrap();
                     let mut buffer = Vec::new();
                     file.read_to_end(&mut buffer).await.unwrap();
                     buffer
@@ -95,72 +105,63 @@ The full code is as follows:
 
 ```rust
 use iced::{
-    executor,
-    widget::{button, column, container, image, image::Handle},
-    Application, Command,
+    Task,
+    widget::{Image, button, column, container, image::Handle},
 };
 use tokio::{fs::File, io::AsyncReadExt};
 
 fn main() -> iced::Result {
-    MyApp::run(iced::Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyMessage {
+enum Message {
     Load,
     Loaded(Vec<u8>),
 }
 
+#[derive(Default)]
 struct MyApp {
     image_handle: Option<Handle>,
     show_container: bool,
 }
 
-impl Application for MyApp {
-    type Executor = executor::Default;
-    type Message = MyMessage;
-    type Theme = iced::Theme;
-    type Flags = ();
-
-    fn new(_flags: Self::Flags) -> (Self, iced::Command<Self::Message>) {
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
         (
             Self {
                 image_handle: None,
                 show_container: false,
             },
-            Command::none(),
+            Task::none(),
         )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
+    fn update(&mut self, message: Message) -> Task<Message> {
         match message {
-            MyMessage::Load => {
+            Message::Load => {
                 self.show_container = true;
-                return Command::perform(
+                return Task::perform(
                     async {
-                        let mut file = File::open("ferris.png").await.unwrap();
+                        let mut file = File::open("../tutorial/pic/ferris.png").await.unwrap();
                         let mut buffer = Vec::new();
                         file.read_to_end(&mut buffer).await.unwrap();
                         buffer
                     },
-                    MyMessage::Loaded,
+                    Message::Loaded,
                 );
             }
-            MyMessage::Loaded(data) => self.image_handle = Some(Handle::from_memory(data)),
+            Message::Loaded(data) => self.image_handle = Some(Handle::from_bytes(data)),
         }
-        Command::none()
+        Task::none()
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
-            button("Load").on_press(MyMessage::Load),
+            button("Load").on_press(Message::Load),
             if self.show_container {
                 match &self.image_handle {
-                    Some(h) => container(image(h.clone())),
+                    Some(h) => container(Image::new(h.clone())),
                     None => container("Loading..."),
                 }
             } else {
@@ -185,6 +186,6 @@ State of *loaded*:
 
 ![Loading Images Asynchronously 3](./pic/loading_images_asynchronously_3.png)
 
-<!-- :arrow_right:  Next:  -->
+:arrow_right:  Next: [The end](./the_end.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

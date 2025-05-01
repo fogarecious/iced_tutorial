@@ -12,4 +12,4 @@ iced = { version = "0.13.1", features = [
     "canvas",
     "advanced",
 ] }
-tokio = { version = "1.44.2", features = ["time"] }
+tokio = { version = "1.44.2", features = ["time", "fs", "io-util"] }
