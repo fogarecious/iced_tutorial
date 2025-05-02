@@ -5,56 +5,53 @@ We use the same `Page` trait and `MyApp` struct.
 
 ```rust
 use iced::{
+    Task,
     widget::{button, column, text, text_input},
-    Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     PageA(PageAMessage),
     PageB(PageBMessage),
 }
 
 trait Page {
-    fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>>;
-    fn view(&self) -> iced::Element<MyAppMessage>;
+    fn update(&mut self, message: Message) -> Option<Box<dyn Page>>;
+    fn view(&self) -> iced::Element<Message>;
 }
 
 struct MyApp {
     page: Box<dyn Page>,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self {
-            page: Box::new(PageA::new()),
-        }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (
+            Self {
+                page: Box::new(PageA::new()),
+            },
+            Task::none(),
+        )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Message) {
         let page = self.page.update(message);
         if let Some(p) = page {
             self.page = p;
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         self.page.view()
     }
 }
 ```
 
-For `PageA` (the login form), we have a [TextInput](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html) for names and a submit [Button](https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html).
+For `PageA` (the login form), we have a [TextInput](https://docs.rs/iced/0.13.1/iced/widget/struct.TextInput.html) for names and a submit [Button](https://docs.rs/iced/0.13.1/iced/widget/struct.Button.html).
 We pass `name` field of `PageA` to `new` function of `PageB` when we press the submit button.
 
 ```rust
@@ -78,22 +75,22 @@ impl PageA {
 }
 
 impl Page for PageA {
-    fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>> {
-        if let MyAppMessage::PageA(msg) = message {
+    fn update(&mut self, message: Message) -> Option<Box<dyn Page>> {
+        if let Message::PageA(msg) = message {
             match msg {
                 PageAMessage::TextChanged(s) => self.name = s,
                 PageAMessage::ButtonPressed => {
-                    return Some(Box::new(PageB::new(self.name.clone())))
+                    return Some(Box::new(PageB::new(self.name.clone())));
                 }
             }
         }
         None
     }
 
-    fn view(&self) -> iced::Element<MyAppMessage> {
+    fn view(&self) -> iced::Element<Message> {
         column![
-            text_input("Name", &self.name).on_input(|s| MyAppMessage::PageA(Ma::TextChanged(s))),
-            button("Log in").on_press(MyAppMessage::PageA(Ma::ButtonPressed)),
+            text_input("Name", &self.name).on_input(|s| Message::PageA(Ma::TextChanged(s))),
+            button("Log in").on_press(Message::PageA(Ma::ButtonPressed)),
         ]
         .into()
     }
@@ -122,8 +119,8 @@ impl PageB {
 }
 
 impl Page for PageB {
-    fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>> {
-        if let MyAppMessage::PageB(msg) = message {
+    fn update(&mut self, message: Message) -> Option<Box<dyn Page>> {
+        if let Message::PageB(msg) = message {
             match msg {
                 PageBMessage::ButtonPressed => return Some(Box::new(PageA::new())),
             }
@@ -131,10 +128,10 @@ impl Page for PageB {
         None
     }
 
-    fn view(&self) -> iced::Element<MyAppMessage> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             text(format!("Hello {}!", self.name)),
-            button("Log out").on_press(MyAppMessage::PageB(Mb::ButtonPressed)),
+            button("Log out").on_press(Message::PageB(Mb::ButtonPressed)),
         ]
         .into()
     }
@@ -143,6 +140,6 @@ impl Page for PageB {
 
 ![Page B](./pic/passing_parameters_across_pages_b.png)
 
-:arrow_right:  Next: [Navigation History](./navigation_history.md)
+:arrow_right: Next: [Navigation History](./navigation_history.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

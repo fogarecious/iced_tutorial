@@ -1,32 +1,30 @@
 # ComboBox
 
-The [ComboBox](https://docs.rs/iced/0.12.1/iced/widget/combo_box/struct.ComboBox.html) widget represents a choice among multiple values.
+The [ComboBox](https://docs.rs/iced/0.13.1/iced/widget/combo_box/struct.ComboBox.html) widget represents a choice among multiple values.
 The values are shown in a dropdown menu and are searchable.
-The widget has two methods of constructions.
-It supports reactions to keyboard inputs and mouse selections.
-It is able to change fonts.
-We can add padding around the text inside.
-We can also add an optional icon.
+The widget has two methods of constructions: the `combo_box` function and the `ComboBox::new` constructor.
+It supports reactions to keyboard inputs and mouse selections, changing fonts, and adding padding and an optional icon.
+
+> **Note:** This example uses the `iced::application` instead of `iced::run`. More on this function later.
 
 ```rust
 use iced::{
+    Font, Task,
     font::Family,
     widget::{
-        column, combo_box,
+        ComboBox, column, combo_box,
         combo_box::State,
         text,
         text_input::{Icon, Side},
-        ComboBox,
     },
-    Font, Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     DoNothing,
     Select4(String),
     Select5(String),
@@ -39,6 +37,7 @@ enum MyAppMessage {
     Close8,
 }
 
+#[derive(Default)]
 struct MyApp {
     state1: State<u32>,
     state2: State<u32>,
@@ -61,115 +60,112 @@ struct MyApp {
     state12: State<u32>,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self {
-            state1: State::new(vec![]),
-            state2: State::new(vec![]),
-            state3: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
-            state4: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
-            select4: None,
-            state5: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
-            select5: None,
-            state6: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
-            select6: None,
-            input6: "".into(),
-            state7: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
-            select7: None,
-            state8: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
-            select8: None,
-            info8: "".into(),
-            state9: State::new(vec![]),
-            state10: State::new(vec![]),
-            state11: State::new(vec![]),
-            state12: State::new(vec![]),
-        }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (
+            Self {
+                state1: State::new(vec![]),
+                state2: State::new(vec![]),
+                state3: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
+                state4: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
+                select4: None,
+                state5: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
+                select5: None,
+                state6: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
+                select6: None,
+                input6: "".into(),
+                state7: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
+                select7: None,
+                state8: State::new(["Aa", "Ab", "Ba", "Bb"].map(|s| s.to_string()).to_vec()),
+                select8: None,
+                info8: "".into(),
+                state9: State::new(vec![]),
+                state10: State::new(vec![]),
+                state11: State::new(vec![]),
+                state12: State::new(vec![]),
+            },
+            Task::none(),
+        )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Message) {
         match message {
-            MyAppMessage::DoNothing => {}
-            MyAppMessage::Select4(s) => self.select4 = Some(s),
-            MyAppMessage::Select5(s) => self.select5 = Some(s),
-            MyAppMessage::Select6(s) => self.select6 = Some(s),
-            MyAppMessage::Input6(s) => self.input6 = s,
-            MyAppMessage::Select7(s) => self.select7 = Some(s),
-            MyAppMessage::Hover7(s) => self.select7 = Some(s),
-            MyAppMessage::Select8(s) => self.select8 = Some(s),
-            MyAppMessage::Hover8(s) => self.select8 = Some(s),
-            MyAppMessage::Close8 => self.info8 = "Done!".into(),
+            Message::DoNothing => {}
+            Message::Select4(s) => self.select4 = Some(s),
+            Message::Select5(s) => self.select5 = Some(s),
+            Message::Select6(s) => self.select6 = Some(s),
+            Message::Input6(s) => self.input6 = s,
+            Message::Select7(s) => self.select7 = Some(s),
+            Message::Hover7(s) => self.select7 = Some(s),
+            Message::Select8(s) => self.select8 = Some(s),
+            Message::Hover8(s) => self.select8 = Some(s),
+            Message::Close8 => self.info8 = "Done!".into(),
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             ComboBox::new(&self.state1, "Construct from struct", None, |_| {
-                MyAppMessage::DoNothing
+                Message::DoNothing
             }),
             combo_box(&self.state2, "Construct from function", None, |_| {
-                MyAppMessage::DoNothing
+                Message::DoNothing
             }),
             combo_box(&self.state3, "With list of items", None, |_| {
-                MyAppMessage::DoNothing
+                Message::DoNothing
             }),
             combo_box(
                 &self.state4,
                 "Functional combobox (Press Enter or click an option)",
                 self.select4.as_ref(),
-                |s| MyAppMessage::Select4(s)
+                |s| Message::Select4(s)
             ),
             combo_box(
                 &self.state5,
                 "Shorter parameter (Press Enter or click an option)",
                 self.select5.as_ref(),
-                MyAppMessage::Select5
+                Message::Select5
             ),
             text(&self.input6),
             combo_box(
                 &self.state6,
                 "Respond to input",
                 self.select6.as_ref(),
-                MyAppMessage::Select6
+                Message::Select6
             )
-            .on_input(MyAppMessage::Input6),
+            .on_input(Message::Input6),
             combo_box(
                 &self.state7,
                 "Respond to option hover",
                 self.select7.as_ref(),
-                MyAppMessage::Select7
+                Message::Select7
             )
-            .on_option_hovered(MyAppMessage::Hover7),
+            .on_option_hovered(Message::Hover7),
             text(&self.info8),
             combo_box(
                 &self.state8,
                 "Respond to closing menu",
                 self.select8.as_ref(),
-                MyAppMessage::Select8
+                Message::Select8
             )
-            .on_option_hovered(MyAppMessage::Hover8)
-            .on_close(MyAppMessage::Close8),
+            .on_option_hovered(Message::Hover8)
+            .on_close(Message::Close8),
             combo_box(&self.state9, "Different font", None, |_| {
-                MyAppMessage::DoNothing
+                Message::DoNothing
             })
             .font(Font {
                 family: Family::Fantasy,
                 ..Font::DEFAULT
             }),
             combo_box(&self.state10, "Larger text", None, |_| {
-                MyAppMessage::DoNothing
+                Message::DoNothing
             })
             .size(24.),
             combo_box(&self.state11, "With padding", None, |_| {
-                MyAppMessage::DoNothing
+                Message::DoNothing
             })
             .padding(20),
-            combo_box(&self.state12, "Icon", None, |_| MyAppMessage::DoNothing).icon(Icon {
+            combo_box(&self.state12, "Icon", None, |_| Message::DoNothing).icon(Icon {
                 font: Font::DEFAULT,
                 code_point: '\u{2705}',
                 size: None,
@@ -184,6 +180,6 @@ impl Sandbox for MyApp {
 
 ![ComboBox](./pic/combobox.png)
 
-:arrow_right:  Next: [Slider And VerticalSlider](./slider.md)
+:arrow_right: Next: [Slider And VerticalSlider](./slider.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

@@ -1,8 +1,8 @@
 # Producing Widget Messages
 
-Our custom widgets are able to send [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message).
+Our custom widgets are able to send Messages.
 
-To do so, we need to store the [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) we are going to send in the widget.
+To do so, we need to store the `Message` we are going to send in the widget.
 
 ```rust
 struct MyWidget<Message> {
@@ -16,7 +16,7 @@ impl<Message> MyWidget<Message> {
 }
 ```
 
-We use a generic type `Message` for `MyWidget`, so that the sent `pressed_message` in `MyWidget` will match the associated type [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
+We use a generic type `Message` for `MyWidget`, so that the sent `pressed_message` in `MyWidget` will match the associated type `Message` of our application.
 
 The message `pressed_message` will be sent when the widget is pressed.
 
@@ -46,28 +46,22 @@ fn on_event(
 }
 ```
 
-We use `shell.publish(self.pressed_message.clone())` to send `pressed_message` to our app.
-To ensure the mouse pressed event happens within the range of the widget, we use `cursor.is_over(layout.bounds())` to check the mouse position and match the `event` to `Event::Mouse(mouse::Event::ButtonPressed(_))` to check the mouse button state.
+We use [`shell.publish`](https://docs.rs/iced/0.13.1/iced/advanced/struct.Shell.html#method.publish) to send `pressed_message` to our app.
+To ensure the mouse pressed event happens within the range of the widget, we use [`cursor.is_over`](https://docs.rs/iced/0.13.1/iced/advanced/mouse/enum.Cursor.html#method.is_over) and pass to it [`layout.bounds()`](https://docs.rs/iced/0.13.1/iced/advanced/struct.Layout.html#method.bounds) to check the mouse position and match the `event` to `Event::Mouse(mouse::Event::ButtonPressed(_))` to check the mouse button state.
 
-Finally, we pass our [Message](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#associatedtype.Message) to the widget.
+Finally, we pass our `Message` to the widget.
 
 ```rust
 #[derive(Debug, Clone)]
-enum MyMessage {
+enum Message {
     MyWidgetPressed,
 }
 
-// ...
-
-impl Sandbox for MyApp {
-    type Message = MyMessage;
-
-    // ...
-
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+impl MyApp {
+    fn view(&self) -> iced::Element<'_, Message> {
         container(
             column![
-                MyWidget::new(MyMessage::MyWidgetPressed),
+                MyWidget::new(Message::MyWidgetPressed),
                 // ...
             ]
             // ...
@@ -81,57 +75,52 @@ The full code is as follows:
 
 ```rust
 use iced::{
+    Border, Color, Element, Event, Length, Rectangle, Shadow, Size, Task, Theme,
     advanced::{
+        Clipboard, Layout, Shell, Widget,
         graphics::core::event,
         layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Clipboard, Layout, Shell, Widget,
     },
     widget::{column, container, text},
-    Border, Color, Element, Event, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyMessage {
+enum Message {
     MyWidgetPressed,
 }
 
+#[derive(Default)]
 struct MyApp {
     count: u32,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyMessage;
-
-    fn new() -> Self {
-        Self { count: 0 }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (Self { count: 0 }, Task::none())
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Message) {
         match message {
-            MyMessage::MyWidgetPressed => self.count += 1,
+            Message::MyWidgetPressed => self.count += 1,
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(
-            column![MyWidget::new(MyMessage::MyWidgetPressed), text(self.count)]
+            column![MyWidget::new(Message::MyWidgetPressed), text(self.count)]
                 .spacing(20)
-                .align_items(iced::Alignment::Center),
+                .align_x(iced::Alignment::Center),
         )
         .width(Length::Fill)
         .height(Length::Fill)
-        .center_x()
-        .center_y()
+        .center_x(Length::Fill)
+        .center_y(Length::Fill)
         .into()
     }
 }
@@ -164,7 +153,10 @@ where
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-        layout::Node::new([100, 100].into())
+        layout::Node::new(iced::Size {
+            width: 100.0,
+            height: 100.0,
+        })
     }
 
     fn draw(

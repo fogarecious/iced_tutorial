@@ -1,36 +1,30 @@
 # Row
 
-Similar to [Column](https://docs.rs/iced/0.12.1/iced/widget/struct.Column.html), [Row](https://docs.rs/iced/0.12.1/iced/widget/struct.Row.html) helps us placing widgets horizontally.
+Similar to [Column](https://docs.rs/iced/0.13.1/iced/widget/struct.Column.html), [Row](https://docs.rs/iced/0.13.1/iced/widget/struct.Row.html) helps us placing widgets horizontally.
 It can leave some space between its boundary and its inner content.
 It can also add spaces among its inner widgets.
 The inner widgets can be aligned top, middle or bottom.
 
 ```rust
 use iced::{
-    widget::{column, row, Row},
-    Alignment, Length, Sandbox, Settings,
+    Alignment, Length,
+    widget::{Row, column, row},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             Row::with_children(vec![
                 "Construct from the with_children function.".into(),
@@ -45,7 +39,7 @@ impl Sandbox for MyApp {
             row!["Space between elements", "Space between elements",].spacing(20),
             row!["Different alignment"]
                 .height(Length::Fill)
-                .align_items(Alignment::Center),
+                .align_y(Alignment::Center),
         ]
         .into()
     }
@@ -54,6 +48,6 @@ impl Sandbox for MyApp {
 
 ![Row](./pic/row.png)
 
-:arrow_right:  Next: [Space](./space.md)
+:arrow_right: Next: [Space](./space.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

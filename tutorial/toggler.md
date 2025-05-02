@@ -1,98 +1,80 @@
 # Toggler
 
-The [Toggler](https://docs.rs/iced/0.12.1/iced/widget/toggler/struct.Toggler.html) widget represents a boolean value.
-It has two methods of constructions.
+The [Toggler](https://docs.rs/iced/0.13.1/iced/widget/toggler/struct.Toggler.html) widget represents a boolean value.
+It has two methods of constructions: the `toggler` function and the `Toggler::new` constructor.
 It supports reactions to clicking and touching.
-It is able to change styles of the button and the text and the space between them.
-It can also align its text.
+It is able to change styles of the button, the text, the space between them, and also align the text.
 
 ```rust
 use iced::{
+    Font, Length,
     alignment::Horizontal,
     font::Family,
-    widget::{column, text::Shaping, toggler, Toggler},
-    Font, Sandbox, Settings,
+    widget::{Toggler, column, text::Shaping, toggler},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     DoNothing,
-    Update3(bool),
-    Update4(bool),
+    Update(bool),
 }
 
 #[derive(Default)]
 struct MyApp {
-    toggler3: bool,
-    toggler4: bool,
+    is_checked: bool,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self::default()
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+impl MyApp {
+    fn update(&mut self, message: Message) {
         match message {
-            MyAppMessage::DoNothing => {}
-            MyAppMessage::Update3(b) => self.toggler3 = b,
-            MyAppMessage::Update4(b) => self.toggler4 = b,
+            Message::DoNothing => {}
+            Message::Update(b) => self.is_checked = b,
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
-            Toggler::new(Some("Construct from struct".into()), false, |_| {
-                MyAppMessage::DoNothing
-            }),
-            toggler(Some("Construct from function".into()), false, |_| {
-                MyAppMessage::DoNothing
-            }),
-            toggler(Some("Functional toggler".into()), self.toggler3, |b| {
-                MyAppMessage::Update3(b)
-            }),
-            toggler(
-                Some("Shorter parameter".into()),
-                self.toggler4,
-                MyAppMessage::Update4
-            ),
-            toggler(Some("Larger button".into()), false, |_| {
-                MyAppMessage::DoNothing
-            })
-            .size(30),
-            toggler(Some("Different font".into()), false, |_| {
-                MyAppMessage::DoNothing
-            })
-            .font(Font {
-                family: Family::Fantasy,
-                ..Font::DEFAULT
-            }),
-            toggler(Some("Larger text".into()), false, |_| {
-                MyAppMessage::DoNothing
-            })
-            .text_size(24),
-            toggler(Some("Special character 😊".into()), false, |_| {
-                MyAppMessage::DoNothing
-            })
-            .text_shaping(Shaping::Advanced),
-            toggler(Some("Space between button and text".into()), false, |_| {
-                MyAppMessage::DoNothing
-            })
-            .spacing(30),
-            toggler(Some("Centered text".into()), false, |_| {
-                MyAppMessage::DoNothing
-            })
-            .text_alignment(Horizontal::Center),
+            Toggler::new(self.is_checked)
+                .label("Construct from struct")
+                .on_toggle(|_| Message::DoNothing),
+            toggler(self.is_checked)
+                .label("Construct from function")
+                .on_toggle(|_| Message::DoNothing),
+            toggler(self.is_checked)
+                .label("Functional toggler")
+                .on_toggle(|b| Message::Update(b)),
+            toggler(self.is_checked)
+                .label("Shorter parameter")
+                .on_toggle(|b| Message::Update(b)),
+            toggler(self.is_checked)
+                .label("Larger button")
+                .size(30)
+                .on_toggle(|_| Message::DoNothing),
+            toggler(self.is_checked)
+                .label("Different font")
+                .font(Font {
+                    family: Family::Fantasy,
+                    ..Font::DEFAULT
+                })
+                .on_toggle(|_| Message::DoNothing),
+            toggler(self.is_checked)
+                .label("Larger text")
+                .text_size(24)
+                .on_toggle(|_| Message::DoNothing),
+            toggler(self.is_checked)
+                .label("Special character 😊")
+                .text_shaping(Shaping::Advanced),
+            toggler(self.is_checked)
+                .label("Space between button and text")
+                .spacing(30),
+            toggler(self.is_checked)
+                .label("Centered text")
+                .width(Length::Fill)
+                .text_alignment(Horizontal::Center),
         ]
         .into()
     }
@@ -101,6 +83,6 @@ impl Sandbox for MyApp {
 
 ![Toggler](./pic/toggler.png)
 
-:arrow_right:  Next: [Radio](./radio.md)
+:arrow_right: Next: [Radio](./radio.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

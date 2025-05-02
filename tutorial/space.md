@@ -1,35 +1,29 @@
 # Space
 
-[Space](https://docs.rs/iced/0.12.1/iced/widget/space/struct.Space.html) is a convenient widget that helps us laying out our widgets.
+[Space](https://docs.rs/iced/0.13.1/iced/widget/struct.Space.html) is a convenient widget that helps us laying out our widgets.
 It is an empty widget that occupies a space.
 It has several constructions to help us allocating spaces horizontally, vertically or both.
 
 ```rust
 use iced::{
-    widget::{button, column, horizontal_space, row, vertical_space, Space},
-    Alignment, Length, Sandbox, Settings,
+    Alignment, Length,
+    widget::{Space, button, column, horizontal_space, row, vertical_space},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             row![
                 button("Horizontal space 1A"),
@@ -54,7 +48,7 @@ impl Sandbox for MyApp {
             vertical_space(),
             button("Vertical space 2B"),
             button("Diagonal space A"),
-            row![Space::new(50, 50), button("Diagonal space B"),].align_items(Alignment::End)
+            row![Space::new(50, 50), button("Diagonal space B"),].align_y(Alignment::End)
         ]
         .into()
     }
@@ -63,6 +57,6 @@ impl Sandbox for MyApp {
 
 ![Space](./pic/space.png)
 
-:arrow_right:  Next: [Container](./container.md)
+:arrow_right: Next: [Container](./container.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

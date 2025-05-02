@@ -1,30 +1,27 @@
 # TextInput
 
-The [TextInput](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html) widget let users to input texts.
-It has two methods of constructions.
-If the [on_input](https://docs.rs/iced/0.12.1/iced/widget/struct.TextInput.html#method.on_input) method is set, it is enabled, and is disabled otherwise.
+The [TextInput](https://docs.rs/iced/0.13.1/iced/widget/struct.TextInput.html) widget let users to input texts.
+It has two methods of construction: the `text_input` function and the `TextInput::new` constructor.
+It is disabled by default if [on_input](https://docs.rs/iced/0.13.1/iced/widget/struct.TextInput.html#method.on_input) is not defined.
 It supports reactions to pasting texts or keyboard submissions.
-It is able to change fonts and text sizes.
-We can add padding around the text inside.
-We can also add an optional icon.
+You can change fonts, text sizes, add password masks, add padding around the inner text, and add an icon.
 
 ```rust
 use iced::{
+    Font,
     font::Family,
     widget::{
-        column, text, text_input,
+        TextInput, column, text, text_input,
         text_input::{Icon, Side},
-        TextInput,
     },
-    Font, Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     Update3(String),
     Update4(String),
     Update5(String),
@@ -47,57 +44,46 @@ struct MyApp {
     text11: String,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self::default()
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+impl MyApp {
+    fn update(&mut self, message: Message) {
         match message {
-            MyAppMessage::Update3(s) => self.text3 = s,
-            MyAppMessage::Update4(s) => self.text4 = s,
-            MyAppMessage::Update5(s) => {
+            Message::Update3(s) => self.text3 = s,
+            Message::Update4(s) => self.text4 = s,
+            Message::Update5(s) => {
                 self.text5 = s;
                 self.info5 = "".into();
             }
-            MyAppMessage::Paste5(s) => {
+            Message::Paste5(s) => {
                 self.text5 = s;
                 self.info5 = "Pasted".into();
             }
-            MyAppMessage::Update6(s) => {
+            Message::Update6(s) => {
                 self.text6 = s;
                 self.info6 = "".into();
             }
-            MyAppMessage::Submit6 => self.info6 = "Submitted".into(),
-            MyAppMessage::Update7(s) => self.text7 = s,
-            MyAppMessage::Update11(s) => self.text11 = s,
+            Message::Submit6 => self.info6 = "Submitted".into(),
+            Message::Update7(s) => self.text7 = s,
+            Message::Update11(s) => self.text11 = s,
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             text_input("Construct from function", ""),
             TextInput::new("Construct from struct", ""),
-            text_input("Enabled text input", self.text3.as_str())
-                .on_input(|s| MyAppMessage::Update3(s)),
-            text_input("Shorter on_input", self.text4.as_str()).on_input(MyAppMessage::Update4),
+            text_input("Enabled text input", self.text3.as_str()).on_input(|s| Message::Update3(s)),
+            text_input("Shorter on_input", self.text4.as_str()).on_input(Message::Update4),
             text_input("Press Ctrl/Cmd + V", self.text5.as_str())
-                .on_input(MyAppMessage::Update5)
-                .on_paste(MyAppMessage::Paste5),
+                .on_input(Message::Update5)
+                .on_paste(Message::Paste5),
             text(self.info5.as_str()),
             text_input("Press enter", self.text6.as_str())
-                .on_input(MyAppMessage::Update6)
-                .on_submit(MyAppMessage::Submit6),
+                .on_input(Message::Update6)
+                .on_submit(Message::Submit6),
             text(self.info6.as_str()),
             text_input("Password", self.text7.as_str())
                 .secure(true)
-                .on_input(MyAppMessage::Update7),
+                .on_input(Message::Update7),
             text_input("Different font", "").font(Font {
                 family: Family::Fantasy,
                 ..Font::DEFAULT
@@ -112,7 +98,7 @@ impl Sandbox for MyApp {
                     spacing: 10.,
                     side: Side::Left,
                 })
-                .on_input(MyAppMessage::Update11),
+                .on_input(Message::Update11),
         ]
         .into()
     }
@@ -121,6 +107,6 @@ impl Sandbox for MyApp {
 
 ![TextInput](./pic/text_input.png)
 
-:arrow_right:  Next: [Checkbox](./checkbox.md)
+:arrow_right: Next: [Checkbox](./checkbox.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

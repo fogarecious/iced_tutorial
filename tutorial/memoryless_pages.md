@@ -1,61 +1,62 @@
 # Memoryless Pages
 
-The [previous tutorial](./more_than_one_page.md) has a problem that the fields can still be accessed when we navigate to other pages.
+The [previous tutorial](./more_than_one_page.md) has a problem: the fields from one page can still be accessed when we navigate to other pages.
 This brings potential security problems, e.g., the input password could be accessed in other pages.
 
-To fix this problem, we can use [trait objects](https://doc.rust-lang.org/stable/book/ch17-02-trait-objects.html).
-The `Page` trait below is responsible for [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) and [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) for a single page.
-In the main struct `MyApp`, we dispatch [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) and [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) to the corresponding page that is indicated by `page` field in `MyApp`.
-The [update](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.update) method in `MyApp` is also responsible for switching pages.
+Also, the solution in the previous tutorial is not scalable.
+If we have more than two pages, the `Message` enum will become very messy.
 
-In addition, we explicitly distinguish messages from different pages in `MyAppMessage`.
+To fix this problem, we can use [trait objects](https://doc.rust-lang.org/stable/book/ch17-02-trait-objects.html).
+The `Page` trait below is responsible for implementing the `update` and `view` methods for a single page.
+
+In the main struct `MyApp`, we dispatch `update` and `view` to the corresponding page that is indicated by `page` state field in `MyApp`.
+The `update` method in `MyApp` is also responsible for switching pages.
+
+In addition, we explicitly distinguish messages from different pages in `Message`.
 
 ```rust
 use iced::{
+    Task,
     widget::{button, column, text, text_input},
-    Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     PageA(PageAMessage),
     PageB(PageBMessage),
 }
 
 trait Page {
-    fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>>;
-    fn view(&self) -> iced::Element<'_, MyAppMessage>;
+    fn update(&mut self, message: Message) -> Option<Box<dyn Page>>;
+    fn view(&self) -> iced::Element<'_, Message>;
 }
 
 struct MyApp {
     page: Box<dyn Page>,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self {
-            page: Box::new(PageA::new()),
-        }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (
+            Self {
+                page: Box::new(PageA::new()),
+            },
+            Task::none(),
+        )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Message) {
         let page = self.page.update(message);
         if let Some(p) = page {
             self.page = p;
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         self.page.view()
     }
 }
@@ -82,8 +83,8 @@ impl PageB {
 }
 
 impl Page for PageB {
-    fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>> {
-        if let MyAppMessage::PageB(msg) = message {
+    fn update(&mut self, message: Message) -> Option<Box<dyn Page>> {
+        if let Message::PageB(msg) = message {
             match msg {
                 PageBMessage::ButtonPressed => return Some(Box::new(PageA::new())),
             }
@@ -91,10 +92,10 @@ impl Page for PageB {
         None
     }
 
-    fn view(&self) -> iced::Element<MyAppMessage> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             text("Hello!"),
-            button("Log out").on_press(MyAppMessage::PageB(Mb::ButtonPressed)),
+            button("Log out").on_press(Message::PageB(Mb::ButtonPressed)),
         ]
         .into()
     }
@@ -129,8 +130,8 @@ impl PageA {
 }
 
 impl Page for PageA {
-    fn update(&mut self, message: MyAppMessage) -> Option<Box<dyn Page>> {
-        if let MyAppMessage::PageA(msg) = message {
+    fn update(&mut self, message: Message) -> Option<Box<dyn Page>> {
+        if let Message::PageA(msg) = message {
             match msg {
                 PageAMessage::TextChanged(s) => self.password = s,
                 PageAMessage::ButtonPressed => {
@@ -143,12 +144,12 @@ impl Page for PageA {
         None
     }
 
-    fn view(&self) -> iced::Element<MyAppMessage> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             text_input("Password", &self.password)
                 .secure(true)
-                .on_input(|s| MyAppMessage::PageA(Ma::TextChanged(s))),
-            button("Log in").on_press(MyAppMessage::PageA(Ma::ButtonPressed)),
+                .on_input(|s| Message::PageA(Ma::TextChanged(s))),
+            button("Log in").on_press(Message::PageA(Ma::ButtonPressed)),
         ]
         .into()
     }
@@ -157,6 +158,6 @@ impl Page for PageA {
 
 ![Page A](./pic/memoryless_pages_a.png)
 
-:arrow_right:  Next: [Passing Parameters Across Pages](./passing_parameters_across_pages.md)
+:arrow_right: Next: [Passing Parameters Across Pages](./passing_parameters_across_pages.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

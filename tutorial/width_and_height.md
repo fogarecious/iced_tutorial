@@ -1,40 +1,33 @@
 # Width And Height
 
 Most widgets have the `width` and `height` methods to control their sizes.
-The methods accept a parameter [Length](https://docs.rs/iced/0.12.1/iced/latest/iced/enum.Length.html).
-There are four types of [Length](https://docs.rs/iced/0.12.1/iced/latest/iced/enum.Length.html):
+The methods accept a parameter [Length](https://docs.rs/iced/0.13.1/iced/enum.Length.html).
 
-* [Shrink](https://docs.rs/iced/0.12.1/iced/latest/iced/enum.Length.html#variant.Shrink): occupy the least space.
-* [Fill](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.Fill): occupy all the rest of space.
-* [FillPortion](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.FillPortion): occupy the space relative to other widgets with [FillPortion](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.FillPortion).
-* [Fixed](https://docs.rs/iced/0.12.1/iced/enum.Length.html#variant.Fixed): occupy a fixed space.
+- [Shrink](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.Shrink): occupy the least space.
+- [Fill](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.Fill): occupy all the rest of space.
+- [FillPortion](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.FillPortion): occupy the space relative to other widgets with FillPortion.
+- [Fixed](https://docs.rs/iced/0.13.1/iced/enum.Length.html#variant.Fixed): occupy a fixed space.
 
 ```rust
 use iced::{
+    Length,
     widget::{button, column, row},
-    Length, Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             button("Shrink").width(Length::Shrink),
             button("Fill").width(Length::Fill),
@@ -54,6 +47,6 @@ impl Sandbox for MyApp {
 
 ![Width And Height](./pic/width_and_height.png)
 
-:arrow_right:  Next: [Column](./column.md)
+:arrow_right: Next: [Column](./column.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

@@ -1,38 +1,31 @@
 # Text
 
-The [Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html) widget is able to display texts.
-It has three methods of constructions.
-It is able to change the font, the size of the font, and display special characters.
-The text inside the widget can be horizontally or vertically centered.
+The [Text](https://docs.rs/iced/0.13.1/iced/widget/type.Text.html) widget displays texts.
+It has three methods of constructions: raw `&str`, the `text` function, and the `Text::new` constructor.
+You can change the font, set different sizes, set its width and height, and align vertically or horizontally.
 
 ```rust
 use iced::{
+    Font, Length,
     alignment::{Horizontal, Vertical},
     font::Family,
-    widget::{column, text, text::Shaping, Text},
-    Font, Length, Sandbox, Settings,
+    widget::{Text, column, text, text::Shaping},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             "Construct from &str",
             text("Construct from function"),
@@ -45,10 +38,10 @@ impl Sandbox for MyApp {
             text("Special character 😊").shaping(Shaping::Advanced),
             text("Center")
                 .width(Length::Fill)
-                .horizontal_alignment(Horizontal::Center),
+                .align_x(Horizontal::Center),
             text("Vertical center")
                 .height(Length::Fill)
-                .vertical_alignment(Vertical::Center),
+                .align_y(Vertical::Center),
         ]
         .into()
     }
@@ -57,6 +50,6 @@ impl Sandbox for MyApp {
 
 ![Text](./pic/text.png)
 
-:arrow_right:  Next: [Button](./button.md)
+:arrow_right: Next: [Button](./button.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

@@ -1,56 +1,54 @@
 # On Pressed/Released Of Some Widgets
 
-If we only consider mouse pressed or released events, we can use [MouseArea](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html).
-The [MouseArea](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html) gives the widget being put in it the sense of mouse pressed/released events, even if the widget has no build-in support of the events.
-For example, we can make a [Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html) to respond to mouse pressed/released events.
+If we only consider mouse pressed or released events, we can use [MouseArea](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html).
+The [MouseArea](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html) gives the widget being put in it the sense of mouse pressed/released events, even if the widget has no build-in support of the events.
+For example, we can make a [Text](https://docs.rs/iced/0.13.1/iced/widget/type.Text.html) to respond to mouse pressed/released events.
 
 ```rust
-use iced::{widget::mouse_area, Sandbox, Settings};
+use iced::{Task, widget::mouse_area};
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     Pressed,
     Released,
 }
 
+#[derive(Default)]
 struct MyApp {
     state: String,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self {
-            state: "Start".into(),
-        }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (
+            Self {
+                state: "Start".into(),
+            },
+            Task::none(),
+        )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Message) {
         match message {
-            MyAppMessage::Pressed => self.state = "Pressed".into(),
-            MyAppMessage::Released => self.state = "Released".into(),
+            Message::Pressed => self.state = "Pressed".into(),
+            Message::Released => self.state = "Released".into(),
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         mouse_area(self.state.as_str())
-            .on_press(MyAppMessage::Pressed)
-            .on_release(MyAppMessage::Released)
+            .on_press(Message::Pressed)
+            .on_release(Message::Released)
             .into()
     }
 }
 ```
 
-In addition to [on_press](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_press) and [on_release](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_release) methods, [MouseArea](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html) also supports [on_middle_press](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_middle_press), [on_right_press](https://docs.rs/iced/0.12.1/iced/widget/struct.MouseArea.html#method.on_right_press), etc.
+In addition to [on_press](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html#method.on_press) and [on_release](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html#method.on_release) methods, [MouseArea](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html) also supports [on_middle_press](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html#method.on_middle_press), [on_right_press](https://docs.rs/iced/0.13.1/iced/widget/struct.MouseArea.html#method.on_right_press), etc.
 
 When the mouse is pressed:
 

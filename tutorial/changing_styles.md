@@ -1,52 +1,46 @@
 # Changing Styles
 
-Most widgets support `style` method to change their styles.
-These methods take parameters from [enums](https://doc.rust-lang.org/std/keyword.enum.html) of [theme](https://docs.rs/iced/0.12.1/iced/theme/index.html) module.
-For example, [widget::Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html) takes [theme::Text](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html) as the parameter of its [style](https://docs.rs/iced/0.12.1/iced/advanced/widget/struct.Text.html#method.style) method, and [widget::Button](https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html) takes [theme::Button](https://docs.rs/iced/0.12.1/iced/theme/enum.Button.html) as the parameter of its [style](https://docs.rs/iced/0.12.1/iced/widget/struct.Button.html#method.style) method.
+Changing styles changed substantially in iced 0.13.x. Like previous versions, most widgets support the `style` method to change their styles.
 
-Since [theme::Text](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html) implements [From\<Color>](https://docs.rs/iced/0.12.1/iced/theme/enum.Text.html#impl-From%3CColor%3E-for-Text), we can also use [Color](https://docs.rs/iced/0.12.1/iced/struct.Color.html) struct directly for the [style](https://docs.rs/iced/0.12.1/iced/advanced/widget/struct.Text.html#method.style) method of [widget::Text](https://docs.rs/iced/0.12.1/iced/widget/type.Text.html).
+However, the [`style`](https://docs.rs/iced/0.13.1/iced/widget/struct.Button.html#method.style) method now takes a closure that receives the theme and the widget's state as arguments, if applicable. This allows for more dynamic and flexible styling. You can use the widget's [Style](https://docs.rs/iced/0.13.1/iced/widget/button/struct.Style.html) struct directly in the closure to define styling attributes like color, background, and more.
+
+Also, the widgets expose predefined functions like [`danger`](https://docs.rs/iced/0.13.1/iced/widget/button/fn.danger.html), [`primary`](https://docs.rs/iced/0.13.1/iced/widget/button/fn.primary.html), etc. This is particular for each widget.
+
+For example, the [Text](https://docs.rs/iced/0.13.1/iced/widget/type.Text.html) widget accepts a [`text::Style`](https://docs.rs/iced/0.13.1/iced/widget/text/struct.Style.html) struct on its [`style`](https://docs.rs/iced/0.13.1/iced/advanced/widget/struct.Text.html#tymethod.style) method. But you can also use the predefined styles like [`danger`](https://docs.rs/iced/0.13.1/iced/widget/text/fn.danger.html) or [`primary`](https://docs.rs/iced/0.13.1/iced/widget/text/fn.primary.html).
+Similarly, the [Button](https://docs.rs/iced/0.13.1/iced/widget/struct.Button.html) widget accepts a [`button::Style`](https://docs.rs/iced/0.13.1/iced/widget/button/struct.Style.html) struct on its [`style`](https://docs.rs/iced/0.13.1/iced/widget/button/struct.Button.html#method.style) method. But you can also use the predefined styles like [`danger`](https://docs.rs/iced/0.13.1/iced/widget/button/fn.danger.html) or [`primary`](https://docs.rs/iced/0.13.1/iced/widget/button/fn.primary.html). Note that the button widget gets a `status` argument on its `style` method that can be used to change the style based on the button's state.
 
 ```rust
 use iced::{
-    theme,
+    Background, Color, theme,
     widget::{button, column, row, text},
-    Color, Sandbox, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
-    DummyMessage,
-}
+enum Message {}
 
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
-            text("Ready?").style(Color::from_rgb(1., 0.6, 0.2)),
+            text("A solid color").style(|_| text::Style {
+                color: Some(Color::from_rgb(0.5, 0.5, 0.0))
+            }),
+            text("A color from the theme").style(text::danger),
             row![
-                button("Cancel")
-                    .style(theme::Button::Secondary)
-                    .on_press(MyAppMessage::DummyMessage),
-                button("Go!~~")
-                    .style(theme::Button::Primary)
-                    .on_press(MyAppMessage::DummyMessage),
+                button("Cancel").style(button::danger),
+                button("Go!~~").style(button::primary),
+                button("Save").style(|_, _| button::Style {
+                    background: Some(Background::Color(Color::from_rgb(0.0, 0.5, 0.5))),
+                    ..Default::default()
+                })
             ],
         ]
         .into()
@@ -56,6 +50,6 @@ impl Sandbox for MyApp {
 
 ![Changing styles](./pic/changing_styles.png)
 
-:arrow_right:  Next: [Custom Styles](./custom_styles.md)
+:arrow_right: Next: [Multipage Apps](./multipage_apps.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

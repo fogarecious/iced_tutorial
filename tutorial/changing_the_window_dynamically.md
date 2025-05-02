@@ -1,26 +1,25 @@
 # Changing The Window Dynamically
 
-We can use functions provided in [window](https://docs.rs/iced/0.12.1/iced/window/index.html) module to change the window after it is initialized.
-For example, to [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html) the window.
-These functions return [Command](https://docs.rs/iced/0.12.1/iced/struct.Command.html), which can be used as the return value in [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
-Developers might be interested in other [Commands](https://docs.rs/iced/0.12.1/iced/struct.Command.html) in [window](https://docs.rs/iced/0.12.1/iced/window/index.html) module.
+We can use functions provided in [window](https://docs.rs/iced/0.13.1/iced/window/index.html) module to change the window after it is initialized.
 
-The [resize](https://docs.rs/iced/0.12.1/iced/window/fn.resize.html) function needs an ID of the window we are going to resize.
-Internally, Iced reserves [window::Id::MAIN](https://docs.rs/iced/0.12.1/iced/window/struct.Id.html#associatedconstant.MAIN) for the first window spawned.
+For example, the [resize](https://docs.rs/iced/0.13.1/iced/window/fn.resize.html) function of the window
+returns a task that can be used as the return value in the `update` method. There are many other functions that return tasks in the [window](https://docs.rs/iced/0.13.1/iced/window/index.html) module.
+
+The [resize](https://docs.rs/iced/0.13.1/iced/window/fn.resize.html) function needs an ID of the window we are going to resize. To do that, the window module has a [`get_latest`](https://docs.rs/iced/0.13.1/iced/window/fn.get_latest.html) function. This function also returns a task that needs to be resolved to the Id of the latest window. In our case, since we have a single window, it will always return the Id of the main window.
 
 ```rust
 use iced::{
-    executor,
+    Element, Result, Size, Task,
     widget::{button, row, text_input},
-    window, Application, Command, Settings, Size,
+    window,
 };
 
-fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+fn main() -> Result {
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     UpdateWidth(String),
     UpdateHeight(String),
     ResizeWindow,
@@ -31,45 +30,43 @@ struct MyApp {
     height: String,
 }
 
-impl Application for MyApp {
-    type Executor = executor::Default;
-    type Message = MyAppMessage;
-    type Theme = iced::Theme;
-    type Flags = ();
-
-    fn new(_flags: Self::Flags) -> (Self, iced::Command<Self::Message>) {
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
         (
             Self {
                 width: "1024".into(),
                 height: "768".into(),
             },
-            Command::none(),
+            Task::none(),
         )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
+    fn resize_window(width: f32, height: f32) -> impl Fn(window::Id) -> Task<Message> {
+        move |window_id: window::Id| {
+            println!("Calling resize_window");
+            window::resize::<Message>(window_id, Size::new(width, height))
+        }
     }
 
-    fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
+    fn update(&mut self, message: Message) -> Task<Message> {
         match message {
-            MyAppMessage::UpdateWidth(w) => self.width = w,
-            MyAppMessage::UpdateHeight(h) => self.height = h,
-            MyAppMessage::ResizeWindow => {
-                return window::resize(
-                    iced::window::Id::MAIN,
-                    Size::new(self.width.parse().unwrap(), self.height.parse().unwrap()),
-                )
+            Message::UpdateWidth(w) => self.width = w,
+            Message::UpdateHeight(h) => self.height = h,
+            Message::ResizeWindow => {
+                let width = self.width.parse::<f32>().unwrap_or(1024.0);
+                let height = self.height.parse::<f32>().unwrap_or(768.0);
+                println!("Resizing window to {}x{}", width, height);
+                return window::get_latest().and_then(Self::resize_window(width, height));
             }
         }
-        Command::none()
+        Task::none()
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> Element<Message> {
         row![
-            text_input("Width", &self.width).on_input(MyAppMessage::UpdateWidth),
-            text_input("Height", &self.height).on_input(MyAppMessage::UpdateHeight),
-            button("Resize window").on_press(MyAppMessage::ResizeWindow),
+            text_input("Width", &self.width).on_input(Message::UpdateWidth),
+            text_input("Height", &self.height).on_input(Message::UpdateHeight),
+            button("Resize window").on_press(Message::ResizeWindow),
         ]
         .into()
     }

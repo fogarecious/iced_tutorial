@@ -1,84 +1,77 @@
 # Batch Subscriptions
 
 This tutorial follows from the previous two tutorials ([keyboard events](./producing_messages_by_keyboard_events.md) and [timers](./producing_messages_by_timers.md)).
-We combine the two [Subscriptions](https://docs.rs/iced/0.12.1/iced/subscription/struct.Subscription.html) of keyboard events and timers.
-This is done by [Subscription::batch](https://docs.rs/iced/0.12.1/iced/subscription/struct.Subscription.html#method.batch) function.
+We combine the two [Subscriptions](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html) of keyboard events and timers.
+This is done by [Subscription::batch](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.batch) function.
 
 In the following app, press the space key to start or stop the timer.
 
 ```rust
 use iced::{
+    Event, Subscription, Task,
     event::{self, Status},
-    executor,
-    keyboard::{key::Named, Key},
+    keyboard::{Key, key::Named},
     time::{self, Duration},
     widget::text,
-    Application, Command, Event, Settings, Subscription,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view)
+        .subscription(MyApp::subscription)
+        .run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     StartOrStop,
     Update,
 }
 
+#[derive(Default)]
 struct MyApp {
     seconds: u32,
     running: bool,
 }
 
-impl Application for MyApp {
-    type Executor = executor::Default;
-    type Message = MyAppMessage;
-    type Theme = iced::Theme;
-    type Flags = ();
-
-    fn new(_flags: Self::Flags) -> (Self, iced::Command<Self::Message>) {
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
         (
             Self {
                 seconds: 0,
                 running: false,
             },
-            Command::none(),
+            Task::none(),
         )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
+    fn update(&mut self, message: Message) -> Task<Message> {
         match message {
-            MyAppMessage::StartOrStop => self.running = !self.running,
-            MyAppMessage::Update => self.seconds += 1,
+            Message::StartOrStop => self.running = !self.running,
+            Message::Update => self.seconds += 1,
         }
-        Command::none()
+        Task::none()
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         text(self.seconds).into()
     }
 
-    fn subscription(&self) -> iced::Subscription<Self::Message> {
-        let subscr_key = event::listen_with(|event, status| match (event, status) {
+    fn subscription(&self) -> Subscription<Message> {
+        let subscr_key = event::listen_with(|event, status, _| match (event, status) {
             (
                 Event::Keyboard(iced::keyboard::Event::KeyPressed {
                     key: Key::Named(Named::Space),
                     ..
                 }),
                 Status::Ignored,
-            ) => Some(MyAppMessage::StartOrStop),
+            ) => Some(Message::StartOrStop),
             _ => None,
         });
 
         if self.running {
             Subscription::batch(vec![
                 subscr_key,
-                time::every(Duration::from_secs(1)).map(|_| MyAppMessage::Update),
+                time::every(Duration::from_secs(1)).map(|_| Message::Update),
             ])
         } else {
             subscr_key
@@ -89,6 +82,6 @@ impl Application for MyApp {
 
 ![Batch subscriptions](./pic/batch_subscriptions.png)
 
-:arrow_right:  Next: [Drawing Shapes](./drawing_shapes.md)
+:arrow_right:  Next: [Canvas](./canvas.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

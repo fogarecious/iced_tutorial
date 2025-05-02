@@ -1,67 +1,73 @@
 # Producing Messages By Timers
 
-To use build-in timers, we need to enable one of the following features: [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio), [async-std](https://docs.rs/crate/iced/0.12.1/features#async-std), or [smol](https://docs.rs/crate/iced/0.12.1/features#smol).
-In this tutorial, we use [tokio](https://docs.rs/crate/iced/0.12.1/features#tokio) feature.
+For this tutorial, we will use timers. Since timers are an async feature, we need to enable it before usage.
+
+Iced offers three mutually exclusive features for that. They need to be enabled before usage:
+- [tokio](https://docs.rs/crate/iced/0.13.1/features#tokio)
+- [async-std](https://docs.rs/crate/iced/0.13.1/features#async-std)
+- [smol](https://docs.rs/crate/iced/0.13.1/features#smol).
+
+Depending on your choice, your must also add the dependency crate to your `Cargo.toml` file:
+- [tokio](https://crates.io/crates/tokio)
+- [async-std](https://crates.io/crates/async-std)
+- [smol](https://crates.io/crates/smol)
+
+The [tokio](https://crates.io/crates/tokio) crate is very popular, and we will use it as an example.
+First, we enable [tokio](https://docs.rs/crate/iced/0.13.1/features#tokio) feature and add [tokio](https://crates.io/crates/tokio) crate.
+
 The dependencies of `Cargo.toml` should look like this:
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1", features = ["tokio"] }
+iced = { version = "0.13.1", features = ["tokio"] }
+tokio = { version = "1.44.2", features = ["time"] }
 ```
 
-We use [time::every](https://docs.rs/iced/0.12.1/iced/time/fn.every.html) function to obtain [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html)\<[Instant](https://docs.rs/iced/0.12.1/iced/time/struct.Instant.html)> struct.
-Then we map the struct to [Subscription](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html)\<`MyAppMessage`> by [Subscription::map](https://docs.rs/iced/0.12.1/iced/struct.Subscription.html#method.map) method.
-The result will be returned in the [subscription](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#method.subscription) method of [Application](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html).
-The corresponding `MyAppMessage` will be received in the [update](https://docs.rs/iced/0.12.1/iced/application/trait.Application.html#tymethod.update) method.
+We use [time::every](https://docs.rs/iced/0.13.1/iced/time/fn.every.html) function to obtain [Subscription](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html)\<[Instant](https://docs.rs/iced/0.13.1/iced/time/struct.Instant.html)> struct.
+
+Then we map the struct to [Subscription](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html)\<`Message`> using [Subscription::map](https://docs.rs/iced/0.13.1/iced/struct.Subscription.html#method.map) method, and call our message to increment the counter.
 
 ```rust
 use iced::{
-    executor,
+    Task,
     time::{self, Duration},
     widget::text,
-    Application, Command, Settings,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view)
+        .subscription(MyApp::subscription)
+        .run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     Update,
 }
 
+#[derive(Default)]
 struct MyApp {
     seconds: u32,
 }
 
-impl Application for MyApp {
-    type Executor = executor::Default;
-    type Message = MyAppMessage;
-    type Theme = iced::Theme;
-    type Flags = ();
-
-    fn new(_flags: Self::Flags) -> (Self, iced::Command<Self::Message>) {
-        (Self { seconds: 0 }, Command::none())
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (Self { seconds: 0 }, Task::none())
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
+    fn update(&mut self, message: Message) -> Task<Message> {
         match message {
-            MyAppMessage::Update => self.seconds += 1,
+            Message::Update => self.seconds += 1,
         }
-        Command::none()
+        Task::none()
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         text(self.seconds).into()
     }
 
-    fn subscription(&self) -> iced::Subscription<Self::Message> {
-        time::every(Duration::from_secs(1)).map(|_| MyAppMessage::Update)
+    fn subscription(&self) -> iced::Subscription<Message> {
+        time::every(Duration::from_secs(1)).map(|_| Message::Update)
     }
 }
 ```

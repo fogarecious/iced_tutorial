@@ -1,6 +1,6 @@
 # Mouse Pointer Over Widgets
 
-To change the mouse pointer based on the requirement of our widgets, we can use the [mouse_interaction](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#method.mouse_interaction) method of [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html).
+To change the mouse pointer based on the requirement of our widgets, we can use the [mouse_interaction](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#method.mouse_interaction) method of [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html).
 
 ```rust
 fn mouse_interaction(
@@ -19,48 +19,41 @@ fn mouse_interaction(
 }
 ```
 
-The method returns [Interaction](https://docs.rs/iced/0.12.1/iced/mouse/enum.Interaction.html), which specifies the type of the mouse pointer.
-In our example, we specify [Interaction::Pointer](https://docs.rs/iced/0.12.1/iced/mouse/enum.Interaction.html#variant.Pointer) when the mouse is over the widget.
+The method returns [Interaction](https://docs.rs/iced/0.13.1/iced/mouse/enum.Interaction.html), which specifies the type of the mouse pointer.
+In our example, we specify [Interaction::Pointer](https://docs.rs/iced/0.13.1/iced/mouse/enum.Interaction.html#variant.Pointer) when the mouse is over the widget.
 
 The full code is as follows:
 
 ```rust
 use iced::{
+    Border, Color, Element, Length, Rectangle, Shadow, Size, Theme,
     advanced::{
-        layout, mouse,
+        Layout, Widget, layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Widget,
     },
     widget::container,
-    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(MyWidget)
             .width(Length::Fill)
             .height(Length::Fill)
-            .center_x()
-            .center_y()
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
             .into()
     }
 }
@@ -84,7 +77,10 @@ where
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-        layout::Node::new([100, 100].into())
+        layout::Node::new(iced::Size {
+            width: 100.0,
+            height: 100.0,
+        })
     }
 
     fn draw(

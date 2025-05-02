@@ -1,38 +1,27 @@
 # Tooltip
 
-The [Tooltip](https://docs.rs/iced/0.12.1/iced/widget/tooltip/struct.Tooltip.html) widget displays a text when the mouse is over a specified widget.
-It has two methods of constructions.
-It is able to change styles of the text.
-We can add padding around the text inside.
-We can also change the space between the tooltip and the target widget.
+The [Tooltip](https://docs.rs/iced/0.13.1/iced/widget/tooltip/struct.Tooltip.html) widget displays a text when the mouse is over a specified widget.
+It has two methods of construction: the `tooltip` function and the `Tooltip::new` constructor.
+It is able to change styles of the text, add padding around the text inside, and change the space between the tooltip and the target widget.
 If the tooltip is allowed to be out of the window, the parts outside are clipped.
 
 ```rust
-use iced::{
-    widget::{button, column, tooltip, tooltip::Position, Tooltip},
-    Sandbox, Settings,
-};
+use iced::widget::{Tooltip, button, column, tooltip, tooltip::Position};
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             Tooltip::new(
                 button("Mouseover to see the tooltip"),
@@ -75,6 +64,6 @@ impl Sandbox for MyApp {
 
 ![Tooltip](./pic/tooltip.png)
 
-:arrow_right:  Next: [Rule](./rule.md)
+:arrow_right: Next: [Rule](./rule.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

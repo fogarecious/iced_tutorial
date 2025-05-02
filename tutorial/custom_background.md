@@ -1,12 +1,12 @@
 # Custom Background
 
-We can also draw an image on a [Widget](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html).
+We can also draw an image on a [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html).
 
-Similar to the [Image](https://docs.rs/iced/0.12.1/iced/widget/image/struct.Image.html) widget, we have to enable the [image](https://docs.rs/crate/iced/latest/features#image) feature.
+Similar to the [Image](https://docs.rs/iced/0.13.1/iced/widget/image/struct.Image.html) widget, we have to enable the [image](https://docs.rs/crate/iced/latest/features#image) feature.
 
 ```toml
 [dependencies]
-iced = { version = "0.12.1", features = ["image", "advanced"] }
+iced = { version = "0.13.1", features = ["image", "advanced"] }
 ```
 
 Assume we have an image, named `ferris.png`,  in the Cargo root directory.
@@ -26,7 +26,7 @@ impl MyWidgetWithImage {
 }
 ```
 
-Then, we use the [iced::widget::image::layout](https://docs.rs/iced/0.12.1/iced/widget/image/fn.layout.html) function to determine the [layout](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) of our widget.
+Then, we use the [iced::widget::image::layout](https://docs.rs/iced/0.13.1/iced/widget/image/fn.layout.html) function to determine the [layout](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.layout) of our widget.
 
 ```rust
 fn layout(&self, _tree: &mut Tree, renderer: &Renderer, limits: &layout::Limits) -> layout::Node {
@@ -41,7 +41,7 @@ fn layout(&self, _tree: &mut Tree, renderer: &Renderer, limits: &layout::Limits)
 }
 ```
 
-And we draw the image by the [iced::widget::image::draw](https://docs.rs/iced/0.12.1/iced/widget/image/fn.draw.html) function.
+And we draw the image by the [iced::widget::image::draw](https://docs.rs/iced/0.13.1/iced/widget/image/fn.draw.html) function.
 
 ```rust
 fn draw(
@@ -66,7 +66,7 @@ fn draw(
 }
 ```
 
-Both functions require the `Renderer` to implement [iced::advanced::image::Renderer](https://docs.rs/iced/0.12.1/iced/advanced/image/trait.Renderer.html).
+Both functions require the `Renderer` to implement [iced::advanced::image::Renderer](https://docs.rs/iced/0.13.1/iced/advanced/image/trait.Renderer.html).
 
 ```rust
 impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetWithImage
@@ -78,41 +78,35 @@ The full code is as follows:
 
 ```rust
 use iced::{
+    Border, Color, Element, Length, Rectangle, Rotation, Shadow, Size,
     advanced::{
-        layout, mouse,
+        Layout, Widget, layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Widget,
     },
-    widget::{container, image::Handle, Theme},
-    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size,
+    widget::{Theme, container, image::Handle},
 };
+use std::env;
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(MyWidgetWithImage::new())
             .width(Length::Fill)
             .height(Length::Fill)
-            .center_x()
-            .center_y()
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
             .into()
     }
 }
@@ -123,8 +117,9 @@ struct MyWidgetWithImage {
 
 impl MyWidgetWithImage {
     fn new() -> Self {
+        println!("Current path: {}", env::current_dir().unwrap().display());
         Self {
-            handle: Handle::from_path("ferris.png"),
+            handle: Handle::from_path("../tutorial/pic/ferris.png"),
         }
     }
 }
@@ -153,6 +148,7 @@ where
             Length::Fixed(200.),
             Length::Fixed(200.),
             iced::ContentFit::Contain,
+            Rotation::default(),
         )
     }
 
@@ -185,6 +181,8 @@ where
             &self.handle,
             iced::ContentFit::Contain,
             iced::widget::image::FilterMethod::Linear,
+            Rotation::default(),
+            1.0,
         );
     }
 }

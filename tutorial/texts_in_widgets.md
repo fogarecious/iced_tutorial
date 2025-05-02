@@ -1,6 +1,6 @@
 # Texts In Widgets
 
-In addition to draw a [Quad](https://docs.rs/iced/latest/iced/advanced/renderer/struct.Quad.html), we can also draw texts in our widgets.
+In addition to draw a [Quad](https://docs.rs/iced/0.13.1/iced/advanced/renderer/struct.Quad.html), we can also draw texts in our widgets.
 
 For example, suppose we would like to draw a string slice named `CONTENT`.
 
@@ -16,7 +16,7 @@ impl MyWidgetWithText {
 }
 ```
 
-We use the [Renderer](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html)'s [fill_text](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html#tymethod.fill_text) method to draw the text.
+We use the [Renderer](https://docs.rs/iced/0.13.1/iced/advanced/text/trait.Renderer.html)'s [fill_text](https://docs.rs/iced/0.13.1/iced/advanced/text/trait.Renderer.html#tymethod.fill_text) method to draw the text.
 
 ```rust
 fn draw(
@@ -51,8 +51,8 @@ fn draw(
 }
 ```
 
-The [fill_text](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html#tymethod.fill_text) method needs the `Renderer` type to implement [iced::advanced::text::Renderer](https://docs.rs/iced/latest/iced/advanced/text/trait.Renderer.html).
-Thus we have to require this in our [Widget](https://docs.rs/iced/latest/iced/advanced/widget/trait.Widget.html) implementation.
+The [fill_text](https://docs.rs/iced/0.13.1/iced/advanced/text/trait.Renderer.html#tymethod.fill_text) method needs the `Renderer` type to implement [iced::advanced::text::Renderer](https://docs.rs/iced/0.13.1/iced/advanced/text/trait.Renderer.html).
+Thus we have to require this in our [Widget](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html) implementation.
 
 ```rust
 impl<Message, Renderer> Widget<Message, Theme, Renderer> for MyWidgetWithText
@@ -60,7 +60,7 @@ where
     Renderer: iced::advanced::Renderer + iced::advanced::text::Renderer,
 ```
 
-Since the requirement of the `Renderer` type is changed, we have to change the requirement in `From<MyWidgetWithText>` for [Element](https://docs.rs/iced/latest/iced/type.Element.html), too.
+Since the requirement of the `Renderer` type is changed, we have to change the requirement in `From<MyWidgetWithText>` for [Element](https://docs.rs/iced/0.13.1/iced/type.Element.html), too.
 
 ```rust
 impl<'a, Message, Renderer> From<MyWidgetWithText> for Element<'a, Message, Theme, Renderer>
@@ -72,45 +72,38 @@ The full code is as follows:
 
 ```rust
 use iced::{
+    Border, Color, Element, Length, Rectangle, Shadow, Size, Theme,
     advanced::{
-        layout, mouse,
+        Layout, Text, Widget, layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Text, Widget,
     },
     alignment::{Horizontal, Vertical},
     widget::{
         container,
-        text::{LineHeight, Shaping},
+        text::{LineHeight, Shaping, Wrapping},
     },
-    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<'_, Self::Message> {
+    fn view(&self) -> iced::Element<'_, Message> {
         container(MyWidgetWithText::new())
             .width(Length::Fill)
             .height(Length::Fill)
-            .center_x()
-            .center_y()
+            .center_x(Length::Fill)
+            .center_y(Length::Fill)
             .into()
     }
 }
@@ -142,7 +135,10 @@ where
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-        layout::Node::new([200, 100].into())
+        layout::Node::new(iced::Size {
+            width: 100.0,
+            height: 100.0,
+        })
     }
 
     fn draw(
@@ -172,7 +168,7 @@ where
 
         renderer.fill_text(
             Text {
-                content: Self::CONTENT,
+                content: Self::CONTENT.to_string(),
                 bounds: bounds.size(),
                 size: renderer.default_size(),
                 line_height: LineHeight::default(),
@@ -180,6 +176,7 @@ where
                 horizontal_alignment: Horizontal::Center,
                 vertical_alignment: Vertical::Center,
                 shaping: Shaping::default(),
+                wrapping: Wrapping::default(),
             },
             bounds.center(),
             Color::from_rgb(0.6, 0.8, 1.0),

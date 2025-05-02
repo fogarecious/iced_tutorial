@@ -8,7 +8,7 @@ struct MyWidget {
 }
 ```
 
-We use the `highlight` variable to change the color of our widget in the [draw](https://docs.rs/iced/0.12.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method.
+We use the `highlight` variable to change the color of our widget in the [draw](https://docs.rs/iced/0.13.1/iced/advanced/widget/trait.Widget.html#tymethod.draw) method.
 
 ```rust
 fn draw(
@@ -52,86 +52,74 @@ impl MyWidget {
 }
 ```
 
-Then, we initialize `MyWidget` in the [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) method of [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html) with an input value for the `highlight` variable.
+Then, we initialize `MyWidget` in the `view` method of our app with an input value for the `highlight` variable.
 
 ```rust
 struct MyApp {
     highlight: bool,
 }
 
-impl Sandbox for MyApp {
-    // ...
-    fn view(&self) -> iced::Element<'_, Self::Message> {
-        container(
-            column![
-                MyWidget::new(self.highlight),
-                // ...
-            ]
-            // ...
-        )
-        // ...
-    }
+fn view(&self) -> iced::Element<'_, Message> {
+    container(
+        column![
+            MyWidget::new(self.highlight),
+        ]
+    )
 }
 ```
 
-In this example, we control the `highlight` variable by a checkbox.
+In this example, we control the `highlight` variable with a checkbox.
 
 The full code is as follows:
 
 ```rust
 use iced::{
+    Border, Color, Element, Length, Rectangle, Shadow, Size, Task, Theme,
     advanced::{
-        layout, mouse,
+        Layout, Widget, layout, mouse,
         renderer::{self, Quad},
         widget::Tree,
-        Layout, Widget,
     },
     widget::{checkbox, column, container},
-    Border, Color, Element, Length, Rectangle, Sandbox, Settings, Shadow, Size, Theme,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
 #[derive(Debug, Clone)]
-enum MyMessage {
+enum Message {
     Highlight(bool),
 }
 
+#[derive(Default)]
 struct MyApp {
     highlight: bool,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyMessage;
-
-    fn new() -> Self {
-        Self { highlight: false }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (Self { highlight: false }, Task::none())
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+    fn update(&mut self, message: Message) {
         match message {
-            MyMessage::Highlight(h) => self.highlight = h,
+            Message::Highlight(h) => self.highlight = h,
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         container(
             column![
                 MyWidget::new(self.highlight),
-                checkbox("Highlight", self.highlight).on_toggle(MyMessage::Highlight),
+                checkbox("Highlight", self.highlight).on_toggle(Message::Highlight),
             ]
             .spacing(20),
         )
         .width(Length::Fill)
         .height(Length::Fill)
-        .center_x()
-        .center_y()
+        .center_x(Length::Fill)
+        .center_y(Length::Fill)
         .into()
     }
 }
@@ -163,7 +151,10 @@ where
         _renderer: &Renderer,
         _limits: &layout::Limits,
     ) -> layout::Node {
-        layout::Node::new([100, 100].into())
+        layout::Node::new(iced::Size {
+            width: 100.0,
+            height: 100.0,
+        })
     }
 
     fn draw(

@@ -1,60 +1,51 @@
 # More Than One Page
 
-To have multiple pages, we can add a field `page` to the main struct `MyApp`.
-The field `page` is an [enum](https://doc.rust-lang.org/std/keyword.enum.html) defined by us that decides what to display in [view](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html#tymethod.view) method of the [Sandbox](https://docs.rs/iced/0.12.1/iced/trait.Sandbox.html).
+To have multiple pages, we can use a simple trick of rendering the pages based on state.
+We can add a state field `page` to the main struct `MyApp`.
+Then, depending on the value of `page`, we can render different widgets in the `view` method.
 
 ```rust
-use iced::{
-    widget::{button, column, text},
-    Sandbox, Settings,
-};
+use iced::widget::{button, column, text};
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Default)]
 enum Page {
+    #[default]
     A,
     B,
 }
 
 #[derive(Debug, Clone)]
-enum MyAppMessage {
+enum Message {
     GoToBButtonPressed,
     GoToAButtonPressed,
 }
 
+#[derive(Default)]
 struct MyApp {
     page: Page,
 }
 
-impl Sandbox for MyApp {
-    type Message = MyAppMessage;
-
-    fn new() -> Self {
-        Self { page: Page::A }
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, message: Self::Message) {
+impl MyApp {
+    fn update(&mut self, message: Message) {
         self.page = match message {
-            MyAppMessage::GoToBButtonPressed => Page::B,
-            MyAppMessage::GoToAButtonPressed => Page::A,
+            Message::GoToBButtonPressed => Page::B,
+            Message::GoToAButtonPressed => Page::A,
         }
     }
 
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         match self.page {
             Page::A => column![
                 text("Page A"),
-                button("Go to B").on_press(MyAppMessage::GoToBButtonPressed),
+                button("Go to B").on_press(Message::GoToBButtonPressed),
             ],
             Page::B => column![
                 text("Page B"),
-                button("Go to A").on_press(MyAppMessage::GoToAButtonPressed),
+                button("Go to A").on_press(Message::GoToAButtonPressed),
             ],
         }
         .into()
@@ -70,6 +61,6 @@ And page B:
 
 ![Page B](./pic/more_than_one_page_b.png)
 
-:arrow_right:  Next: [Memoryless Pages](./memoryless_pages.md)
+:arrow_right: Next: [Memoryless Pages](./memoryless_pages.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

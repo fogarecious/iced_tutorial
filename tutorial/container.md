@@ -1,35 +1,29 @@
 # Container
 
-[Container](https://docs.rs/iced/0.12.1/iced/widget/container/struct.Container.html) is another way to help us laying out widgets, especially when we need to algin a widget center both horizontally and vertically.
-[Container](https://docs.rs/iced/0.12.1/iced/widget/container/struct.Container.html) accepts any widget including [Column](https://docs.rs/iced/0.12.1/iced/widget/struct.Column.html) and [Row](https://docs.rs/iced/0.12.1/iced/widget/struct.Row.html).
+[Container](https://docs.rs/iced/0.13.1/iced/widget/struct.Container.html) is another way to help us laying out widgets, especially when we need to algin a widget center both horizontally and vertically.
+[Container](https://docs.rs/iced/0.13.1/iced/widget/struct.Container.html) accepts any widget including [Column](https://docs.rs/iced/0.13.1/iced/widget/struct.Column.html) and [Row](https://docs.rs/iced/0.13.1/iced/widget/struct.Row.html).
 
 ```rust
 use iced::{
+    Length,
     alignment::{Horizontal, Vertical},
-    widget::{column, container, Container},
-    Length, Sandbox, Settings,
+    widget::{Container, column, container},
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::run("My App", MyApp::update, MyApp::view)
 }
 
+#[derive(Debug, Clone)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp;
 
-impl Sandbox for MyApp {
-    type Message = ();
+impl MyApp {
+    fn update(&mut self, _message: Message) {}
 
-    fn new() -> Self {
-        Self
-    }
-
-    fn title(&self) -> String {
-        String::from("My App")
-    }
-
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             Container::new("Construct from struct"),
             container("Construct from function"),
@@ -40,6 +34,11 @@ impl Sandbox for MyApp {
             container("Different alignment for vertical axis")
                 .height(Length::Fill)
                 .align_y(Vertical::Center),
+            container("Center")
+                .width(Length::Fill)
+                .height(Length::Fill)
+                .center_x(Length::Fill)
+                .center_y(Length::Fill),
         ]
         .into()
     }
@@ -48,12 +47,6 @@ impl Sandbox for MyApp {
 
 ![Container](./pic/container.png)
 
-If we want to center a widget both horizontally and vertically, we can use the following code:
-
-```rust
-container("Center").width(Length::Fill).height(Length::Fill).center_x().center_y()
-```
-
-:arrow_right:  Next: [Scrollable](./scrollable.md)
+:arrow_right: Next: [Scrollable](./scrollable.md)
 
 :blue_book: Back: [Table of contents](./../README.md)

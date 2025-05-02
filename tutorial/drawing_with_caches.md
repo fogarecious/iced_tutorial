@@ -1,10 +1,12 @@
 # Drawing With Caches
 
-Previously, we mentioned that [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) has the method [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) that every time the corresponding [Canvas](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Canvas.html) needed to be re-drawn, the method is called.
-However, if the shapes of the [Canvas](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Canvas.html) remain unchanged, it is not performant to re-draw all these shapes.
-Instead, we store an image of these shapes in a [Cache](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Cache.html), and we draw this cache when the [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method of [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) is called.
+Previously, we mentioned that [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) has the method [draw](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html#tymethod.draw) that every time the corresponding [Canvas](https://docs.rs/iced/0.13.1/iced/widget/canvas/struct.Canvas.html) needed to be re-drawn, the method is called.
 
-To do so, we declare a field of type [Cache](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Cache.html) in our app
+However, if the shapes of the [Canvas](https://docs.rs/iced/0.13.1/iced/widget/canvas/struct.Canvas.html) remain unchanged, it is not performant to re-draw all these shapes.
+
+What we can do instead, is to store an image of these shapes in a [Cache](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Cache.html), and draw this cache when the [draw](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method of [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) is called.
+
+To do so, we declare a field of type [Cache](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Cache.html) in our app
 
 ```rust
 struct MyApp {
@@ -15,14 +17,17 @@ struct MyApp {
 and initialize it.
 
 ```rust
-fn new() -> Self {
-    Self {
-        cache: Cache::new(),
-    }
+fn new() -> (Self, Task<Message>) {
+    (
+        Self {
+            cache: Cache::new(),
+        },
+        Task::none()
+    )
 }
 ```
 
-In the [draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method, instead of creating a new [Frame](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Frame.html)
+In the [draw](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html#tymethod.draw) method, instead of creating a new [Frame](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Frame.html)
 
 ```rust
 let mut frame = Frame::new(renderer, bounds.size());
@@ -30,7 +35,7 @@ let mut frame = Frame::new(renderer, bounds.size());
 vec![frame.into_geometry()]
 ```
 
-we use [cache.draw](https://docs.rs/iced/0.12.1/iced/widget/canvas/struct.Cache.html#method.draw) to construct the [Geometry](https://docs.rs/iced/0.12.1/iced/widget/canvas/enum.Geometry.html).
+we use [cache.draw](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Cache.html#method.draw) to construct the [Geometry](https://docs.rs/iced/0.13.1/iced/widget/canvas/type.Geometry.html).
 
 ```rust
 let geometry = self.cache.draw(renderer, bounds.size(), |frame| {
@@ -42,50 +47,50 @@ vec![geometry]
 
 The closure `|frame| { /* ... */ }` is only called when the dimensions of the `frame` change or the cache is explicitly cleared.
 
-In addition, previously, we implement [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) for the struct `MyProgram`.
-But because we need to access the `cache` field of `MyApp`, we have to implement [Program](https://docs.rs/iced/0.12.1/iced/widget/canvas/trait.Program.html) for `MyApp`.
+In addition, previously, we implement [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) for the struct `MyProgram`. But because we need to access the `cache` field of `MyApp`, we have to implement [Program](https://docs.rs/iced/0.13.1/iced/widget/canvas/trait.Program.html) for `MyApp`.
 
 The full code is as follows:
 
 ```rust
 use iced::{
-    mouse,
+    Alignment, Color, Length, Point, Rectangle, Renderer, Task, Theme, Vector, mouse,
     widget::{
+        Canvas,
         canvas::{Cache, Geometry, Path, Program, Stroke},
-        column, Canvas,
+        column,
     },
-    Alignment, Color, Length, Point, Rectangle, Renderer, Sandbox, Settings, Theme, Vector,
 };
 
 fn main() -> iced::Result {
-    MyApp::run(Settings::default())
+    iced::application("My App", MyApp::update, MyApp::view).run_with(MyApp::new)
 }
 
+#[derive(Clone, Debug)]
+enum Message {}
+
+#[derive(Default)]
 struct MyApp {
     cache: Cache,
 }
 
-impl Sandbox for MyApp {
-    type Message = ();
-
-    fn new() -> Self {
-        Self {
-            cache: Cache::new(),
-        }
+impl MyApp {
+    fn new() -> (Self, Task<Message>) {
+        (
+            Self {
+                cache: Cache::new(),
+            },
+            Task::none(),
+        )
     }
 
-    fn title(&self) -> String {
-        String::from("My App")
-    }
+    fn update(&mut self, _message: Message) {}
 
-    fn update(&mut self, _message: Self::Message) {}
-
-    fn view(&self) -> iced::Element<Self::Message> {
+    fn view(&self) -> iced::Element<Message> {
         column![
             "A Canvas",
             Canvas::new(self).width(Length::Fill).height(Length::Fill)
         ]
-        .align_items(Alignment::Center)
+        .align_x(Alignment::Center)
         .into()
     }
 }
@@ -129,6 +134,6 @@ impl<Message> Program<Message> for MyApp {
 
 ![Drawing With Caches](./pic/drawing_with_caches.png)
 
-:arrow_right:  Next: [Drawing Widgets](./drawing_widgets.md)
+:arrow_right:  Next: [Custom Widgets](./custom_widgets.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
