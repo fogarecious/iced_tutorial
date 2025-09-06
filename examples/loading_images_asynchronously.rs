@@ -37,7 +37,7 @@ impl MyApp {
                 self.show_container = true;
                 return Task::perform(
                     async {
-                        let mut file = File::open("../tutorial/pic/ferris.png").await.unwrap();
+                        let mut file = File::open("./tutorial/pic/ferris.png").await.unwrap();
                         let mut buffer = Vec::new();
                         file.read_to_end(&mut buffer).await.unwrap();
                         buffer

@@ -48,12 +48,12 @@ In the *loading* state, the app shows the text `Loading...`.
 And in the *loaded* state, the app shows the image.
 
 ```rust
-fn view(&self) -> iced::Element<Self::Message> {
+fn view(&self) -> iced::Element<Message> {
     column![
-        button("Load").on_press(MyMessage::Load),
+        button("Load").on_press(Message::Load),
         if self.show_container {
             match &self.image_handle {
-                Some(h) => container(image(h.clone())),
+                Some(h) => container(Image::new(h.clone())),
                 None => container("Loading..."),
             }
         } else {
@@ -69,7 +69,7 @@ We have two messages for the app:
 
 ```rust
 #[derive(Debug, Clone)]
-enum MyMessage {
+enum Message {
     Load,
     Loaded(Vec<u8>),
 }
@@ -81,23 +81,23 @@ And when the image is loaded, the app triggers a `Loaded(...)` message.
 The image will be loaded asynchronously.
 
 ```rust
-fn update(&mut self, message: Self::Message) -> iced::Command<Self::Message> {
+fn update(&mut self, message: Message) -> Task<Message> {
     match message {
-        MyMessage::Load => {
+        Message::Load => {
             self.show_container = true;
-            return Command::perform(
+            return Task::perform(
                 async {
-                    let mut file = File::open("../tutorial/pic/ferris.png").await.unwrap();
+                    let mut file = File::open("./tutorial/pic/ferris.png").await.unwrap();
                     let mut buffer = Vec::new();
                     file.read_to_end(&mut buffer).await.unwrap();
                     buffer
                 },
-                MyMessage::Loaded,
+                Message::Loaded,
             );
         }
-        MyMessage::Loaded(data) => self.image_handle = Some(Handle::from_memory(data)),
+        Message::Loaded(data) => self.image_handle = Some(Handle::from_bytes(data)),
     }
-    Command::none()
+    Task::none()
 }
 ```
 
@@ -143,7 +143,7 @@ impl MyApp {
                 self.show_container = true;
                 return Task::perform(
                     async {
-                        let mut file = File::open("../tutorial/pic/ferris.png").await.unwrap();
+                        let mut file = File::open("./tutorial/pic/ferris.png").await.unwrap();
                         let mut buffer = Vec::new();
                         file.read_to_end(&mut buffer).await.unwrap();
                         buffer
