@@ -21,10 +21,10 @@ We use a generic type `Message` for `MyWidget`, so that the sent `pressed_messag
 The message `pressed_message` will be sent when the widget is pressed.
 
 ```rust
-fn on_event(
+fn update(
     &mut self,
     _state: &mut Tree,
-    event: Event,
+    event: &Event,
     layout: Layout<'_>,
     cursor: mouse::Cursor,
     _renderer: &Renderer,
@@ -183,10 +183,10 @@ where
         );
     }
 
-    fn on_event(
+    fn update(
         &mut self,
         _state: &mut Tree,
-        event: Event,
+        event: &Event,
         layout: Layout<'_>,
         cursor: mouse::Cursor,
         _renderer: &Renderer,
