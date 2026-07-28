@@ -75,6 +75,58 @@ impl MyApp {
 
 ![Changing the window dynamically](./pic/changing_the_window_dynamically.png)
 
+Another example is to resize the window to the monitor size.
+It first obtains the size of the monitor by [monitor_size](https://docs.rs/iced/latest/iced/window/fn.monitor_size.html), and then passes the size to `resize_window`.
+To do so, change the previous example as follows.
+
+Add `ResizeToMonitorSize` to `Message`.
+
+```rust
+#[derive(Debug, Clone)]
+enum Message {
+    UpdateWidth(String),
+    UpdateHeight(String),
+    ResizeWindow,
+    ResizeToMonitorSize,
+}
+```
+
+Add the code for `Message::ResizeToMonitorSize`.
+
+```rust
+fn update(&mut self, message: Message) -> Task<Message> {
+    match message {
+        Message::UpdateWidth(w) => /* ... */,
+        Message::UpdateHeight(h) => /* ... */,
+        Message::ResizeWindow => { /* ... */ }
+        Message::ResizeToMonitorSize => {
+            return window::latest().and_then(|id| {
+                window::monitor_size(id).and_then(move |size| {
+                    Self::resize_window(size.width, size.height)(id)
+                })
+            });
+        }
+    }
+    Task::none()
+}
+```
+
+Add a button to deliver `Message::ResizeToMonitorSize`.
+
+```rust
+fn view(&self) -> Element<Message> {
+    row![
+        text_input("Width", &self.width).on_input(Message::UpdateWidth),
+        text_input("Height", &self.height).on_input(Message::UpdateHeight),
+        button("Resize window").on_press(Message::ResizeWindow),
+        button("Resize to monitor size").on_press(Message::ResizeToMonitorSize),
+    ]
+    .into()
+}
+```
+
+By pressing button `Resize to monitor size`, the window resizes to the monitor size.
+
 :arrow_right:  Next: [Closing The Window On Demand](./closing_the_window_on_demand.md)
 
 :blue_book: Back: [Table of contents](./../README.md)
